@@ -13,7 +13,7 @@ body {
 
 /* HERO */
 .hero {
-  height: 80vh;
+  height: 70vh;
   background: #333;
   display: flex;
   justify-content: center;
@@ -25,14 +25,14 @@ body {
 }
 
 .hero-overlay {
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0,0,0,0.3);
   padding: 2rem;
   border-radius: 8px;
 }
 
 .hero h1 {
   font-family: 'Playfair Display', serif;
-  font-size: 2.8rem;
+  font-size: 2.5rem;
   margin-bottom: 1rem;
 }
 
@@ -75,7 +75,7 @@ body {
 .phase-card h2 {
   font-family: 'Playfair Display', serif;
   margin-bottom: 1rem;
-  font-size: 1.8rem;
+  font-size: 1.6rem;
   color: #222;
 }
 
@@ -110,7 +110,6 @@ body {
   background-color: #388e3c;
 }
 
-/* PHASE RESULT */
 .phase-result {
   margin-top: 1rem;
   padding: 1rem;
