@@ -9,56 +9,71 @@ body {
   color: #222;
 }
 
+/* HERO */
 .hero {
-  background: #0f172a;
+  background: linear-gradient(120deg, #0a3d62, #1e90ff);
   color: white;
-  padding: 30px 20px;
+  padding: 60px 20px;
   text-align: center;
 }
 
 .hero h1 {
   margin: 0;
-  font-size: 2rem;
+  font-size: 2.5rem;
 }
 
 .hero p {
-  margin-top: 8px;
-  opacity: 0.85;
+  font-size: 1.1rem;
+  opacity: 0.95;
 }
 
+/* APP CONTAINER */
 #app {
-  max-width: 900px;
-  margin: 30px auto;
-  padding: 0 15px;
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 0 20px;
 }
 
+/* PHASE CARD */
 .phase-card {
   background: white;
-  border-radius: 8px;
-  padding: 20px;
-  margin-bottom: 20px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+  border-radius: 12px;
+  padding: 25px;
+  margin-bottom: 25px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
 }
 
 .phase-card h2 {
   margin-top: 0;
-  font-size: 1.2rem;
-  color: #0f172a;
+  color: #0a3d62;
 }
 
-label {
-  display: block;
-  margin-top: 12px;
-  font-weight: bold;
-}
-
+/* INPUTS */
 select,
+input[type="number"],
 input[type="range"] {
   width: 100%;
-  margin-top: 6px;
-  padding: 6px;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
 }
 
-p {
-  margin-top: 8px;
+input[type="range"] {
+  padding: 0;
+}
+
+/* INFO TEXT */
+.phase-card p {
+  line-height: 1.6;
+  color: #444;
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .hero h1 {
+    font-size: 2rem;
+  }
 }
