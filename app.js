@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
           ${countries.map(c => `<option value="${c}">${c}</option>`).join('')}
         </select>
         <div class="phase-result" id="destination-result"></div>
-        <button onclick="savePhase1()">Continue</button>
+        <button onclick="savePhase1()">Save</button>
       `
     },
     {
@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <option value="EU">EU Passport</option>
         </select>
         <div class="phase-result" id="residency-result"></div>
-        <button onclick="savePhase2()">Continue</button>
+        <button onclick="savePhase2()">Save</button>
       `
     },
     {
@@ -63,17 +63,10 @@ document.addEventListener("DOMContentLoaded", () => {
         </select>
 
         <div class="phase-result" id="budget-result"></div>
-        <button onclick="savePhase3()">Continue</button>
+        <button onclick="savePhase3()">Save</button>
       `
     },
-    {
-      id: 4,
-      html: `
-        <h2>🏥 Healthcare</h2>
-        <p>No inputs needed here, just notes based on your data.</p>
-        <button onclick="nextPhase()">Continue</button>
-      `
-    },
+    { id: 4, html: `<h2>🏥 Healthcare</h2><p>No input needed here, just notes based on your data.</p>` },
     {
       id: 5,
       html: `
@@ -99,15 +92,15 @@ document.addEventListener("DOMContentLoaded", () => {
         </select>
 
         <div class="phase-result" id="housing-result"></div>
-        <button onclick="savePhase5()">Continue</button>
+        <button onclick="savePhase5()">Save</button>
       `
     },
-    { id: 6, html: `<h2>💸 Tax Reality</h2><p>Understanding tax rates based on your selected country.</p><button onclick="nextPhase()">Continue</button>` },
-    { id: 7, html: `<h2>🏦 Banking</h2><p>Local vs international banking options explained.</p><button onclick="nextPhase()">Continue</button>` },
-    { id: 8, html: `<h2>📑 Visas</h2><p>Visa types and renewal risks overview.</p><button onclick="nextPhase()">Continue</button>` },
-    { id: 9, html: `<h2>🚗 Transport</h2><p>Driving licences, car imports, and local transport info.</p><button onclick="nextPhase()">Continue</button>` },
-    { id: 10, html: `<h2>📦 Moving</h2><p>Shipping, pets, personal items guidance.</p><button onclick="nextPhase()">Continue</button>` },
-    { id: 11, html: `<h2>✅ Final Score</h2><div id="final-output"></div>` }
+    { id: 6, html: `<h2>💸 Tax Reality</h2><p>Understanding tax rates based on your selected country.</p>` },
+    { id: 7, html: `<h2>🏦 Banking</h2><p>Local vs international banking options explained.</p>` },
+    { id: 8, html: `<h2>📑 Visas</h2><p>Visa types and renewal risks overview.</p>` },
+    { id: 9, html: `<h2>🚗 Transport</h2><p>Driving licences, car imports, and local transport info.</p>` },
+    { id: 10, html: `<h2>📦 Moving</h2><p>Shipping, pets, personal items guidance.</p>` },
+    { id: 11, html: `<h2>✅ Final Output</h2><div id="final-output"></div>` }
   ];
 
   // ========= RENDER =========
@@ -128,11 +121,6 @@ document.addEventListener("DOMContentLoaded", () => {
     updateProgress();
   }
 
-  function nextPhase() {
-    if (currentPhase < phases.length) currentPhase++;
-    updateProgress();
-  }
-
   function updateProgress() {
     document.getElementById("progress-text").innerText = `Phase ${currentPhase} of ${phases.length}`;
     const percent = (currentPhase / phases.length) * 100;
@@ -146,7 +134,6 @@ document.addEventListener("DOMContentLoaded", () => {
     userData.destination = dest;
     document.getElementById("destination-result").innerHTML = `🌍 You selected <strong>${dest}</strong>`;
     document.getElementById("destination-result").style.display = "block";
-    nextPhase();
   }
 
   window.savePhase2 = function() {
@@ -157,7 +144,6 @@ document.addEventListener("DOMContentLoaded", () => {
       ? `🛂 UK passport: post-Brexit rules apply.`
       : `🛂 EU passport: easier residency options.`;
     document.getElementById("residency-result").style.display = "block";
-    nextPhase();
   }
 
   window.savePhase3 = function() {
@@ -168,7 +154,6 @@ document.addEventListener("DOMContentLoaded", () => {
     userData.budget = budget;
     document.getElementById("budget-result").innerHTML = `💰 Income: £${income}/month, Budget: <strong>${budget}</strong>`;
     document.getElementById("budget-result").style.display = "block";
-    nextPhase();
   }
 
   window.savePhase5 = function() {
@@ -181,7 +166,7 @@ document.addEventListener("DOMContentLoaded", () => {
     userData.locationStyle = loc;
     document.getElementById("housing-result").innerHTML = `🏠 ${type} with £${budget}/month in a <strong>${loc}</strong> area.`;
     document.getElementById("housing-result").style.display = "block";
-    nextPhase();
+    generateFinalOutput();
   }
 
   // ========= FINAL OUTPUT =========
@@ -194,11 +179,5 @@ document.addEventListener("DOMContentLoaded", () => {
       🏠 Housing: ${userData.housingType} in a ${userData.locationStyle} area, £${userData.housingBudget}/month
     `;
   }
-
-  // Update final output when user reaches phase 11
-  const observer = new MutationObserver(() => {
-    if(document.getElementById("final-output")) generateFinalOutput();
-  });
-  observer.observe(app, { childList: true, subtree: true });
 
 });
