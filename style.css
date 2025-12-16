@@ -1,160 +1,28 @@
-/* =========================
-   RESET
-========================= */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Inter', sans-serif;
-}
-
-body {
-  background: #f5f5f5;
-  color: #333;
-  line-height: 1.5;
-}
-
-/* =========================
-   HERO
-========================= */
-.hero {
-  height: 80vh;
-  background: #333;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #fff;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-
-.hero-overlay {
-  background: rgba(0, 0, 0, 0.3);
-  padding: 2rem;
-  border-radius: 8px;
-}
-
-.hero h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 2.8rem;
-  margin-bottom: 1rem;
-}
-
-.hero p {
-  font-size: 1.2rem;
-  margin-bottom: 1.5rem;
-}
-
-.hero button {
-  background-color: #ff7f50;
-  border: none;
-  padding: 0.8rem 1.5rem;
-  color: #fff;
-  font-size: 1rem;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.hero button:hover {
-  background-color: #ff5722;
-}
-
-/* =========================
-   PROGRESS BAR
-========================= */
-#progress-wrapper {
-  width: 90%;
-  max-width: 900px;
-  margin: 2rem auto;
-}
-
-#progress-text {
-  margin-bottom: 0.5rem;
-  font-weight: 600;
-}
-
-#progress-bar {
-  width: 100%;
-  height: 15px;
-  background: #ddd;
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-#progress-fill {
-  width: 0%;
-  height: 100%;
-  background: #4caf50;
-  transition: width 0.4s ease-in-out;
-}
-
-/* =========================
-   PHASE CARDS
-========================= */
-.phase-card {
-  background: #fff;
-  max-width: 800px;
-  margin: 2rem auto;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.phase-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-}
-
-.phase-card h2 {
-  font-family: 'Playfair Display', serif;
-  margin-bottom: 1rem;
-  font-size: 1.8rem;
-  color: #222;
-}
-
-.phase-card label {
-  display: block;
-  margin-top: 1rem;
-  margin-bottom: 0.5rem;
-  font-weight: 500;
-}
-
-.phase-card select,
-.phase-card input[type="range"] {
-  width: 100%;
-  padding: 0.6rem;
-  margin-bottom: 1rem;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-}
-
-.phase-card button {
-  background-color: #4caf50;
-  border: none;
-  padding: 0.8rem 1.5rem;
-  color: #fff;
-  font-size: 1rem;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.phase-card button:hover {
-  background-color: #388e3c;
-}
-
-/* =========================
-   PHASE RESULT BOX
-========================= */
-.phase-result {
-  margin-top: 1rem;
-  padding: 1rem;
-  background: #e8f5e9;
-  border-left: 4px solid #4caf50;
-  display: none;
-  border-radius: 5px;
-  font-size: 0.95rem;
-}
+* {margin:0;padding:0;box-sizing:border-box;font-family:'Arial',sans-serif;}
+body {background:#f0f8ff;color:#00247d;line-height:1.6;}
+.hero {position:relative;height:80vh;overflow:hidden;}
+.hero-bg {width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;}
+.hero-overlay {position:relative;z-index:1;display:flex;flex-direction:column;justify-content:center;align-items:center;height:100%;background:rgba(0,0,0,0.4);color:white;text-align:center;padding:2rem;}
+.hero h1 {font-size:3rem;margin-bottom:1rem;}
+.hero p {font-size:1.5rem;margin-bottom:2rem;}
+.hero button {background:#c8102e;color:white;padding:1rem 2rem;border:none;border-radius:50px;font-size:1.2rem;cursor:pointer;}
+#progress-wrapper {max-width:900px;margin:2rem auto;padding:0 1rem;}
+#progress-text {font-weight:bold;margin-bottom:0.5rem;}
+#progress-bar {height:15px;background:#ddd;border-radius:10px;overflow:hidden;}
+#progress-fill {height:100%;background:#28a745;width:0%;transition:width 0.5s;}
+#app {max-width:800px;margin:0 auto;padding:1rem;}
+.phase-card {background:white;padding:2rem;border-radius:12px;box-shadow:0 5px 15px rgba(0,0,0,0.1);margin-bottom:2rem;}
+.phase-card h2 {font-size:1.8rem;margin-bottom:1rem;color:#c8102e;}
+.phase-card label {display:block;margin:1rem 0 0.5rem;font-weight:bold;}
+.phase-card select, .phase-card input {width:100%;padding:0.8rem;border-radius:8px;border:1px solid #ccc;}
+.phase-card button {background:#28a745;color:white;padding:0.8rem 1.5rem;border:none;border-radius:50px;margin-top:1rem;cursor:pointer;}
+.phase-result {background:#e8f5e9;padding:1rem;border-left:4px solid #28a745;margin-top:1rem;border-radius:5px;display:none;}
+.result {font-size:2rem;background:#c8102e;color:white;padding:1.5rem;border-radius:12px;text-align:center;margin:2rem 0;}
+.buy {background:gold;color:#c8102e;font-size:2rem;padding:1.5rem;width:100%;border:none;border-radius:50px;cursor:pointer;box-shadow:0 10px 30px rgba(0,0,0,0.3);}
+table {width:100%;border-collapse:collapse;margin:2rem 0;}
+th {background:#00247d;color:white;padding:1rem;text-align:left;}
+td {padding:1rem;border-bottom:1px solid #ddd;cursor:pointer;}
+tr:hover {background:#f0f8ff;}
+.detail {background:#e6f2ff;display:none;padding:1rem;}
+#aiResponse {background:#00247d;color:white;padding:1.5rem;border-radius:12px;margin:1rem 0;}
+@media (max-width:600px) {h1{font-size:2.5rem;}.hero p{font-size:1.2rem;}}
