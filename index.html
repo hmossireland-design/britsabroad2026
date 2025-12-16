@@ -1,30 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
   <title>Brits Abroad 2026</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <header class="hero">
-    <div class="hero-overlay">
-      <h1>Brits Abroad 2026</h1>
-      <p>Your all-in-one relocation intelligence engine</p>
-      <button onclick="startApp()">Start Your Plan</button>
-    </div>
-  </header>
+<header class="hero">
+  <h1>Brits Abroad 2026</h1>
+  <p>The Ultimate Relocation Intelligence Tool</p>
+  <button id="startBtn">Start Planning</button>
+</header>
 
-  <div id="progress-wrapper">
-    <div id="progress-text">Phase 1 of 11</div>
-    <div id="progress-bar">
-      <div id="progress-fill"></div>
-    </div>
+<section id="progress">
+  <div id="progress-text">Not started</div>
+  <div id="progress-bar">
+    <div id="progress-fill"></div>
   </div>
+</section>
 
-  <div id="app"></div>
+<main id="app"></main>
 
-  <script src="app.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
