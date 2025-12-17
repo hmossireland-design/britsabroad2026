@@ -10,79 +10,61 @@ body {
 }
 
 .hero {
-  background: #222;
+  background: #1f2933;
   color: white;
   padding: 3rem 1rem;
   text-align: center;
 }
 
-.hero button {
-  margin-top: 1rem;
-  padding: 0.8rem 1.5rem;
-  background: #4caf50;
-  color: white;
-  border: none;
-  font-size: 1rem;
-  cursor: pointer;
-  border-radius: 6px;
-}
-
-#progress {
-  max-width: 800px;
-  margin: 2rem auto;
-  padding: 0 1rem;
-}
-
-#progress-text {
-  margin-bottom: 0.5rem;
-  font-weight: bold;
-}
-
-#progress-bar {
-  height: 14px;
-  background: #ddd;
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-#progress-fill {
-  height: 100%;
-  width: 0%;
-  background: #4caf50;
-  transition: width 0.4s ease;
-}
-
 #app {
-  max-width: 800px;
+  max-width: 900px;
   margin: 2rem auto;
-  padding: 0 1rem;
+  padding: 1rem;
 }
 
 .phase {
   background: white;
+  border-radius: 12px;
   padding: 1.5rem;
-  border-radius: 10px;
   margin-bottom: 1.5rem;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
 }
 
 .phase h2 {
   margin-top: 0;
 }
 
-.phase select,
-.phase input {
-  width: 100%;
-  padding: 0.6rem;
-  margin-top: 0.5rem;
+label {
+  display: block;
+  margin-top: 1rem;
+  font-weight: bold;
 }
 
-.phase button {
-  margin-top: 1rem;
-  padding: 0.6rem 1.2rem;
+select, input {
+  width: 100%;
+  padding: 0.6rem;
+  margin-top: 0.4rem;
+}
+
+button {
+  margin-top: 2rem;
+  padding: 0.9rem 1.6rem;
   background: #4caf50;
   color: white;
   border: none;
+  border-radius: 8px;
+  font-size: 1rem;
   cursor: pointer;
-  border-radius: 5px;
+}
+
+button:hover {
+  background: #43a047;
+}
+
+#result {
+  background: #e8f5e9;
+  border-left: 6px solid #4caf50;
+  padding: 1.5rem;
+  margin-top: 2rem;
+  border-radius: 8px;
 }
