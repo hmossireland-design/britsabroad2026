@@ -9,62 +9,59 @@ body {
   color: #222;
 }
 
-.hero {
-  background: #1f2933;
-  color: white;
-  padding: 3rem 1rem;
+header {
+  background: #1e3a5f;
+  color: #fff;
+  padding: 20px;
   text-align: center;
 }
 
-#app {
-  max-width: 900px;
-  margin: 2rem auto;
-  padding: 1rem;
+main {
+  max-width: 1000px;
+  margin: auto;
+  padding: 20px;
 }
 
 .phase {
-  background: white;
-  border-radius: 12px;
-  padding: 1.5rem;
-  margin-bottom: 1.5rem;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+  background: #fff;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
 .phase h2 {
   margin-top: 0;
+  color: #1e3a5f;
 }
 
 label {
   display: block;
-  margin-top: 1rem;
+  margin: 10px 0 5px;
   font-weight: bold;
 }
 
-select, input {
+input, select {
   width: 100%;
-  padding: 0.6rem;
-  margin-top: 0.4rem;
+  padding: 8px;
 }
 
 button {
-  margin-top: 2rem;
-  padding: 0.9rem 1.6rem;
-  background: #4caf50;
-  color: white;
+  margin-top: 15px;
+  padding: 12px 20px;
+  background: #1e3a5f;
+  color: #fff;
   border: none;
-  border-radius: 8px;
-  font-size: 1rem;
+  border-radius: 4px;
   cursor: pointer;
 }
 
 button:hover {
-  background: #43a047;
+  background: #16314f;
 }
 
-#result {
-  background: #e8f5e9;
-  border-left: 6px solid #4caf50;
-  padding: 1.5rem;
-  margin-top: 2rem;
-  border-radius: 8px;
+#results {
+  background: #e8f0fe;
+  padding: 20px;
+  border-radius: 6px;
 }
