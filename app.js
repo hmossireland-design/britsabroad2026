@@ -1,130 +1,85 @@
 const app = document.getElementById("app");
-const startBtn = document.getElementById("startBtn");
-const progressText = document.getElementById("progress-text");
-const progressFill = document.getElementById("progress-fill");
 
-let currentPhase = 0;
+const countries = {
+  Portugal: { tax: "Low pension tax (≈10%)", visa: "D7 Passive Income Visa" },
+  Spain: { tax: "Worldwide taxation", visa: "Non-Lucrative Visa" },
+  France: { tax: "Progressive tax", visa: "Long-Stay Visitor" },
+  Cyprus: { tax: "Non-dom benefits", visa: "Pink Slip / Category F" },
+  Italy: { tax: "7% flat tax (south)", visa: "Elective Residence" },
+  Greece: { tax: "Flat 7% pension tax", visa: "FIP Visa" },
+  UAE: { tax: "0% income tax", visa: "Retirement Visa" },
+  Thailand: { tax: "Territorial taxation", visa: "Retirement Visa" },
+  Malaysia: { tax: "Territorial taxation", visa: "MM2H" },
+  Panama: { tax: "No foreign income tax", visa: "Pensionado" },
+  Mexico: { tax: "Worldwide taxation", visa: "Temporary Resident" },
+  Costa Rica: { tax: "Territorial taxation", visa: "Pensionado" },
+  Hungary: { tax: "Low flat tax", visa: "Residence Permit" },
+  Poland: { tax: "Low cost EU tax", visa: "Temporary Residence" },
+  Bulgaria: { tax: "10% flat tax", visa: "D Visa" },
+  Serbia: { tax: "Low flat tax", visa: "Temporary Residence" },
+  Argentina: { tax: "Worldwide tax", visa: "Rentista" },
+  Vietnam: { tax: "Territorial", visa: "Long Stay Visa" },
+  "New Zealand": { tax: "Worldwide tax", visa: "Parent / Investor" },
+  Mauritius: { tax: "Low tax regime", visa: "Retired Non-Citizen" },
+  Ecuador: { tax: "Territorial tax", visa: "Pensioner Visa" }
+};
 
-const phases = [
-  {
-    title: "🌍 Destination",
-    content: `
-      <label>Select a country</label>
-      <select id="country">
-        <option value="">-- Choose --</option>
-        <option>Portugal</option>
-        <option>Spain</option>
-        <option>France</option>
-        <option>Cyprus</option>
-        <option>Italy</option>
-        <option>Greece</option>
-        <option>UAE</option>
-        <option>Thailand</option>
-        <option>Malaysia</option>
-        <option>Panama</option>
-        <option>Mexico</option>
-        <option>Costa Rica</option>
-        <option>Hungary</option>
-        <option>Poland</option>
-        <option>Bulgaria</option>
-        <option>Serbia</option>
-        <option>Argentina</option>
-        <option>Vietnam</option>
-        <option>New Zealand</option>
-        <option>Mauritius</option>
-        <option>Ecuador</option>
-      </select>
-    `
-  },
-  {
-    title: "🛂 Passport",
-    content: `
-      <label>Passport held</label>
-      <select>
-        <option>UK Passport</option>
-        <option>EU Passport</option>
-      </select>
-    `
-  },
-  {
-    title: "💰 Monthly Income (£)",
-    content: `
-      <input type="number" placeholder="e.g. 2000" />
-    `
-  },
-  {
-    title: "🏥 Health Status",
-    content: `
-      <select>
-        <option>Working</option>
-        <option>Retired</option>
-      </select>
-    `
-  },
-  {
-    title: "🏠 Housing Plan",
-    content: `
-      <select>
-        <option>Rent</option>
-        <option>Buy</option>
-      </select>
-    `
-  },
-  {
-    title: "💸 Tax Awareness",
-    content: `<p>Understand tax residency & double taxation rules.</p>`
-  },
-  {
-    title: "🏦 Banking",
-    content: `<p>Local vs international banking considerations.</p>`
-  },
-  {
-    title: "📑 Visas",
-    content: `<p>Visa types, renewals, and risks.</p>`
-  },
-  {
-    title: "🚗 Transport",
-    content: `<p>Driving licences, car imports, transport costs.</p>`
-  },
-  {
-    title: "📦 Moving",
-    content: `<p>Shipping, pets, relocation logistics.</p>`
-  },
-  {
-    title: "✅ Summary",
-    content: `<p>Your relocation planning is complete.</p>`
-  }
-];
+app.innerHTML = `
+  <div class="phase">
+    <h2>🌍 Destination</h2>
+    <label>Choose your country</label>
+    <select id="country">
+      ${Object.keys(countries).map(c => `<option>${c}</option>`).join("")}
+    </select>
+  </div>
 
-startBtn.addEventListener("click", () => {
-  currentPhase = 0;
-  app.innerHTML = "";
-  renderNextPhase();
-});
+  <div class="phase">
+    <h2>🛂 Passport</h2>
+    <select id="passport">
+      <option>UK Passport</option>
+      <option>EU Passport</option>
+    </select>
+  </div>
 
-function renderNextPhase() {
-  if (currentPhase >= phases.length) return;
+  <div class="phase">
+    <h2>💰 Monthly Income (£)</h2>
+    <input type="number" id="income" placeholder="e.g. 2000">
+  </div>
 
-  const phase = phases[currentPhase];
-  const div = document.createElement("div");
-  div.className = "phase";
+  <div class="phase">
+    <h2>🏥 Status</h2>
+    <select id="status">
+      <option>Working</option>
+      <option>Retired</option>
+    </select>
+  </div>
 
-  div.innerHTML = `
-    <h2>${phase.title}</h2>
-    ${phase.content}
-    <button>Continue</button>
+  <div class="phase">
+    <h2>🏠 Housing</h2>
+    <select id="housing">
+      <option>Rent</option>
+      <option>Buy</option>
+    </select>
+  </div>
+
+  <button onclick="calculate()">Generate My Relocation Profile</button>
+
+  <div id="result"></div>
+`;
+
+window.calculate = function () {
+  const country = document.getElementById("country").value;
+  const income = document.getElementById("income").value;
+  const status = document.getElementById("status").value;
+
+  const data = countries[country];
+
+  document.getElementById("result").innerHTML = `
+    <h2>✅ Your Personal Relocation Summary</h2>
+    <p><strong>Country:</strong> ${country}</p>
+    <p><strong>Visa Route:</strong> ${data.visa}</p>
+    <p><strong>Tax Reality:</strong> ${data.tax}</p>
+    <p><strong>Status:</strong> ${status}</p>
+    <p><strong>Income Entered:</strong> £${income || "Not specified"} / month</p>
   `;
-
-  div.querySelector("button").addEventListener("click", () => {
-    currentPhase++;
-    updateProgress();
-    renderNextPhase();
-  });
-
-  app.appendChild(div);
-}
-
-function updateProgress() {
-  progressText.textContent = `Phase ${currentPhase} of ${phases.length}`;
-  progressFill.style.width = `${(currentPhase / phases.length) * 100}%`;
-}
+};
