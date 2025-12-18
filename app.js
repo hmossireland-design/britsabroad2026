@@ -1,113 +1,71 @@
-// ================================
-// GLOBAL STATE
-// ================================
-const userData = {
-  country: null,
-  income: null,
-  housing: null,
-  healthcare: null,
-  taxConcern: null
-};
+document.addEventListener("DOMContentLoaded", () => {
 
-// ================================
-// COUNTRY RULES (EXTENDABLE)
-// ================================
-const countryRules = {
-  Portugal: {
-    visa: "D7 Passive Income Visa",
-    tax: "10% pension tax (NHR legacy)",
-    healthcare: "S1 or private insurance",
-    warning: "Rising housing costs in Lisbon/Algarve"
-  },
-  UAE: {
-    visa: "Retirement / Property Visa",
-    tax: "0% income tax",
-    healthcare: "Private insurance mandatory",
-    warning: "No permanent residency path"
-  },
-  Spain: {
-    visa: "Non-Lucrative Visa",
-    tax: "Worldwide income taxable",
-    healthcare: "Private initially, then public",
-    warning: "High income threshold"
-  },
-  Thailand: {
-    visa: "Retirement / Elite Visa",
-    tax: "Territorial (changing rules)",
-    healthcare: "Private insurance required",
-    warning: "Visa policy volatility"
-  }
-};
+  const countries = [
+    "Portugal","Spain","Ireland","Australia","Cyprus","Malta","France","UAE",
+    "Thailand","Italy","Greece","Canada","New Zealand","Malaysia","Panama",
+    "Mexico","Costa Rica","Hungary","Poland","Slovenia","Slovakia","Bulgaria",
+    "Indonesia","Colombia","Mauritius","Belize","Ecuador","Uruguay","Chile","Latvia"
+  ];
 
-// ================================
-// PHASE HANDLERS
-// ================================
-function selectCountry(value) {
-  userData.country = value;
-  document.getElementById("countryStatus").innerText =
-    `Primary destination: ${value}`;
-}
+  const countrySelect = document.getElementById("countrySelect");
 
-function saveIncome(value) {
-  userData.income = value;
-}
-
-function saveHousing(value) {
-  userData.housing = value;
-}
-
-function saveHealthcare(value) {
-  userData.healthcare = value;
-}
-
-function saveTax(value) {
-  userData.taxConcern = value;
-}
-
-// ================================
-// FINAL SUMMARY ENGINE
-// ================================
-function generateSummary() {
-  const output = document.getElementById("finalSummary");
-
-  if (!userData.country) {
-    alert("Please select a destination country first.");
+  // SAFETY CHECK
+  if (!countrySelect) {
+    console.error("Country select element not found");
     return;
   }
 
-  const rules = countryRules[userData.country];
+  // Populate dropdown
+  countries.forEach(country => {
+    const option = document.createElement("option");
+    option.value = country;
+    option.textContent = country;
+    countrySelect.appendChild(option);
+  });
 
-  if (!rules) {
+  // Make function global so button can call it
+  window.generateSummary = function () {
+
+    const data = {
+      country: countrySelect.value,
+      age: document.getElementById("age").value,
+      income: document.getElementById("income").value,
+      healthcare: document.getElementById("healthcare").value,
+      housing: document.getElementById("housing").value,
+      banking: document.getElementById("banking").value,
+      transport: document.getElementById("transport").value,
+      visa: document.getElementById("visa").value,
+      lifestyle: document.getElementById("lifestyle").value,
+      risk: document.getElementById("risk").value
+    };
+
+    if (!data.country) {
+      alert("Please select a destination country.");
+      return;
+    }
+
+    const output = document.getElementById("output");
+
     output.innerHTML = `
-      <h3>⚠️ No Data Available</h3>
-      <p>We do not yet have detailed rules for ${userData.country}.</p>
+      <h3>Your Relocation Plan: ${data.country}</h3>
+      <ul>
+        <li><strong>Age:</strong> ${data.age}</li>
+        <li><strong>Income:</strong> £${data.income} / month</li>
+        <li><strong>Healthcare:</strong> ${data.healthcare}</li>
+        <li><strong>Housing:</strong> ${data.housing}</li>
+        <li><strong>Banking:</strong> ${data.banking}</li>
+        <li><strong>Transport:</strong> ${data.transport}</li>
+        <li><strong>Residency Route:</strong> ${data.visa}</li>
+        <li><strong>Lifestyle:</strong> ${data.lifestyle}</li>
+        <li><strong>Risk Tolerance:</strong> ${data.risk}</li>
+      </ul>
+
+      <p>
+        <strong>Next steps:</strong><br>
+        Visa rules, tax exposure, healthcare access, and cost of living analysis
+        will now be generated specifically for <strong>${data.country}</strong>.
+      </p>
     `;
-    return;
-  }
+  };
 
-  output.innerHTML = `
-    <h2>📊 Your Personalised Relocation Plan</h2>
-
-    <p><strong>Destination:</strong> ${userData.country}</p>
-    <p><strong>Recommended Visa:</strong> ${rules.visa}</p>
-    <p><strong>Tax Position:</strong> ${rules.tax}</p>
-    <p><strong>Healthcare Setup:</strong> ${rules.healthcare}</p>
-
-    <hr>
-
-    <h3>⚠️ Key Risk</h3>
-    <p>${rules.warning}</p>
-
-    <hr>
-
-    <h3>✅ Readiness Check</h3>
-    <ul>
-      <li>Income: ${userData.income || "Not specified"}</li>
-      <li>Housing plan: ${userData.housing || "Not specified"}</li>
-      <li>Healthcare status: ${userData.healthcare || "Not specified"}</li>
-      <li>Tax concern: ${userData.taxConcern || "Not specified"}</li>
-    </ul>
-
-    <p><strong>Status:</strong> Your plan is viable, but professional tax advice is recommended before relocation.</p>
-  `;
-}
+});
