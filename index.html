@@ -14,77 +14,110 @@
   <p>The Ultimate Relocation & Relaxation Planner</p>
 </header>
 
-<main class="container">
+<main id="app">
 
   <!-- PHASE 1 -->
   <section class="phase">
-    <h2>Phase 1: Destination</h2>
-    <select onchange="selectCountry(this.value)">
-      <option value="">Select a country</option>
-      <option>Portugal</option>
-      <option>Spain</option>
-      <option>UAE</option>
-      <option>Thailand</option>
+    <h2>Phase 1: Choose Destination Country</h2>
+    <select id="countrySelect">
+      <option value="">Select country</option>
     </select>
-    <p id="countryStatus"></p>
   </section>
 
   <!-- PHASE 2 -->
   <section class="phase">
-    <h2>Phase 2: Monthly Income</h2>
-    <select onchange="saveIncome(this.value)">
-      <option value="">Select income</option>
-      <option>Under £1,500</option>
-      <option>£1,500 – £3,000</option>
-      <option>£3,000+</option>
-    </select>
+    <h2>Phase 2: Age</h2>
+    <input type="number" id="age" placeholder="Your age">
   </section>
 
   <!-- PHASE 3 -->
   <section class="phase">
-    <h2>Phase 3: Housing Plan</h2>
-    <select onchange="saveHousing(this.value)">
-      <option value="">Select housing</option>
+    <h2>Phase 3: Monthly Income (£)</h2>
+    <input type="number" id="income" placeholder="Monthly income">
+  </section>
+
+  <!-- PHASE 4 -->
+  <section class="phase">
+    <h2>Phase 4: Healthcare Preference</h2>
+    <select id="healthcare">
+      <option value="">Select</option>
+      <option>Private</option>
+      <option>Public</option>
+      <option>Mixed</option>
+    </select>
+  </section>
+
+  <!-- PHASE 5 -->
+  <section class="phase">
+    <h2>Phase 5: Housing Plan</h2>
+    <select id="housing">
+      <option value="">Select</option>
       <option>Rent</option>
       <option>Buy</option>
       <option>Undecided</option>
     </select>
   </section>
 
-  <!-- PHASE 4 -->
+  <!-- PHASE 6 -->
   <section class="phase">
-    <h2>Phase 4: Healthcare Status</h2>
-    <select onchange="saveHealthcare(this.value)">
-      <option value="">Select status</option>
-      <option>State Pension (S1 possible)</option>
-      <option>Working / Self-employed</option>
-      <option>Private Insurance</option>
+    <h2>Phase 6: Banking</h2>
+    <select id="banking">
+      <option value="">Select</option>
+      <option>UK only</option>
+      <option>Local account</option>
+      <option>UK + Offshore</option>
     </select>
   </section>
 
-  <!-- PHASE 5 -->
+  <!-- PHASE 7 -->
   <section class="phase">
-    <h2>Phase 5: Tax Awareness</h2>
-    <select onchange="saveTax(this.value)">
-      <option value="">Select concern level</option>
+    <h2>Phase 7: Transport</h2>
+    <select id="transport">
+      <option value="">Select</option>
+      <option>No car</option>
+      <option>Buy locally</option>
+      <option>Import UK vehicle</option>
+    </select>
+  </section>
+
+  <!-- PHASE 8 -->
+  <section class="phase">
+    <h2>Phase 8: Residency Route</h2>
+    <select id="visa">
+      <option value="">Select</option>
+      <option>Retirement / Passive Income</option>
+      <option>Work / Self-employed</option>
+      <option>Investment</option>
+    </select>
+  </section>
+
+  <!-- PHASE 9 -->
+  <section class="phase">
+    <h2>Phase 9: Lifestyle Preference</h2>
+    <select id="lifestyle">
+      <option value="">Select</option>
+      <option>Quiet / Rural</option>
+      <option>City</option>
+      <option>Coastal / Island</option>
+    </select>
+  </section>
+
+  <!-- PHASE 10 -->
+  <section class="phase">
+    <h2>Phase 10: Risk Tolerance</h2>
+    <select id="risk">
+      <option value="">Select</option>
       <option>Low</option>
       <option>Medium</option>
       <option>High</option>
     </select>
   </section>
 
-  <!-- PHASE 6–10 (INFO) -->
-  <section class="phase"><h2>Phase 6: Banking</h2><p>Local vs offshore accounts</p></section>
-  <section class="phase"><h2>Phase 7: Transport</h2><p>Driving & vehicle rules</p></section>
-  <section class="phase"><h2>Phase 8: Visas</h2><p>Residency pathways</p></section>
-  <section class="phase"><h2>Phase 9: Lifestyle</h2><p>Climate, culture, pace</p></section>
-  <section class="phase"><h2>Phase 10: Risk Factors</h2><p>Political, tax & legal risks</p></section>
-
   <!-- PHASE 11 -->
-  <section class="phase final">
+  <section class="phase">
     <h2>Phase 11: Your Relocation Summary</h2>
     <button onclick="generateSummary()">Generate My Summary</button>
-    <div id="finalSummary"></div>
+    <div id="output"></div>
   </section>
 
 </main>
