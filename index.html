@@ -14,8 +14,79 @@
   <p>The Ultimate Relocation & Relaxation Planner</p>
 </header>
 
-<main id="app">
-  <!-- JS WILL INJECT CONTENT HERE -->
+<main class="container">
+
+  <!-- PHASE 1 -->
+  <section class="phase">
+    <h2>Phase 1: Destination</h2>
+    <select onchange="selectCountry(this.value)">
+      <option value="">Select a country</option>
+      <option>Portugal</option>
+      <option>Spain</option>
+      <option>UAE</option>
+      <option>Thailand</option>
+    </select>
+    <p id="countryStatus"></p>
+  </section>
+
+  <!-- PHASE 2 -->
+  <section class="phase">
+    <h2>Phase 2: Monthly Income</h2>
+    <select onchange="saveIncome(this.value)">
+      <option value="">Select income</option>
+      <option>Under £1,500</option>
+      <option>£1,500 – £3,000</option>
+      <option>£3,000+</option>
+    </select>
+  </section>
+
+  <!-- PHASE 3 -->
+  <section class="phase">
+    <h2>Phase 3: Housing Plan</h2>
+    <select onchange="saveHousing(this.value)">
+      <option value="">Select housing</option>
+      <option>Rent</option>
+      <option>Buy</option>
+      <option>Undecided</option>
+    </select>
+  </section>
+
+  <!-- PHASE 4 -->
+  <section class="phase">
+    <h2>Phase 4: Healthcare Status</h2>
+    <select onchange="saveHealthcare(this.value)">
+      <option value="">Select status</option>
+      <option>State Pension (S1 possible)</option>
+      <option>Working / Self-employed</option>
+      <option>Private Insurance</option>
+    </select>
+  </section>
+
+  <!-- PHASE 5 -->
+  <section class="phase">
+    <h2>Phase 5: Tax Awareness</h2>
+    <select onchange="saveTax(this.value)">
+      <option value="">Select concern level</option>
+      <option>Low</option>
+      <option>Medium</option>
+      <option>High</option>
+    </select>
+  </section>
+
+  <!-- PHASE 6–10 (INFO) -->
+  <section class="phase"><h2>Phase 6: Banking</h2><p>Local vs offshore accounts</p></section>
+  <section class="phase"><h2>Phase 7: Transport</h2><p>Driving & vehicle rules</p></section>
+  <section class="phase"><h2>Phase 8: Visas</h2><p>Residency pathways</p></section>
+  <section class="phase"><h2>Phase 9: Lifestyle</h2><p>Climate, culture, pace</p></section>
+  <section class="phase"><h2>Phase 10: Risk Factors</h2><p>Political, tax & legal risks</p></section>
+
+  <!-- PHASE 11 -->
+  <section class="phase final">
+    <h2>Phase 11: Your Relocation Summary</h2>
+    <button onclick="generateSummary()">Generate My Summary</button>
+    <div id="finalSummary"></div>
+  </section>
+
 </main>
 
 <footer>
