@@ -161,3 +161,29 @@ function generateResult() {
 ========================= */
 
 renderApp();
+function generateSummary() {
+  const country = document.getElementById("country")?.value || "Not selected";
+  const income = document.getElementById("income")?.value || "N/A";
+  const housing = document.getElementById("housing")?.value || "N/A";
+  const healthcare = document.getElementById("healthcare")?.value || "N/A";
+  const tax = document.getElementById("tax")?.value || "N/A";
+
+  const output = document.getElementById("finalSummary");
+
+  if (!output) {
+    alert("Summary output box not found.");
+    return;
+  }
+
+  output.innerHTML = `
+    <h3>🧭 Your Relocation Snapshot</h3>
+    <ul>
+      <li><strong>Destination:</strong> ${country}</li>
+      <li><strong>Monthly Income:</strong> £${income}</li>
+      <li><strong>Housing Plan:</strong> ${housing}</li>
+      <li><strong>Healthcare Status:</strong> ${healthcare}</li>
+      <li><strong>Tax Position:</strong> ${tax}</li>
+    </ul>
+    <p><strong>Status:</strong> Your plan is structurally viable. Further optimisation recommended.</p>
+  `;
+}
