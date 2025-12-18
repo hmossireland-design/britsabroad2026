@@ -1,189 +1,113 @@
-const app = document.getElementById("app");
+// ================================
+// GLOBAL STATE
+// ================================
+const userData = {
+  country: null,
+  income: null,
+  housing: null,
+  healthcare: null,
+  taxConcern: null
+};
 
-/* =========================
-   COUNTRY DATA (30)
-========================= */
+// ================================
+// COUNTRY RULES (EXTENDABLE)
+// ================================
+const countryRules = {
+  Portugal: {
+    visa: "D7 Passive Income Visa",
+    tax: "10% pension tax (NHR legacy)",
+    healthcare: "S1 or private insurance",
+    warning: "Rising housing costs in Lisbon/Algarve"
+  },
+  UAE: {
+    visa: "Retirement / Property Visa",
+    tax: "0% income tax",
+    healthcare: "Private insurance mandatory",
+    warning: "No permanent residency path"
+  },
+  Spain: {
+    visa: "Non-Lucrative Visa",
+    tax: "Worldwide income taxable",
+    healthcare: "Private initially, then public",
+    warning: "High income threshold"
+  },
+  Thailand: {
+    visa: "Retirement / Elite Visa",
+    tax: "Territorial (changing rules)",
+    healthcare: "Private insurance required",
+    warning: "Visa policy volatility"
+  }
+};
 
-const countries = [
-  "Portugal",
-  "Spain",
-  "Ireland",
-  "Australia",
-  "Cyprus",
-  "Malta",
-  "France",
-  "UAE",
-  "Thailand",
-  "Italy",
-  "Greece",
-  "Canada",
-  "New Zealand",
-  "Malaysia",
-  "Panama",
-  "Mexico",
-  "Costa Rica",
-  "Hungary",
-  "Poland",
-  "Slovenia",
-  "Slovakia",
-  "Bulgaria",
-  "Indonesia",
-  "Colombia",
-  "Mauritius",
-  "Belize",
-  "Ecuador",
-  "Uruguay",
-  "Chile",
-  "Latvia"
-];
-
-/* =========================
-   RENDER APP
-========================= */
-
-function renderApp() {
-  app.innerHTML = `
-    <section class="card">
-      <h2>🌍 Phase 1: Choose Your Country</h2>
-      <select id="country">
-        <option value="">-- Select Country --</option>
-        ${countries.map(c => `<option value="${c}">${c}</option>`).join("")}
-      </select>
-    </section>
-
-    <section class="card">
-      <h2>🛂 Phase 2: Passport</h2>
-      <select id="passport">
-        <option>UK Passport</option>
-        <option>EU Passport</option>
-        <option>Dual Citizen</option>
-      </select>
-    </section>
-
-    <section class="card">
-      <h2>💰 Phase 3: Monthly Income (£)</h2>
-      <input id="income" type="number" placeholder="e.g. 2500">
-    </section>
-
-    <section class="card">
-      <h2>🏥 Phase 4: Healthcare Preference</h2>
-      <select id="health">
-        <option>Private Insurance</option>
-        <option>State + Private</option>
-        <option>State Only</option>
-      </select>
-    </section>
-
-    <section class="card">
-      <h2>🏠 Phase 5: Housing Plan</h2>
-      <select id="housing">
-        <option>Rent</option>
-        <option>Buy</option>
-      </select>
-    </section>
-
-    <section class="card">
-      <h2>💸 Phase 6: Tax Awareness</h2>
-      <select id="tax">
-        <option>UK Tax Resident</option>
-        <option>Foreign Tax Resident</option>
-        <option>Not Sure</option>
-      </select>
-    </section>
-
-    <section class="card">
-      <h2>🏦 Phase 7: Banking Setup</h2>
-      <select id="banking">
-        <option>UK Bank Only</option>
-        <option>International Bank</option>
-        <option>Local Bank</option>
-      </select>
-    </section>
-
-    <section class="card">
-      <h2>📑 Phase 8: Visa Preparation</h2>
-      <select id="visa">
-        <option>No Research Yet</option>
-        <option>Basic Research</option>
-        <option>Already Applied</option>
-      </select>
-    </section>
-
-    <section class="card">
-      <h2>🚗 Phase 9: Transport</h2>
-      <select id="transport">
-        <option>No Car</option>
-        <option>Buy Locally</option>
-        <option>Import Vehicle</option>
-      </select>
-    </section>
-
-    <section class="card">
-      <h2>📦 Phase 10: Moving Complexity</h2>
-      <select id="moving">
-        <option>Minimal</option>
-        <option>Moderate</option>
-        <option>Complex (pets, shipping)</option>
-      </select>
-    </section>
-
-    <section class="card final">
-      <h2>✅ Phase 11: Your Relocation Summary</h2>
-      <button onclick="generateResult()">Generate My Plan</button>
-      <div id="result"></div>
-    </section>
-  `;
+// ================================
+// PHASE HANDLERS
+// ================================
+function selectCountry(value) {
+  userData.country = value;
+  document.getElementById("countryStatus").innerText =
+    `Primary destination: ${value}`;
 }
 
-/* =========================
-   RESULT LOGIC
-========================= */
+function saveIncome(value) {
+  userData.income = value;
+}
 
-function generateResult() {
-  const country = document.getElementById("country").value;
-  const income = document.getElementById("income").value || "unspecified";
+function saveHousing(value) {
+  userData.housing = value;
+}
 
-  if (!country) {
-    alert("Please select a country first.");
+function saveHealthcare(value) {
+  userData.healthcare = value;
+}
+
+function saveTax(value) {
+  userData.taxConcern = value;
+}
+
+// ================================
+// FINAL SUMMARY ENGINE
+// ================================
+function generateSummary() {
+  const output = document.getElementById("finalSummary");
+
+  if (!userData.country) {
+    alert("Please select a destination country first.");
     return;
   }
 
-  document.getElementById("result").innerHTML = `
-    <h3>Relocation Plan: ${country}</h3>
-    <p><strong>Income:</strong> £${income} per month</p>
-    <p>This country is now locked as your primary destination.</p>
-    <p>Next steps will include visa rules, tax exposure, and healthcare setup specific to ${country}.</p>
-  `;
-}
+  const rules = countryRules[userData.country];
 
-/* =========================
-   INIT
-========================= */
-
-renderApp();
-function generateSummary() {
-  const country = document.getElementById("country")?.value || "Not selected";
-  const income = document.getElementById("income")?.value || "N/A";
-  const housing = document.getElementById("housing")?.value || "N/A";
-  const healthcare = document.getElementById("healthcare")?.value || "N/A";
-  const tax = document.getElementById("tax")?.value || "N/A";
-
-  const output = document.getElementById("finalSummary");
-
-  if (!output) {
-    alert("Summary output box not found.");
+  if (!rules) {
+    output.innerHTML = `
+      <h3>⚠️ No Data Available</h3>
+      <p>We do not yet have detailed rules for ${userData.country}.</p>
+    `;
     return;
   }
 
   output.innerHTML = `
-    <h3>🧭 Your Relocation Snapshot</h3>
+    <h2>📊 Your Personalised Relocation Plan</h2>
+
+    <p><strong>Destination:</strong> ${userData.country}</p>
+    <p><strong>Recommended Visa:</strong> ${rules.visa}</p>
+    <p><strong>Tax Position:</strong> ${rules.tax}</p>
+    <p><strong>Healthcare Setup:</strong> ${rules.healthcare}</p>
+
+    <hr>
+
+    <h3>⚠️ Key Risk</h3>
+    <p>${rules.warning}</p>
+
+    <hr>
+
+    <h3>✅ Readiness Check</h3>
     <ul>
-      <li><strong>Destination:</strong> ${country}</li>
-      <li><strong>Monthly Income:</strong> £${income}</li>
-      <li><strong>Housing Plan:</strong> ${housing}</li>
-      <li><strong>Healthcare Status:</strong> ${healthcare}</li>
-      <li><strong>Tax Position:</strong> ${tax}</li>
+      <li>Income: ${userData.income || "Not specified"}</li>
+      <li>Housing plan: ${userData.housing || "Not specified"}</li>
+      <li>Healthcare status: ${userData.healthcare || "Not specified"}</li>
+      <li>Tax concern: ${userData.taxConcern || "Not specified"}</li>
     </ul>
-    <p><strong>Status:</strong> Your plan is structurally viable. Further optimisation recommended.</p>
+
+    <p><strong>Status:</strong> Your plan is viable, but professional tax advice is recommended before relocation.</p>
   `;
 }
