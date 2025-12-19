@@ -1,106 +1,264 @@
-/*************************************
- BRITS ABROAD 2026 – CORE LOGIC
-*************************************/
+// ===============================
+// COUNTRY DATA (30 COUNTRIES)
+// ===============================
+const countries = {
+  Portugal: {
+    visa: "D7 Passive Income Visa",
+    incomeRequired: 870,
+    tax: "10% pension tax (NHR)",
+    healthcare: "Public + private mix",
+    notes: "Large UK expat community, warm climate, EU access"
+  },
+  Spain: {
+    visa: "Non-Lucrative Visa",
+    incomeRequired: 2400,
+    tax: "Progressive (19–47%)",
+    healthcare: "Excellent public healthcare",
+    notes: "Sunny lifestyle, no work allowed on NLV"
+  },
+  Ireland: {
+    visa: "No visa required",
+    incomeRequired: 0,
+    tax: "Progressive (20–40%)",
+    healthcare: "Public + private",
+    notes: "English-speaking, high cost of living"
+  },
+  France: {
+    visa: "Long-Stay Visitor",
+    incomeRequired: 1800,
+    tax: "Progressive",
+    healthcare: "S1 access for pensioners",
+    notes: "Excellent healthcare, language barrier"
+  },
+  Italy: {
+    visa: "Elective Residence",
+    incomeRequired: 2600,
+    tax: "7% flat tax (southern regions)",
+    healthcare: "Public system available",
+    notes: "Bureaucracy but excellent lifestyle"
+  },
+  Greece: {
+    visa: "Financially Independent",
+    incomeRequired: 3500,
+    tax: "7% flat tax option",
+    healthcare: "Public & private",
+    notes: "Islands, climate, slower admin"
+  },
+  Cyprus: {
+    visa: "Category F / Pink Slip",
+    incomeRequired: 2000,
+    tax: "Low tax, pension exemptions",
+    healthcare: "GESY system",
+    notes: "English widely spoken"
+  },
+  Malta: {
+    visa: "Retirement Programme",
+    incomeRequired: 830,
+    tax: "Foreign income remittance basis",
+    healthcare: "Strong private sector",
+    notes: "English official language"
+  },
+  UAE: {
+    visa: "Retirement Visa",
+    incomeRequired: 4200,
+    tax: "0% income tax",
+    healthcare: "Private only",
+    notes: "No permanent residency path"
+  },
+  Thailand: {
+    visa: "Retirement Visa (50+)",
+    incomeRequired: 1500,
+    tax: "Territorial",
+    healthcare: "Excellent private hospitals",
+    notes: "Low cost tropical living"
+  },
+  Malaysia: {
+    visa: "MM2H",
+    incomeRequired: 1500,
+    tax: "Territorial",
+    healthcare: "Affordable private care",
+    notes: "English spoken"
+  },
+  Panama: {
+    visa: "Pensionado",
+    incomeRequired: 1000,
+    tax: "No tax on foreign income",
+    healthcare: "Private recommended",
+    notes: "Major senior discounts"
+  },
+  Mexico: {
+    visa: "Temporary Resident",
+    incomeRequired: 2500,
+    tax: "Territorial",
+    healthcare: "Private popular",
+    notes: "Culture, affordability"
+  },
+  CostaRica: {
+    visa: "Pensionado",
+    incomeRequired: 1000,
+    tax: "Territorial",
+    healthcare: "Caja + private",
+    notes: "Nature-focused lifestyle"
+  },
+  Hungary: {
+    visa: "Residence Permit",
+    incomeRequired: 150,
+    tax: "Flat 15%",
+    healthcare: "Private recommended",
+    notes: "Very low cost EU"
+  },
+  Poland: {
+    visa: "Temporary Residence",
+    incomeRequired: 160,
+    tax: "Progressive",
+    healthcare: "Private faster",
+    notes: "Very affordable EU"
+  },
+  Bulgaria: {
+    visa: "D Visa",
+    incomeRequired: 1000,
+    tax: "Flat 10%",
+    healthcare: "Private preferred",
+    notes: "Cheapest EU country"
+  },
+  Slovenia: {
+    visa: "Long-term Residence",
+    incomeRequired: 1000,
+    tax: "Progressive",
+    healthcare: "Public system",
+    notes: "Safe, scenic"
+  },
+  Slovakia: {
+    visa: "Temporary Residence",
+    incomeRequired: 800,
+    tax: "Flat 19%",
+    healthcare: "Public & private",
+    notes: "Low cost, colder winters"
+  },
+  Indonesia: {
+    visa: "Retirement KITAS",
+    incomeRequired: 1500,
+    tax: "Territorial",
+    healthcare: "Private essential",
+    notes: "Bali lifestyle"
+  },
+  Colombia: {
+    visa: "Pension Visa",
+    incomeRequired: 900,
+    tax: "Territorial",
+    healthcare: "Private popular",
+    notes: "Great cities, affordability"
+  },
+  Mauritius: {
+    visa: "Retired Non-Citizen",
+    incomeRequired: 1500,
+    tax: "Low tax",
+    healthcare: "Private",
+    notes: "Island living"
+  },
+  Ecuador: {
+    visa: "Pensioner Visa",
+    incomeRequired: 800,
+    tax: "Territorial",
+    healthcare: "Very affordable",
+    notes: "Extremely low cost"
+  },
+  Uruguay: {
+    visa: "Residency",
+    incomeRequired: 1500,
+    tax: "Territorial option",
+    healthcare: "Good quality",
+    notes: "Stable, safe"
+  },
+  Chile: {
+    visa: "Retirement Visa",
+    incomeRequired: 1200,
+    tax: "Territorial",
+    healthcare: "Excellent private",
+    notes: "High quality of life"
+  },
+  Latvia: {
+    visa: "Temporary Residence",
+    incomeRequired: 1100,
+    tax: "Progressive",
+    healthcare: "Private faster",
+    notes: "Low cost EU capital"
+  },
+  Canada: {
+    visa: "Family / Skilled",
+    incomeRequired: 0,
+    tax: "High progressive",
+    healthcare: "Public",
+    notes: "No retirement visa"
+  },
+  Australia: {
+    visa: "Parent / Family Visa",
+    incomeRequired: 0,
+    tax: "Progressive",
+    healthcare: "Medicare access",
+    notes: "Very expensive entry"
+  },
+  NewZealand: {
+    visa: "Investor / Family",
+    incomeRequired: 0,
+    tax: "Progressive",
+    healthcare: "Public & private",
+    notes: "Strict immigration"
+  }
+};
 
-const countries = [
-  { name: "Portugal", flag: "🇵🇹", tax: "10% pension tax (NHR legacy)", visa: "D7 Passive Income", vibe: "Coastal", cost: 1800 },
-  { name: "Spain", flag: "🇪🇸", tax: "Worldwide income taxed", visa: "Non-Lucrative", vibe: "Coastal", cost: 1900 },
-  { name: "Cyprus", flag: "🇨🇾", tax: "Low pension tax", visa: "Category F / Pink Slip", vibe: "Island", cost: 1700 },
-  { name: "UAE", flag: "🇦🇪", tax: "0% income tax", visa: "Retirement / Property", vibe: "City", cost: 2800 },
-  { name: "Thailand", flag: "🇹🇭", tax: "Foreign income rules evolving", visa: "Retirement Visa", vibe: "Tropical", cost: 1400 },
-  { name: "Malaysia", flag: "🇲🇾", tax: "Territorial tax system", visa: "MM2H", vibe: "Tropical", cost: 1300 },
-  { name: "Poland", flag: "🇵🇱", tax: "Progressive EU tax", visa: "Temporary Residence", vibe: "City", cost: 1200 },
-  { name: "Hungary", flag: "🇭🇺", tax: "Flat tax system", visa: "Residence Permit", vibe: "City", cost: 1100 },
-  { name: "Ecuador", flag: "🇪🇨", tax: "Low pension thresholds", visa: "Pensioner Visa", vibe: "Relaxed", cost: 1000 }
-];
+// ===============================
+// POPULATE COUNTRY DROPDOWN
+// ===============================
+const countrySelect = document.getElementById("countrySelect");
 
-const fields = [
-  "countrySelect","age","income","healthcare","housing",
-  "banking","transport","visa","lifestyle","risk"
-];
-
-document.addEventListener("DOMContentLoaded", () => {
-  populateCountries();
-  attachProgressListeners();
+Object.keys(countries).forEach(country => {
+  const option = document.createElement("option");
+  option.value = country;
+  option.textContent = country;
+  countrySelect.appendChild(option);
 });
 
-/* =========================
-   COUNTRY DROPDOWN
-========================= */
-function populateCountries() {
-  const select = document.getElementById("countrySelect");
-  select.innerHTML = `<option value="">Select country</option>`;
-  countries.forEach(c => {
-    const opt = document.createElement("option");
-    opt.value = c.name;
-    opt.textContent = `${c.flag} ${c.name}`;
-    select.appendChild(opt);
-  });
-}
-
-/* =========================
-   PROGRESS BAR
-========================= */
-function attachProgressListeners() {
-  fields.forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.addEventListener("change", updateProgress);
-  });
-}
-
-function updateProgress() {
-  let filled = 0;
-  fields.forEach(id => {
-    const el = document.getElementById(id);
-    if (el && el.value) filled++;
-  });
-
-  const percent = Math.round((filled / fields.length) * 100);
-  document.getElementById("progress-fill").style.width = percent + "%";
-}
-
-/* =========================
-   SUMMARY GENERATOR
-========================= */
+// ===============================
+// SUMMARY GENERATOR
+// ===============================
 function generateSummary() {
-  const countryName = document.getElementById("countrySelect").value;
-  const income = Number(document.getElementById("income").value);
+  const country = countrySelect.value;
+  const age = document.getElementById("age").value;
+  const income = document.getElementById("income").value;
+  const healthcare = document.getElementById("healthcare").value;
+  const housing = document.getElementById("housing").value;
+  const banking = document.getElementById("banking").value;
+  const transport = document.getElementById("transport").value;
+  const visaRoute = document.getElementById("visa").value;
   const lifestyle = document.getElementById("lifestyle").value;
   const risk = document.getElementById("risk").value;
 
-  if (!countryName) {
-    alert("Please select a destination country.");
+  if (!country) {
+    alert("Please select a country first.");
     return;
   }
 
-  const country = countries.find(c => c.name === countryName);
-
-  const alternatives = countries
-    .filter(c => c.name !== country.name && c.cost <= income)
-    .slice(0, 3);
+  const c = countries[country];
 
   document.getElementById("output").innerHTML = `
-    <div class="summary-card">
-      <h3>${country.flag} ${country.name}</h3>
-      <p><strong>Visa Route:</strong> ${country.visa}</p>
-      <p><strong>Tax Position:</strong> ${country.tax}</p>
-      <p><strong>Typical Monthly Cost:</strong> £${country.cost}</p>
-
-      <hr>
-
-      <h4>Recommended Alternatives</h4>
-      <ul>
-        ${alternatives.map(a =>
-          `<li>${a.flag} ${a.name} — £${a.cost}/month</li>`
-        ).join("")}
-      </ul>
-
-      <hr>
-
-      <p class="note">
-        This plan is indicative only. Always verify visa, tax and healthcare
-        rules with official sources or a professional adviser.
-      </p>
-    </div>
+    <h3>📍 Destination: ${country}</h3>
+    <p><strong>Visa Route:</strong> ${c.visa}</p>
+    <p><strong>Income Required:</strong> £${c.incomeRequired}/month</p>
+    <p><strong>Tax Treatment:</strong> ${c.tax}</p>
+    <p><strong>Healthcare:</strong> ${c.healthcare}</p>
+    <p><strong>Notes:</strong> ${c.notes}</p>
+    <hr>
+    <p><strong>Your Profile:</strong></p>
+    <ul>
+      <li>Age: ${age}</li>
+      <li>Monthly Income: £${income}</li>
+      <li>Housing: ${housing}</li>
+      <li>Banking: ${banking}</li>
+      <li>Transport: ${transport}</li>
+      <li>Lifestyle: ${lifestyle}</li>
+      <li>Risk Tolerance: ${risk}</li>
+    </ul>
+    <p><strong>Next Steps:</strong> Visa application, tax planning, healthcare registration.</p>
   `;
 }
