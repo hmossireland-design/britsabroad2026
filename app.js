@@ -1,93 +1,106 @@
-/* =========================
-   COUNTRY DATABASE
-   ========================= */
+/*************************************
+ BRITS ABROAD 2026 – CORE LOGIC
+*************************************/
 
-const countryData = {
-  Portugal: { cost: 2, lifestyle: "coastal", risk: "low", healthcare: "public", tax: "10%", visa: "D7 Visa" },
-  Spain: { cost: 2, lifestyle: "coastal", risk: "low", healthcare: "public", tax: "progressive", visa: "Non-Lucrative" },
-  Ireland: { cost: 3, lifestyle: "city", risk: "low", healthcare: "public", tax: "high", visa: "None" },
-  Cyprus: { cost: 2, lifestyle: "coastal", risk: "low", healthcare: "mixed", tax: "low", visa: "Category F" },
-  France: { cost: 3, lifestyle: "city", risk: "low", healthcare: "public", tax: "high", visa: "Visitor Visa" },
-  UAE: { cost: 3, lifestyle: "city", risk: "medium", healthcare: "private", tax: "0%", visa: "Retirement Visa" },
-  Thailand: { cost: 1, lifestyle: "coastal", risk: "medium", healthcare: "private", tax: "territorial", visa: "Retirement Visa" },
-  Italy: { cost: 2, lifestyle: "rural", risk: "medium", healthcare: "public", tax: "7% south", visa: "Elective" },
-  Greece: { cost: 2, lifestyle: "coastal", risk: "medium", healthcare: "public", tax: "progressive", visa: "FIP" },
-  Malaysia: { cost: 1, lifestyle: "city", risk: "medium", healthcare: "private", tax: "territorial", visa: "MM2H" },
-  Panama: { cost: 1, lifestyle: "coastal", risk: "medium", healthcare: "mixed", tax: "0% foreign", visa: "Pensionado" },
-  Mexico: { cost: 1, lifestyle: "city", risk: "medium", healthcare: "private", tax: "progressive", visa: "Temp Resident" },
-  Hungary: { cost: 1, lifestyle: "city", risk: "low", healthcare: "public", tax: "15%", visa: "Residence Permit" },
-  Poland: { cost: 1, lifestyle: "city", risk: "low", healthcare: "public", tax: "low", visa: "Temporary Residence" },
-  Bulgaria: { cost: 1, lifestyle: "coastal", risk: "medium", healthcare: "public", tax: "10%", visa: "D Visa" }
-};
+const countries = [
+  { name: "Portugal", flag: "🇵🇹", tax: "10% pension tax (NHR legacy)", visa: "D7 Passive Income", vibe: "Coastal", cost: 1800 },
+  { name: "Spain", flag: "🇪🇸", tax: "Worldwide income taxed", visa: "Non-Lucrative", vibe: "Coastal", cost: 1900 },
+  { name: "Cyprus", flag: "🇨🇾", tax: "Low pension tax", visa: "Category F / Pink Slip", vibe: "Island", cost: 1700 },
+  { name: "UAE", flag: "🇦🇪", tax: "0% income tax", visa: "Retirement / Property", vibe: "City", cost: 2800 },
+  { name: "Thailand", flag: "🇹🇭", tax: "Foreign income rules evolving", visa: "Retirement Visa", vibe: "Tropical", cost: 1400 },
+  { name: "Malaysia", flag: "🇲🇾", tax: "Territorial tax system", visa: "MM2H", vibe: "Tropical", cost: 1300 },
+  { name: "Poland", flag: "🇵🇱", tax: "Progressive EU tax", visa: "Temporary Residence", vibe: "City", cost: 1200 },
+  { name: "Hungary", flag: "🇭🇺", tax: "Flat tax system", visa: "Residence Permit", vibe: "City", cost: 1100 },
+  { name: "Ecuador", flag: "🇪🇨", tax: "Low pension thresholds", visa: "Pensioner Visa", vibe: "Relaxed", cost: 1000 }
+];
 
-/* =========================
-   POPULATE COUNTRY SELECT
-   ========================= */
+const fields = [
+  "countrySelect","age","income","healthcare","housing",
+  "banking","transport","visa","lifestyle","risk"
+];
 
-const countrySelect = document.getElementById("countrySelect");
-
-Object.keys(countryData).forEach(c => {
-  const opt = document.createElement("option");
-  opt.value = c;
-  opt.textContent = c;
-  countrySelect.appendChild(opt);
+document.addEventListener("DOMContentLoaded", () => {
+  populateCountries();
+  attachProgressListeners();
 });
 
 /* =========================
-   RECOMMENDATION ENGINE
-   ========================= */
-
-function scoreCountry(country, user) {
-  let score = 0;
-  const c = countryData[country];
-
-  if (user.income < 2000 && c.cost === 1) score += 3;
-  if (user.income >= 2000 && c.cost <= 2) score += 2;
-
-  if (user.lifestyle && c.lifestyle === user.lifestyle) score += 3;
-  if (user.risk && c.risk === user.risk) score += 2;
-  if (user.healthcare && c.healthcare === user.healthcare.toLowerCase()) score += 2;
-
-  return score;
+   COUNTRY DROPDOWN
+========================= */
+function populateCountries() {
+  const select = document.getElementById("countrySelect");
+  select.innerHTML = `<option value="">Select country</option>`;
+  countries.forEach(c => {
+    const opt = document.createElement("option");
+    opt.value = c.name;
+    opt.textContent = `${c.flag} ${c.name}`;
+    select.appendChild(opt);
+  });
 }
 
 /* =========================
-   GENERATE SUMMARY
-   ========================= */
+   PROGRESS BAR
+========================= */
+function attachProgressListeners() {
+  fields.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener("change", updateProgress);
+  });
+}
 
+function updateProgress() {
+  let filled = 0;
+  fields.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && el.value) filled++;
+  });
+
+  const percent = Math.round((filled / fields.length) * 100);
+  document.getElementById("progress-fill").style.width = percent + "%";
+}
+
+/* =========================
+   SUMMARY GENERATOR
+========================= */
 function generateSummary() {
-  const user = {
-    country: countrySelect.value,
-    income: Number(document.getElementById("income").value || 0),
-    lifestyle: document.getElementById("lifestyle").value?.toLowerCase(),
-    risk: document.getElementById("risk").value?.toLowerCase(),
-    healthcare: document.getElementById("healthcare").value
-  };
+  const countryName = document.getElementById("countrySelect").value;
+  const income = Number(document.getElementById("income").value);
+  const lifestyle = document.getElementById("lifestyle").value;
+  const risk = document.getElementById("risk").value;
 
-  const output = document.getElementById("output");
-
-  if (!user.country) {
-    output.innerHTML = "<p>Please select a country.</p>";
+  if (!countryName) {
+    alert("Please select a destination country.");
     return;
   }
 
-  const rankings = Object.keys(countryData)
-    .map(c => ({ country: c, score: scoreCountry(c, user) }))
-    .sort((a, b) => b.score - a.score)
+  const country = countries.find(c => c.name === countryName);
+
+  const alternatives = countries
+    .filter(c => c.name !== country.name && c.cost <= income)
     .slice(0, 3);
 
-  output.innerHTML = `
-    <h3>Your Selected Country: ${user.country}</h3>
-    <p><strong>Visa:</strong> ${countryData[user.country].visa}</p>
-    <p><strong>Tax:</strong> ${countryData[user.country].tax}</p>
+  document.getElementById("output").innerHTML = `
+    <div class="summary-card">
+      <h3>${country.flag} ${country.name}</h3>
+      <p><strong>Visa Route:</strong> ${country.visa}</p>
+      <p><strong>Tax Position:</strong> ${country.tax}</p>
+      <p><strong>Typical Monthly Cost:</strong> £${country.cost}</p>
 
-    <hr>
+      <hr>
 
-    <h3>Top 3 Recommended Alternatives</h3>
-    <ol>
-      ${rankings.map(r => `<li>${r.country}</li>`).join("")}
-    </ol>
+      <h4>Recommended Alternatives</h4>
+      <ul>
+        ${alternatives.map(a =>
+          `<li>${a.flag} ${a.name} — £${a.cost}/month</li>`
+        ).join("")}
+      </ul>
 
-    <p><em>Recommendations are based on income, lifestyle, risk tolerance and healthcare preference.</em></p>
+      <hr>
+
+      <p class="note">
+        This plan is indicative only. Always verify visa, tax and healthcare
+        rules with official sources or a professional adviser.
+      </p>
+    </div>
   `;
 }
