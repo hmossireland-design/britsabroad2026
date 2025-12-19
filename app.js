@@ -1,67 +1,187 @@
 /* =========================
-   COUNTRY DATA (CORE INTELLIGENCE)
+   COUNTRY DATABASE (2026)
    ========================= */
 
 const countryData = {
   Portugal: {
     visa: "D7 Passive Income Visa",
-    visaReq: "Approx €870/month passive income, accommodation, private health insurance",
+    visaReq: "€870+/month passive income, accommodation, health insurance",
     tax: "10% tax on foreign pensions (current regime)",
-    notes: "Popular with UK retirees, EU access, good healthcare"
+    notes: "Top choice for UK retirees, EU access, strong healthcare"
   },
   Spain: {
     visa: "Non-Lucrative Visa",
-    visaReq: "€2,400/month income, private healthcare, no work allowed",
+    visaReq: "€2,400+/month income, private health insurance",
     tax: "Worldwide income taxable once resident",
-    notes: "Excellent lifestyle but higher income threshold"
+    notes: "Great lifestyle, higher income threshold"
   },
   Ireland: {
     visa: "No visa required (Common Travel Area)",
     visaReq: "None",
     tax: "Irish tax residency rules apply",
-    notes: "Easiest move for UK citizens, high living costs"
+    notes: "Easiest move legally, expensive living costs"
+  },
+  Australia: {
+    visa: "Parent / Family Visa",
+    visaReq: "Family sponsorship or high contribution",
+    tax: "Worldwide income taxable",
+    notes: "High quality of life, long processing times"
   },
   Cyprus: {
     visa: "Category F / Pink Slip",
-    visaReq: "Income proof or property ownership, health insurance",
+    visaReq: "Income proof or €300k property",
     tax: "Low tax on pensions, non-dom advantages",
-    notes: "English widely spoken, sunny climate"
-  },
-  UAE: {
-    visa: "Retirement / Property Visa",
-    visaReq: "Property purchase or £4,200/month income",
-    tax: "0% personal income tax",
-    notes: "No path to permanent residency, extreme heat"
-  },
-  Thailand: {
-    visa: "Retirement Visa",
-    visaReq: "50+, approx £1,500/month income",
-    tax: "Foreign income rules evolving",
-    notes: "Very affordable, renewals required"
-  },
-  Italy: {
-    visa: "Elective Residence",
-    visaReq: "€31,000/year passive income",
-    tax: "7% flat tax in southern regions",
-    notes: "Bureaucracy varies by region"
-  },
-  Greece: {
-    visa: "Financially Independent / Golden Visa",
-    visaReq: "€3,500/month or property investment",
-    tax: "Worldwide taxation after residency",
-    notes: "Island lifestyle, paperwork heavy"
-  },
-  France: {
-    visa: "Long Stay Visitor",
-    visaReq: "Approx €1,800/month income",
-    tax: "Progressive tax bands",
-    notes: "S1 healthcare possible for pensioners"
+    notes: "English spoken, sunny, popular with Brits"
   },
   Malta: {
     visa: "Retirement Programme",
-    visaReq: "€10,000/year income + property",
-    tax: "Foreign income remittance basis",
-    notes: "English speaking, small island"
+    visaReq: "€10k/year income + property",
+    tax: "Tax on remitted income only",
+    notes: "English-speaking, compact island"
+  },
+  France: {
+    visa: "Long Stay Visitor Visa",
+    visaReq: "€1,800+/month income",
+    tax: "Progressive income tax",
+    notes: "Excellent healthcare, bureaucracy heavy"
+  },
+  UAE: {
+    visa: "Retirement / Property Visa",
+    visaReq: "£4,200/month or property ownership",
+    tax: "0% personal income tax",
+    notes: "Tax-free, no permanent residency"
+  },
+  Thailand: {
+    visa: "Retirement Visa",
+    visaReq: "50+, £1,500/month income",
+    tax: "Foreign income rules evolving",
+    notes: "Affordable, visa renewals required"
+  },
+  Italy: {
+    visa: "Elective Residence Visa",
+    visaReq: "€31k/year passive income",
+    tax: "7% flat tax in southern regions",
+    notes: "Food, culture, bureaucracy varies"
+  },
+  Greece: {
+    visa: "Financially Independent / Golden Visa",
+    visaReq: "€3,500/month or €250k property",
+    tax: "Worldwide taxation",
+    notes: "Islands, paperwork heavy"
+  },
+  Canada: {
+    visa: "Family / Skilled Migration",
+    visaReq: "Points-based or sponsorship",
+    tax: "Worldwide income taxable",
+    notes: "Safe, cold winters"
+  },
+  NewZealand: {
+    visa: "Investment / Family Visa",
+    visaReq: "High capital or sponsorship",
+    tax: "Worldwide income taxable",
+    notes: "Beautiful, isolated, costly"
+  },
+  Malaysia: {
+    visa: "MM2H",
+    visaReq: "$1,500/month income",
+    tax: "Territorial tax system",
+    notes: "Low cost, English spoken"
+  },
+  Panama: {
+    visa: "Pensionado Visa",
+    visaReq: "$1,000/month pension",
+    tax: "No tax on foreign income",
+    notes: "Senior discounts, humid climate"
+  },
+  Mexico: {
+    visa: "Temporary Resident Visa",
+    visaReq: "$2,500/month proof",
+    tax: "Worldwide income taxable",
+    notes: "Affordable, safety varies"
+  },
+  CostaRica: {
+    visa: "Pensionado",
+    visaReq: "$1,000/month pension",
+    tax: "Territorial tax system",
+    notes: "Nature, high import costs"
+  },
+  Hungary: {
+    visa: "Residence Permit",
+    visaReq: "Low income proof",
+    tax: "Flat tax ~15%",
+    notes: "Cheap EU, cold winters"
+  },
+  Poland: {
+    visa: "Temporary Residence",
+    visaReq: "Minimal income proof",
+    tax: "Progressive tax system",
+    notes: "Very low cost EU option"
+  },
+  Slovenia: {
+    visa: "Long-Term Residence",
+    visaReq: "Income proof",
+    tax: "Progressive tax",
+    notes: "Safe, scenic, small expat scene"
+  },
+  Slovakia: {
+    visa: "Temporary Residence",
+    visaReq: "€800+/month",
+    tax: "Flat tax",
+    notes: "Low cost, language barrier"
+  },
+  Bulgaria: {
+    visa: "D Visa",
+    visaReq: "€1,000/month income",
+    tax: "10% flat tax",
+    notes: "Cheapest EU option"
+  },
+  Indonesia: {
+    visa: "Retirement KITAS",
+    visaReq: "55+, $1,500/month",
+    tax: "Territorial tax system",
+    notes: "Bali popular, earthquakes"
+  },
+  Colombia: {
+    visa: "Pension Visa",
+    visaReq: "$900/month pension",
+    tax: "Worldwide income taxable",
+    notes: "Affordable cities"
+  },
+  Mauritius: {
+    visa: "Retired Non-Citizen Permit",
+    visaReq: "$1,500/month income",
+    tax: "Low flat tax",
+    notes: "Island paradise"
+  },
+  Belize: {
+    visa: "QRP",
+    visaReq: "$2,000/month income",
+    tax: "No tax on foreign income",
+    notes: "English-speaking Caribbean"
+  },
+  Ecuador: {
+    visa: "Pensioner Visa",
+    visaReq: "$800/month pension",
+    tax: "Worldwide income taxable",
+    notes: "Very low cost living"
+  },
+  Uruguay: {
+    visa: "Residency",
+    visaReq: "Income proof",
+    tax: "Territorial tax system",
+    notes: "Stable, higher regional cost"
+  },
+  Chile: {
+    visa: "Retirement Visa",
+    visaReq: "Pension proof",
+    tax: "Worldwide income taxable",
+    notes: "Safe, earthquakes"
+  },
+  Latvia: {
+    visa: "Temporary Residence",
+    visaReq: "€1,100/month income",
+    tax: "Progressive tax",
+    notes: "Low-cost EU Baltic"
   }
 };
 
@@ -74,7 +194,7 @@ const countrySelect = document.getElementById("countrySelect");
 Object.keys(countryData).forEach(country => {
   const option = document.createElement("option");
   option.value = country;
-  option.textContent = country;
+  option.textContent = country.replace(/([A-Z])/g, " $1").trim();
   countrySelect.appendChild(option);
 });
 
@@ -84,52 +204,30 @@ Object.keys(countryData).forEach(country => {
 
 function generateSummary() {
   const country = countrySelect.value;
-  const age = document.getElementById("age").value;
-  const income = document.getElementById("income").value;
-  const healthcare = document.getElementById("healthcare").value;
-  const housing = document.getElementById("housing").value;
-  const banking = document.getElementById("banking").value;
-  const transport = document.getElementById("transport").value;
-  const visaType = document.getElementById("visa").value;
-  const lifestyle = document.getElementById("lifestyle").value;
-  const risk = document.getElementById("risk").value;
-
   const output = document.getElementById("output");
 
-  if (!country) {
-    output.innerHTML = "<p>Please select a destination country.</p>";
+  if (!country || !countryData[country]) {
+    output.innerHTML = "<p>Please select a valid country.</p>";
     return;
   }
 
   const data = countryData[country];
 
   output.innerHTML = `
-    <h3>Your Relocation Summary: ${country}</h3>
+    <h3>Relocation Summary: ${country.replace(/([A-Z])/g, " $1")}</h3>
 
     <p><strong>Visa Route:</strong> ${data.visa}</p>
     <p><strong>Visa Requirements:</strong> ${data.visaReq}</p>
-
     <p><strong>Tax Position:</strong> ${data.tax}</p>
-
-    <p><strong>Why This Country:</strong> ${data.notes}</p>
-
-    <hr>
-
-    <p><strong>Your Profile:</strong></p>
-    <p>Age: ${age || "Not specified"}</p>
-    <p>Monthly Income: £${income || "Not specified"}</p>
-    <p>Healthcare Preference: ${healthcare || "Not specified"}</p>
-    <p>Housing Plan: ${housing || "Not specified"}</p>
-    <p>Banking Setup: ${banking || "Not specified"}</p>
-    <p>Transport Plan: ${transport || "Not specified"}</p>
-    <p>Lifestyle Preference: ${lifestyle || "Not specified"}</p>
-    <p>Risk Tolerance: ${risk || "Not specified"}</p>
+    <p><strong>Country Notes:</strong> ${data.notes}</p>
 
     <hr>
 
     <p><strong>Next Steps:</strong></p>
-    <p>✔ Confirm visa eligibility with embassy</p>
-    <p>✔ Review tax residency impact</p>
-    <p>✔ Arrange healthcare cover</p>
+    <ul>
+      <li>Confirm eligibility with embassy</li>
+      <li>Review UK & local tax residency rules</li>
+      <li>Arrange healthcare & banking</li>
+    </ul>
   `;
 }
