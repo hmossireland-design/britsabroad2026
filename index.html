@@ -9,36 +9,24 @@
 
 <body>
 
-<header class="hero">
-  <h1>🌍 Brits Abroad 2026</h1>
+<header class="site-header">
+  <h1>Brits Abroad 2026</h1>
   <p>The Ultimate Relocation & Relaxation Planner</p>
 </header>
 
-<!-- PROGRESS BAR -->
-<div class="progress-wrapper">
-  <div class="progress-label">Your Relocation Journey (11 Phases)</div>
-  <div class="progress-bar">
-    <div class="progress-fill"></div>
-  </div>
-</div>
-
-<main id="app" class="phase-grid">
+<main id="app">
 
   <!-- PHASE 1 -->
-<section class="phase-card full-width">
-  <h2>Phase 1: Choose Your Destination</h2>
-
-  <div id="countryGrid" class="country-grid">
-    <!-- JS will inject country cards here -->
-  </div>
-
-  <input type="hidden" id="countrySelect">
-</section>
+  <section class="phase-card">
+    <h2>Phase 1: Choose Your Destination</h2>
+    <div id="countryGrid" class="country-grid"></div>
+    <input type="hidden" id="countrySelect">
+  </section>
 
   <!-- PHASE 2 -->
   <section class="phase-card">
-    <h2>Phase 2: Age</h2>
-    <input type="number" id="age" placeholder="Your age">
+    <h2>Phase 2: Your Age</h2>
+    <input type="number" id="age" placeholder="Enter your age">
   </section>
 
   <!-- PHASE 3 -->
@@ -49,7 +37,7 @@
 
   <!-- PHASE 4 -->
   <section class="phase-card">
-    <h2>Phase 4: Healthcare</h2>
+    <h2>Phase 4: Healthcare Preference</h2>
     <select id="healthcare">
       <option value="">Select</option>
       <option>Private</option>
@@ -60,7 +48,7 @@
 
   <!-- PHASE 5 -->
   <section class="phase-card">
-    <h2>Phase 5: Housing</h2>
+    <h2>Phase 5: Housing Plan</h2>
     <select id="housing">
       <option value="">Select</option>
       <option>Rent</option>
@@ -96,7 +84,7 @@
     <h2>Phase 8: Residency Route</h2>
     <select id="visa">
       <option value="">Select</option>
-      <option>Retirement / Passive Income</option>
+      <option>Passive Income / Retirement</option>
       <option>Work / Self-employed</option>
       <option>Investment</option>
     </select>
@@ -104,7 +92,7 @@
 
   <!-- PHASE 9 -->
   <section class="phase-card">
-    <h2>Phase 9: Lifestyle</h2>
+    <h2>Phase 9: Lifestyle Preference</h2>
     <select id="lifestyle">
       <option value="">Select</option>
       <option>Quiet / Rural</option>
@@ -125,16 +113,16 @@
   </section>
 
   <!-- PHASE 11 -->
-  <section class="phase-card full-width">
+  <section class="phase-card">
     <h2>Phase 11: Your Relocation Summary</h2>
-    <button class="primary-btn" onclick="generateSummary()">Generate My Plan</button>
-    <div id="output" class="output-box"></div>
+    <button onclick="generateSummary()">Generate My Summary</button>
+    <div id="output"></div>
   </section>
 
 </main>
 
-<footer>
-  <p>© 2026 Brits Abroad · Plan Smart. Live Free.</p>
+<footer class="site-footer">
+  <p>© 2026 Brits Abroad</p>
 </footer>
 
 <script src="app.js"></script>
