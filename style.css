@@ -110,3 +110,33 @@ footer {
   font-size: 0.9rem;
   color: #777;
 }
+.summary-card {
+  background: white;
+  padding: 1.8rem;
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.summary-card h3 {
+  margin-top: 0;
+  font-size: 1.6rem;
+}
+
+.summary-card ul {
+  padding-left: 1.2rem;
+}
+
+.summary-card li {
+  margin-bottom: 0.5rem;
+}
+
+.summary-card hr {
+  margin: 1.5rem 0;
+  border: none;
+  border-top: 1px solid #ddd;
+}
+
+.note {
+  font-size: 0.9rem;
+  color: #555;
+}
