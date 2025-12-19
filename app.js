@@ -262,3 +262,48 @@ function generateSummary() {
     <p><strong>Next Steps:</strong> Visa application, tax planning, healthcare registration.</p>
   `;
 }
+/* ===============================
+   COUNTRY DATA (VISUAL PHASE 1)
+================================ */
+const countries = [
+  { name: "Portugal", flag: "🇵🇹" },
+  { name: "Spain", flag: "🇪🇸" },
+  { name: "France", flag: "🇫🇷" },
+  { name: "Ireland", flag: "🇮🇪" },
+  { name: "Cyprus", flag: "🇨🇾" },
+  { name: "Italy", flag: "🇮🇹" },
+  { name: "Greece", flag: "🇬🇷" },
+  { name: "UAE", flag: "🇦🇪" },
+  { name: "Thailand", flag: "🇹🇭" },
+  { name: "Malaysia", flag: "🇲🇾" },
+  { name: "Mexico", flag: "🇲🇽" },
+  { name: "Panama", flag: "🇵🇦" },
+  { name: "Poland", flag: "🇵🇱" },
+  { name: "Hungary", flag: "🇭🇺" },
+  { name: "Bulgaria", flag: "🇧🇬" },
+  { name: "Mauritius", flag: "🇲🇺" }
+];
+
+const countryGrid = document.getElementById("countryGrid");
+const countryInput = document.getElementById("countrySelect");
+
+if (countryGrid) {
+  countries.forEach(country => {
+    const card = document.createElement("div");
+    card.className = "country-card";
+    card.innerHTML = `
+      <div class="country-flag">${country.flag}</div>
+      <div class="country-name">${country.name}</div>
+    `;
+
+    card.addEventListener("click", () => {
+      document.querySelectorAll(".country-card")
+        .forEach(c => c.classList.remove("selected"));
+
+      card.classList.add("selected");
+      countryInput.value = country.name;
+    });
+
+    countryGrid.appendChild(card);
+  });
+}
