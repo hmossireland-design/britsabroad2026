@@ -25,12 +25,15 @@
 <main id="app" class="phase-grid">
 
   <!-- PHASE 1 -->
-  <section class="phase-card">
-    <h2>Phase 1: Destination</h2>
-    <select id="countrySelect">
-      <option value="">Select country</option>
-    </select>
-  </section>
+<section class="phase-card full-width">
+  <h2>Phase 1: Choose Your Destination</h2>
+
+  <div id="countryGrid" class="country-grid">
+    <!-- JS will inject country cards here -->
+  </div>
+
+  <input type="hidden" id="countrySelect">
+</section>
 
   <!-- PHASE 2 -->
   <section class="phase-card">
