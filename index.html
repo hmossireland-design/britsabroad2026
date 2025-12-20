@@ -8,35 +8,33 @@
 </head>
 
 <body>
-
 <header>
   <h1>Brits Abroad 2026</h1>
   <p>The Ultimate Relocation & Relaxation Planner</p>
-  <div class="progress-container">
-    <div id="progressBar"></div>
-  </div>
 </header>
 
 <main id="app">
-
-  <!-- PHASES -->
+  <!-- PHASE 1 -->
   <section class="phase">
     <h2>Phase 1: Choose Destination Country</h2>
     <select id="countrySelect">
-      <option value="">Select country</option>
+      <option value="">Select country (optional)</option>
     </select>
   </section>
 
+  <!-- PHASE 2 -->
   <section class="phase">
     <h2>Phase 2: Age</h2>
     <input type="number" id="age" placeholder="Your age">
   </section>
 
+  <!-- PHASE 3 -->
   <section class="phase">
     <h2>Phase 3: Monthly Income (£)</h2>
     <input type="number" id="income" placeholder="Monthly income">
   </section>
 
+  <!-- PHASE 4 -->
   <section class="phase">
     <h2>Phase 4: Healthcare Preference</h2>
     <select id="healthcare">
@@ -47,6 +45,7 @@
     </select>
   </section>
 
+  <!-- PHASE 5 -->
   <section class="phase">
     <h2>Phase 5: Housing Plan</h2>
     <select id="housing">
@@ -57,6 +56,7 @@
     </select>
   </section>
 
+  <!-- PHASE 6 -->
   <section class="phase">
     <h2>Phase 6: Banking</h2>
     <select id="banking">
@@ -67,6 +67,7 @@
     </select>
   </section>
 
+  <!-- PHASE 7 -->
   <section class="phase">
     <h2>Phase 7: Transport</h2>
     <select id="transport">
@@ -77,6 +78,7 @@
     </select>
   </section>
 
+  <!-- PHASE 8 -->
   <section class="phase">
     <h2>Phase 8: Residency Route</h2>
     <select id="visa">
@@ -87,6 +89,7 @@
     </select>
   </section>
 
+  <!-- PHASE 9 -->
   <section class="phase">
     <h2>Phase 9: Lifestyle Preference</h2>
     <select id="lifestyle">
@@ -97,6 +100,7 @@
     </select>
   </section>
 
+  <!-- PHASE 10 -->
   <section class="phase">
     <h2>Phase 10: Risk Tolerance</h2>
     <select id="risk">
@@ -107,11 +111,11 @@
     </select>
   </section>
 
+  <!-- PHASE 11 -->
   <section class="phase">
     <h2>Phase 11: Your Relocation Summary</h2>
     <button onclick="generateSummary()">Generate My Summary</button>
     <div id="output"></div>
-    <div id="recommended"></div>
   </section>
 
 </main>
