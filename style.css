@@ -1,105 +1,113 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f0f4f8;
+  font-family: "Segoe UI", Arial, sans-serif;
   margin: 0;
-  padding: 0;
+  background: linear-gradient(to bottom, #f0f4f8, #ffffff);
+  color: #333;
 }
 
 header {
-  background-color: #2c3e50;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
   color: white;
+  padding: 1.5rem;
   text-align: center;
-  padding: 1rem;
-}
-
-header h1 {
-  margin: 0;
-}
-
-header p {
-  margin: 0.5rem 0;
 }
 
 #progressBarContainer {
-  background-color: #ddd;
+  background: rgba(255,255,255,0.3);
+  height: 10px;
   border-radius: 20px;
-  margin: 1rem auto;
-  width: 90%;
-  height: 12px;
+  margin-top: 1rem;
 }
 
 #progressBar {
-  background-color: #27ae60;
   height: 100%;
   width: 0%;
+  background: #2ecc71;
   border-radius: 20px;
+  transition: width 0.4s ease;
 }
 
 main {
   max-width: 900px;
-  margin: 1rem auto;
-  padding: 0 1rem;
+  margin: auto;
+  padding: 1rem;
 }
 
 .phase {
-  background-color: #fff;
-  border-radius: 10px;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  background: white;
+  border-radius: 14px;
+  padding: 1.2rem;
+  margin-bottom: 1.2rem;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
 }
 
 .phase h2 {
   margin-top: 0;
+  color: #1e3c72;
 }
 
 input, select {
   width: 100%;
-  padding: 0.5rem;
+  padding: 0.6rem;
   margin-top: 0.5rem;
-  border-radius: 5px;
-  border: 1px solid #ccc;
   font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
 }
 
 button {
-  background-color: #27ae60;
+  background: linear-gradient(135deg, #27ae60, #2ecc71);
   color: white;
-  padding: 0.75rem 1.5rem;
   border: none;
-  border-radius: 8px;
-  cursor: pointer;
+  padding: 0.8rem 1.6rem;
+  border-radius: 30px;
   font-size: 1rem;
+  cursor: pointer;
 }
 
 button:hover {
-  background-color: #219150;
+  opacity: 0.9;
 }
 
 #output {
   margin-top: 1rem;
+  background: #f7f9fb;
   padding: 1rem;
-  background-color: #ecf0f1;
-  border-radius: 5px;
+  border-radius: 10px;
 }
 
+/* COUNTRY CARDS */
 #countryCards {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 12px;
 }
 
 .countryCard {
-  flex: 1 1 120px;
-  background-color: #3498db;
+  background: linear-gradient(135deg, #3498db, #2980b9);
   color: white;
-  padding: 0.5rem;
-  border-radius: 8px;
-  cursor: pointer;
+  border-radius: 14px;
+  padding: 1rem;
   text-align: center;
-  transition: transform 0.2s;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .countryCard:hover {
-  transform: scale(1.05);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.countryCard.selected {
+  outline: 4px solid #2ecc71;
+}
+
+footer {
+  text-align: center;
+  padding: 1rem;
+  color: #777;
 }
