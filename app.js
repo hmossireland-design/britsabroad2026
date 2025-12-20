@@ -1,4 +1,3 @@
-// Countries list with placeholder data
 const countries = [
   { name: "Portugal", tax: 10, visa: "D7", flag: "🇵🇹" },
   { name: "Spain", tax: 10, visa: "Non-Lucrative", flag: "🇪🇸" },
@@ -32,18 +31,43 @@ const countries = [
   { name: "Latvia", tax: 10, visa: "Temporary Residence", flag: "🇱🇻" }
 ];
 
-// Populate Phase 1 dropdown
-const countrySelect = document.getElementById("countrySelect");
+const countryCardsContainer = document.getElementById("countryCards");
+let selectedCountry = null;
+
+// Create country cards
 countries.forEach(c => {
-  const option = document.createElement("option");
-  option.value = c.name;
-  option.textContent = `${c.flag} ${c.name}`;
-  countrySelect.appendChild(option);
+  const card = document.createElement("div");
+  card.classList.add("countryCard");
+  card.innerHTML = `${c.flag}<br>${c.name}`;
+  card.onclick = () => {
+    selectedCountry = c;
+    document.querySelectorAll(".countryCard").forEach(d => d.style.opacity = 0.5);
+    card.style.opacity = 1;
+    updateProgress();
+  };
+  countryCardsContainer.appendChild(card);
 });
 
-// Generate summary based on phases
+// Update progress bar
+function updateProgress() {
+  let total = 10; // Phases 2-10
+  let filled = 0;
+  if(document.getElementById("age").value) filled++;
+  if(document.getElementById("income").value) filled++;
+  if(document.getElementById("healthcare").value) filled++;
+  if(document.getElementById("housing").value) filled++;
+  if(document.getElementById("banking").value) filled++;
+  if(document.getElementById("transport").value) filled++;
+  if(document.getElementById("visa").value) filled++;
+  if(document.getElementById("lifestyle").value) filled++;
+  if(document.getElementById("risk").value) filled++;
+  if(selectedCountry) filled++;
+  const percent = (filled / total) * 100;
+  document.getElementById("progressBar").style.width = percent + "%";
+}
+
+// Generate summary
 function generateSummary() {
-  const selectedCountry = countrySelect.value;
   const age = document.getElementById("age").value;
   const income = document.getElementById("income").value;
   const healthcare = document.getElementById("healthcare").value;
@@ -54,24 +78,20 @@ function generateSummary() {
   const lifestyle = document.getElementById("lifestyle").value;
   const risk = document.getElementById("risk").value;
 
-  let primary = selectedCountry ? countries.find(c => c.name === selectedCountry) : null;
-
-  // Recommend 3 countries based on placeholder logic (expand later)
-  let recommendations = countries
-    .filter(c => c.name !== selectedCountry)
-    .slice(0,3)
-    .map(c => `${c.flag} ${c.name}`);
-
   let outputText = `<h3>Relocation Summary</h3>`;
-  if(primary) {
-    outputText += `<p>Your primary destination: ${primary.flag} ${primary.name} (Visa: ${primary.visa}, Tax: ${primary.tax}%)</p>`;
+  if(selectedCountry) {
+    outputText += `<p>Primary destination: ${selectedCountry.flag} ${selectedCountry.name} (Visa: ${selectedCountry.visa}, Tax: ${selectedCountry.tax}%)</p>`;
   } else {
-    outputText += `<p>No primary destination selected yet.</p>`;
+    outputText += `<p>No primary destination selected.</p>`;
   }
+
   outputText += `<p>Age: ${age || "N/A"}, Monthly Income: £${income || "N/A"}</p>`;
   outputText += `<p>Healthcare: ${healthcare || "N/A"}, Housing: ${housing || "N/A"}</p>`;
   outputText += `<p>Banking: ${banking || "N/A"}, Transport: ${transport || "N/A"}</p>`;
   outputText += `<p>Residency Route: ${visa || "N/A"}, Lifestyle: ${lifestyle || "N/A"}, Risk: ${risk || "N/A"}</p>`;
+
+  // Recommend 3 other countries
+  const recommendations = countries.filter(c => c !== selectedCountry).slice(0,3).map(c => `${c.flag} ${c.name}`);
   outputText += `<p>Recommended countries: ${recommendations.join(", ")}</p>`;
 
   document.getElementById("output").innerHTML = outputText;
