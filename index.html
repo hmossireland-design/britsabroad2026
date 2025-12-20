@@ -12,15 +12,19 @@
 <header>
   <h1>Brits Abroad 2026</h1>
   <p>The Ultimate Relocation & Relaxation Planner</p>
+
+  <!-- PROGRESS BAR -->
+  <div id="progress-container">
+    <div id="progress-bar"></div>
+  </div>
 </header>
 
 <main id="app">
 
   <!-- PHASE 1 -->
-  <section class="phase">
+  <section class="phase" data-phase>
     <h2>Phase 1: Choose Your Destination</h2>
 
-    <!-- HIDDEN SELECT (JS USES THIS) -->
     <select id="countrySelect" style="display:none">
       <option value="">Select</option>
       <option>Portugal</option>
@@ -31,7 +35,6 @@
       <option>Thailand</option>
     </select>
 
-    <!-- VISUAL COUNTRY CARDS -->
     <div class="country-grid">
       <div class="country-card" onclick="selectCountry('Portugal', this)">🇵🇹 Portugal</div>
       <div class="country-card" onclick="selectCountry('Spain', this)">🇪🇸 Spain</div>
@@ -40,24 +43,20 @@
       <div class="country-card" onclick="selectCountry('UAE', this)">🇦🇪 UAE</div>
       <div class="country-card" onclick="selectCountry('Thailand', this)">🇹🇭 Thailand</div>
     </div>
-
-    <p class="note">Click one country to lock it as your destination.</p>
   </section>
 
-  <!-- PHASE 2 -->
-  <section class="phase">
+  <!-- PHASES 2–10 -->
+  <section class="phase" data-phase>
     <h2>Phase 2: Age</h2>
-    <input type="number" id="age" placeholder="Your age">
+    <input type="number" id="age">
   </section>
 
-  <!-- PHASE 3 -->
-  <section class="phase">
+  <section class="phase" data-phase>
     <h2>Phase 3: Monthly Income (£)</h2>
-    <input type="number" id="income" placeholder="Monthly income">
+    <input type="number" id="income">
   </section>
 
-  <!-- PHASE 4 -->
-  <section class="phase">
+  <section class="phase" data-phase>
     <h2>Phase 4: Healthcare Preference</h2>
     <select id="healthcare">
       <option value="">Select</option>
@@ -67,8 +66,7 @@
     </select>
   </section>
 
-  <!-- PHASE 5 -->
-  <section class="phase">
+  <section class="phase" data-phase>
     <h2>Phase 5: Housing Plan</h2>
     <select id="housing">
       <option value="">Select</option>
@@ -78,8 +76,7 @@
     </select>
   </section>
 
-  <!-- PHASE 6 -->
-  <section class="phase">
+  <section class="phase" data-phase>
     <h2>Phase 6: Banking</h2>
     <select id="banking">
       <option value="">Select</option>
@@ -89,8 +86,7 @@
     </select>
   </section>
 
-  <!-- PHASE 7 -->
-  <section class="phase">
+  <section class="phase" data-phase>
     <h2>Phase 7: Transport</h2>
     <select id="transport">
       <option value="">Select</option>
@@ -100,8 +96,7 @@
     </select>
   </section>
 
-  <!-- PHASE 8 -->
-  <section class="phase">
+  <section class="phase" data-phase>
     <h2>Phase 8: Residency Route</h2>
     <select id="visa">
       <option value="">Select</option>
@@ -111,8 +106,7 @@
     </select>
   </section>
 
-  <!-- PHASE 9 -->
-  <section class="phase">
+  <section class="phase" data-phase>
     <h2>Phase 9: Lifestyle Preference</h2>
     <select id="lifestyle">
       <option value="">Select</option>
@@ -122,8 +116,7 @@
     </select>
   </section>
 
-  <!-- PHASE 10 -->
-  <section class="phase">
+  <section class="phase" data-phase>
     <h2>Phase 10: Risk Tolerance</h2>
     <select id="risk">
       <option value="">Select</option>
@@ -151,7 +144,29 @@ function selectCountry(country, el) {
   document.getElementById("countrySelect").value = country;
   document.querySelectorAll(".country-card").forEach(c => c.classList.remove("active"));
   el.classList.add("active");
+  updateProgress();
 }
+
+function updateProgress() {
+  const phases = document.querySelectorAll("[data-phase]");
+  let completed = 0;
+
+  phases.forEach(p => {
+    const input = p.querySelector("input, select");
+    if (input && input.value) {
+      p.classList.add("completed");
+      completed++;
+    } else {
+      p.classList.remove("completed");
+    }
+  });
+
+  const percent = Math.round((completed / phases.length) * 100);
+  document.getElementById("progress-bar").style.width = percent + "%";
+}
+
+document.addEventListener("input", updateProgress);
+document.addEventListener("change", updateProgress);
 </script>
 
 <script src="app.js"></script>
