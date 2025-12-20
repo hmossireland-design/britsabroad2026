@@ -1,4 +1,4 @@
-/* --- General Reset --- */
+/* General Reset */
 * {
   margin: 0;
   padding: 0;
@@ -7,11 +7,12 @@
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f5f7fa;
+  background-color: #f0f4f8;
   color: #333;
   line-height: 1.5;
 }
 
+/* Header */
 header {
   text-align: center;
   padding: 20px;
@@ -23,18 +24,44 @@ header h1 {
   margin-bottom: 5px;
 }
 
+/* Progress Bar */
+#progressContainer {
+  background-color: #dfe3ee;
+  border-radius: 20px;
+  margin-top: 10px;
+  height: 12px;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#progressBar {
+  height: 12px;
+  width: 0%;
+  background-color: #34a853;
+  border-radius: 20px;
+  transition: width 0.3s ease;
+}
+
+/* Main container */
 main {
   max-width: 900px;
   margin: 20px auto;
   padding: 10px;
 }
 
+/* Phase cards */
 .phase {
   background: white;
-  border-radius: 8px;
+  border-radius: 10px;
   padding: 15px 20px;
   margin-bottom: 15px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+}
+
+.phase:hover {
+  transform: translateY(-3px);
 }
 
 .phase h2 {
@@ -42,15 +69,24 @@ main {
   color: #1a73e8;
 }
 
+/* Inputs and selects */
 .phase select, 
 .phase input {
   width: 100%;
-  padding: 8px 10px;
+  padding: 10px 12px;
   font-size: 1rem;
-  border-radius: 5px;
+  border-radius: 6px;
   border: 1px solid #ccc;
+  transition: border-color 0.2s;
 }
 
+.phase select:focus,
+.phase input:focus {
+  border-color: #1a73e8;
+  outline: none;
+}
+
+/* Generate button */
 .generate-btn {
   display: inline-block;
   padding: 12px 25px;
@@ -68,13 +104,14 @@ main {
   background-color: #2c8e46;
 }
 
+/* Output cards */
 #output {
   margin-top: 15px;
 }
 
 .country-card {
   background: #e8f0fe;
-  border-radius: 8px;
+  border-radius: 10px;
   padding: 15px;
   margin-top: 10px;
   border-left: 5px solid #1a73e8;
@@ -88,10 +125,19 @@ main {
   margin-bottom: 5px;
 }
 
+/* Footer */
 footer {
   text-align: center;
   padding: 15px;
   margin-top: 30px;
   background: #1a73e8;
   color: white;
+}
+
+/* Responsive for smaller screens */
+@media (max-width: 600px) {
+  main {
+    margin: 10px;
+    padding: 5px;
+  }
 }
