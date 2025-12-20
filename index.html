@@ -6,35 +6,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+
 <header>
   <h1>Brits Abroad 2026</h1>
   <p>The Ultimate Relocation & Relaxation Planner</p>
+
   <div id="progressBarContainer">
     <div id="progressBar"></div>
   </div>
 </header>
 
 <main id="app">
-  <!-- PHASES -->
-  <section class="phase" id="phase1">
-    <h2>Phase 1: Choose Destination Country</h2>
+
+  <section class="phase">
+    <h2>Phase 1: Choose Your Destination</h2>
     <div id="countryCards"></div>
   </section>
 
   <section class="phase">
-    <h2>Phase 2: Age</h2>
-    <input type="number" id="age" placeholder="Your age" oninput="updateProgress()">
+    <h2>Phase 2: Your Age</h2>
+    <input type="number" id="age" placeholder="Enter your age">
   </section>
 
   <section class="phase">
     <h2>Phase 3: Monthly Income (£)</h2>
-    <input type="number" id="income" placeholder="Monthly income" oninput="updateProgress()">
+    <input type="number" id="income" placeholder="Monthly income">
   </section>
 
   <section class="phase">
     <h2>Phase 4: Healthcare Preference</h2>
-    <select id="healthcare" onchange="updateProgress()">
+    <select id="healthcare">
       <option value="">Select</option>
       <option>Private</option>
       <option>Public</option>
@@ -44,7 +47,7 @@
 
   <section class="phase">
     <h2>Phase 5: Housing Plan</h2>
-    <select id="housing" onchange="updateProgress()">
+    <select id="housing">
       <option value="">Select</option>
       <option>Rent</option>
       <option>Buy</option>
@@ -53,8 +56,8 @@
   </section>
 
   <section class="phase">
-    <h2>Phase 6: Banking</h2>
-    <select id="banking" onchange="updateProgress()">
+    <h2>Phase 6: Banking Setup</h2>
+    <select id="banking">
       <option value="">Select</option>
       <option>UK only</option>
       <option>Local account</option>
@@ -64,7 +67,7 @@
 
   <section class="phase">
     <h2>Phase 7: Transport</h2>
-    <select id="transport" onchange="updateProgress()">
+    <select id="transport">
       <option value="">Select</option>
       <option>No car</option>
       <option>Buy locally</option>
@@ -74,7 +77,7 @@
 
   <section class="phase">
     <h2>Phase 8: Residency Route</h2>
-    <select id="visa" onchange="updateProgress()">
+    <select id="visa">
       <option value="">Select</option>
       <option>Retirement / Passive Income</option>
       <option>Work / Self-employed</option>
@@ -84,7 +87,7 @@
 
   <section class="phase">
     <h2>Phase 9: Lifestyle Preference</h2>
-    <select id="lifestyle" onchange="updateProgress()">
+    <select id="lifestyle">
       <option value="">Select</option>
       <option>Quiet / Rural</option>
       <option>City</option>
@@ -94,7 +97,7 @@
 
   <section class="phase">
     <h2>Phase 10: Risk Tolerance</h2>
-    <select id="risk" onchange="updateProgress()">
+    <select id="risk">
       <option value="">Select</option>
       <option>Low</option>
       <option>Medium</option>
@@ -102,11 +105,12 @@
     </select>
   </section>
 
-  <section class="phase" id="phase11">
+  <section class="phase final">
     <h2>Phase 11: Your Relocation Summary</h2>
     <button onclick="generateSummary()">Generate My Summary</button>
     <div id="output"></div>
   </section>
+
 </main>
 
 <footer>
