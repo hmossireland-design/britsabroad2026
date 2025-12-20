@@ -1,4 +1,3 @@
-// --- Country Data ---
 const countries = [
   { name: "Portugal", flag: "🇵🇹", visa: "D7: €870/mo passive income", tax: "10% pension tax" },
   { name: "Spain", flag: "🇪🇸", visa: "Non-Lucrative: €2,400/mo", tax: "Variable by region" },
@@ -32,120 +31,74 @@ const countries = [
   { name: "Latvia", flag: "🇱🇻", visa: "Temporary Residence: €1,101/mo", tax: "Low Baltic EU rates" }
 ];
 
-// --- Populate countries in dropdown ---
+// Populate dropdown
 const countrySelect = document.getElementById("countrySelect");
-countries.forEach(country => {
+countries.forEach(c => {
   const option = document.createElement("option");
-  option.value = country.name;
-  option.text = `${country.flag} ${country.name}`;
+  option.value = c.name;
+  option.text = `${c.flag} ${c.name}`;
   countrySelect.add(option);
 });
 
-// --- Track user inputs ---
-const userData = {
-  country: "",
-  age: "",
-  income: "",
-  healthcare: "",
-  housing: "",
-  banking: "",
-  transport: "",
-  visa: "",
-  lifestyle: "",
-  risk: ""
-};
-
-// --- Input listeners ---
-countrySelect.addEventListener("change", () => {
-  userData.country = countrySelect.value;
-  updateProgress();
+// Track user input
+const userData = {};
+["country","age","income","healthcare","housing","banking","transport","visa","lifestyle","risk"].forEach(id=>{
+  userData[id]="";
+  const el=document.getElementById(id);
+  el.addEventListener(el.tagName==="INPUT"?"input":"change",e=>{userData[id]=e.target.value; updateProgress();});
 });
 
-document.getElementById("age").addEventListener("input", e => {
-  userData.age = e.target.value;
-  updateProgress();
-});
-
-document.getElementById("income").addEventListener("input", e => {
-  userData.income = e.target.value;
-  updateProgress();
-});
-
-document.getElementById("healthcare").addEventListener("change", e => {
-  userData.healthcare = e.target.value;
-  updateProgress();
-});
-
-document.getElementById("housing").addEventListener("change", e => {
-  userData.housing = e.target.value;
-  updateProgress();
-});
-
-document.getElementById("banking").addEventListener("change", e => {
-  userData.banking = e.target.value;
-  updateProgress();
-});
-
-document.getElementById("transport").addEventListener("change", e => {
-  userData.transport = e.target.value;
-  updateProgress();
-});
-
-document.getElementById("visa").addEventListener("change", e => {
-  userData.visa = e.target.value;
-  updateProgress();
-});
-
-document.getElementById("lifestyle").addEventListener("change", e => {
-  userData.lifestyle = e.target.value;
-  updateProgress();
-});
-
-document.getElementById("risk").addEventListener("change", e => {
-  userData.risk = e.target.value;
-  updateProgress();
-});
-
-// --- Progress Bar ---
-function updateProgress() {
-  const totalPhases = 11;
-  let completed = 0;
-  for (let key in userData) {
-    if (userData[key] !== "") completed++;
-  }
-  const percent = Math.floor((completed / totalPhases) * 100);
-  document.getElementById("progressBar").style.width = `${percent}%`;
+// Progress bar
+function updateProgress(){
+  const total=11;
+  let completed=0;
+  for(let key in userData) if(userData[key]) completed++;
+  document.getElementById("progressBar").style.width=`${Math.floor((completed/total)*100)}%`;
 }
 
-// --- Generate Summary ---
-function generateSummary() {
-  const output = document.getElementById("output");
-  output.innerHTML = "";
+// Generate Summary
+function generateSummary(){
+  const output=document.getElementById("output");
+  const recommended=document.getElementById("recommended");
+  output.innerHTML=""; recommended.innerHTML="";
 
-  if (!userData.country) {
-    output.innerHTML = "<p>Please select your destination country first.</p>";
-    return;
-  }
+  if(!userData.country){ output.innerHTML="<p>Please select your destination country.</p>"; return; }
 
-  const selectedCountry = countries.find(c => c.name === userData.country);
-
-  const summaryCard = document.createElement("div");
-  summaryCard.className = "country-card";
-
-  summaryCard.innerHTML = `
-    <h3>${selectedCountry.flag} ${selectedCountry.name}</h3>
-    <p><strong>Visa/Residency:</strong> ${selectedCountry.visa}</p>
-    <p><strong>Tax Info:</strong> ${selectedCountry.tax}</p>
-    <p><strong>Age:</strong> ${userData.age || "N/A"}</p>
-    <p><strong>Income:</strong> £${userData.income || "N/A"}</p>
-    <p><strong>Healthcare:</strong> ${userData.healthcare || "N/A"}</p>
-    <p><strong>Housing:</strong> ${userData.housing || "N/A"}</p>
-    <p><strong>Banking:</strong> ${userData.banking || "N/A"}</p>
-    <p><strong>Transport:</strong> ${userData.transport || "N/A"}</p>
-    <p><strong>Residency Route:</strong> ${userData.visa || "N/A"}</p>
-    <p><strong>Lifestyle Preference:</strong> ${userData.lifestyle || "N/A"}</p>
-    <p><strong>Risk Tolerance:</strong> ${userData.risk || "N/A"}</p>
+  const c=countries.find(c=>c.name===userData.country);
+  const card=document.createElement("div");
+  card.className="country-card";
+  card.innerHTML=`
+    <h3>${c.flag} ${c.name}</h3>
+    <p><strong>Visa/Residency:</strong> ${c.visa}</p>
+    <p><strong>Tax:</strong> ${c.tax}</p>
+    <p><strong>Age:</strong> ${userData.age||"N/A"}</p>
+    <p><strong>Income:</strong> £${userData.income||"N/A"}</p>
+    <p><strong>Healthcare:</strong> ${userData.healthcare||"N/A"}</p>
+    <p><strong>Housing:</strong> ${userData.housing||"N/A"}</p>
+    <p><strong>Banking:</strong> ${userData.banking||"N/A"}</p>
+    <p><strong>Transport:</strong> ${userData.transport||"N/A"}</p>
+    <p><strong>Residency Route:</strong> ${userData.visa||"N/A"}</p>
+    <p><strong>Lifestyle:</strong> ${userData.lifestyle||"N/A"}</p>
+    <p><strong>Risk Tolerance:</strong> ${userData.risk||"N/A"}</p>
   `;
+  output.appendChild(card);
 
-  output.appendChild(summaryCard);
+  // Recommended countries
+  const recs=countries.filter(x=>{
+    return (userData.income?parseInt(userData.income)>=1000:true) &&
+           (userData.age?parseInt(userData.age)>=50:true) &&
+           x.name!==userData.country;
+  }).slice(0,3);
+
+  if(recs.length){
+    const recDiv=document.createElement("div");
+    recDiv.innerHTML="<h3>Recommended Alternatives:</h3>";
+    recs.forEach(r=>{
+      const div=document.createElement("div");
+      div.className="country-card";
+      div.innerHTML=`${r.flag} ${r.name} | Visa: ${r.visa} | Tax: ${r.tax}`;
+      recDiv.appendChild(div);
+    });
+    recommended.appendChild(recDiv);
+  }
 }
