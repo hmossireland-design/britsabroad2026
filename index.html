@@ -12,29 +12,31 @@
 <header>
   <h1>Brits Abroad 2026</h1>
   <p>The Ultimate Relocation & Relaxation Planner</p>
-
-  <div id="progressBarContainer">
-    <div id="progressBar"></div>
-  </div>
 </header>
 
 <main id="app">
 
+  <!-- PHASE 1 -->
   <section class="phase">
-    <h2>Phase 1: Choose Your Destination</h2>
-    <div id="countryCards"></div>
+    <h2>Phase 1: Choose Destination Country</h2>
+    <select id="countrySelect">
+      <option value="">-- Select Country --</option>
+    </select>
   </section>
 
+  <!-- PHASE 2 -->
   <section class="phase">
-    <h2>Phase 2: Your Age</h2>
-    <input type="number" id="age" placeholder="Enter your age">
+    <h2>Phase 2: Age</h2>
+    <input type="number" id="age" placeholder="Your age">
   </section>
 
+  <!-- PHASE 3 -->
   <section class="phase">
     <h2>Phase 3: Monthly Income (£)</h2>
     <input type="number" id="income" placeholder="Monthly income">
   </section>
 
+  <!-- PHASE 4 -->
   <section class="phase">
     <h2>Phase 4: Healthcare Preference</h2>
     <select id="healthcare">
@@ -45,6 +47,7 @@
     </select>
   </section>
 
+  <!-- PHASE 5 -->
   <section class="phase">
     <h2>Phase 5: Housing Plan</h2>
     <select id="housing">
@@ -55,57 +58,8 @@
     </select>
   </section>
 
+  <!-- PHASE 11 -->
   <section class="phase">
-    <h2>Phase 6: Banking Setup</h2>
-    <select id="banking">
-      <option value="">Select</option>
-      <option>UK only</option>
-      <option>Local account</option>
-      <option>UK + Offshore</option>
-    </select>
-  </section>
-
-  <section class="phase">
-    <h2>Phase 7: Transport</h2>
-    <select id="transport">
-      <option value="">Select</option>
-      <option>No car</option>
-      <option>Buy locally</option>
-      <option>Import UK vehicle</option>
-    </select>
-  </section>
-
-  <section class="phase">
-    <h2>Phase 8: Residency Route</h2>
-    <select id="visa">
-      <option value="">Select</option>
-      <option>Retirement / Passive Income</option>
-      <option>Work / Self-employed</option>
-      <option>Investment</option>
-    </select>
-  </section>
-
-  <section class="phase">
-    <h2>Phase 9: Lifestyle Preference</h2>
-    <select id="lifestyle">
-      <option value="">Select</option>
-      <option>Quiet / Rural</option>
-      <option>City</option>
-      <option>Coastal / Island</option>
-    </select>
-  </section>
-
-  <section class="phase">
-    <h2>Phase 10: Risk Tolerance</h2>
-    <select id="risk">
-      <option value="">Select</option>
-      <option>Low</option>
-      <option>Medium</option>
-      <option>High</option>
-    </select>
-  </section>
-
-  <section class="phase final">
     <h2>Phase 11: Your Relocation Summary</h2>
     <button onclick="generateSummary()">Generate My Summary</button>
     <div id="output"></div>
