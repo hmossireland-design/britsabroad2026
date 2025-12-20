@@ -1,189 +1,68 @@
-console.log("Brits Abroad 2026 – Country logic loaded");
+// --- COUNTRY DATA ---
+const countries = [
+  { name: "Portugal", taxRate: 0.10, visaType: "D7 Visa", minIncome: 870 },
+  { name: "Spain", taxRate: 0.15, visaType: "Non-Lucrative Visa", minIncome: 2400 },
+  { name: "Ireland", taxRate: 0.20, visaType: "No visa required", minIncome: 0 },
+  { name: "UAE", taxRate: 0, visaType: "Retirement Visa", minIncome: 4200 },
+  { name: "Thailand", taxRate: 0.05, visaType: "Retirement/Elite Visa", minIncome: 1500 },
+  { name: "Australia", taxRate: 0.20, visaType: "Parent/Contributory Visa", minIncome: 30000 },
+  { name: "Cyprus", taxRate: 0.10, visaType: "Category F/Pink Slip", minIncome: 300 },
+  { name: "Malta", taxRate: 0.15, visaType: "Retirement Programme", minIncome: 10000 },
+  { name: "France", taxRate: 0.15, visaType: "Long-Stay Visitor", minIncome: 1800 },
+  { name: "Italy", taxRate: 0.07, visaType: "Elective Residence", minIncome: 31000 },
+  { name: "Greece", taxRate: 0.10, visaType: "Financially Independent (FIP)", minIncome: 3500 },
+  { name: "Canada", taxRate: 0.20, visaType: "Family/Points-based", minIncome: 2200 },
+  { name: "New Zealand", taxRate: 0.20, visaType: "Investment/Family", minIncome: 2500 },
+  { name: "Malaysia", taxRate: 0.05, visaType: "MM2H", minIncome: 1500 },
+  { name: "Panama", taxRate: 0, visaType: "Pensionado", minIncome: 1000 },
+  { name: "Mexico", taxRate: 0.05, visaType: "Temporary Resident", minIncome: 2500 },
+  { name: "Costa Rica", taxRate: 0.05, visaType: "Pensionado", minIncome: 1000 },
+  { name: "Hungary", taxRate: 0.10, visaType: "Residence Permit", minIncome: 1700 },
+  { name: "Poland", taxRate: 0.10, visaType: "Temporary Residence", minIncome: 160 },
+  { name: "Slovenia", taxRate: 0.10, visaType: "Long-term Residence", minIncome: 1000 },
+  { name: "Slovakia", taxRate: 0.10, visaType: "Temporary Residence", minIncome: 800 },
+  { name: "Bulgaria", taxRate: 0.10, visaType: "D Visa", minIncome: 1000 },
+  { name: "Indonesia", taxRate: 0.05, visaType: "Retirement KITAS", minIncome: 1500 },
+  { name: "Colombia", taxRate: 0.05, visaType: "Pension Visa", minIncome: 900 },
+  { name: "Mauritius", taxRate: 0.05, visaType: "Retired Non-Citizen", minIncome: 1500 },
+  { name: "Belize", taxRate: 0, visaType: "QRP", minIncome: 2000 },
+  { name: "Ecuador", taxRate: 0.05, visaType: "Pensioner Visa", minIncome: 800 },
+  { name: "Uruguay", taxRate: 0.05, visaType: "Residency", minIncome: 1500 },
+  { name: "Chile", taxRate: 0.05, visaType: "Retirement Visa", minIncome: 1500 },
+  { name: "Latvia", taxRate: 0.10, visaType: "Temporary Residence (Financial)", minIncome: 1101 },
+];
 
-/* =========================
-   COUNTRY DATA (2026)
-========================= */
-
-const countryData = {
-  Portugal: {
-    visa: "D7 Passive Income Visa",
-    tax: "Pensions typically taxed at 10% (NHR-style regime)",
-  },
-  Spain: {
-    visa: "Non-Lucrative Residence Visa",
-    tax: "Worldwide income taxable; higher progressive rates",
-  },
-  France: {
-    visa: "Long-Stay Visitor Visa",
-    tax: "Progressive tax; UK state pension taxable in UK",
-  },
-  Italy: {
-    visa: "Elective Residence Visa",
-    tax: "7% flat tax available in southern regions",
-  },
-  Greece: {
-    visa: "Financially Independent Person (FIP)",
-    tax: "7% flat tax on foreign income (optional)",
-  },
-  Cyprus: {
-    visa: "Pink Slip / Category F",
-    tax: "Low tax; many pensions tax-free or reduced",
-  },
-  Malta: {
-    visa: "Malta Retirement Programme",
-    tax: "Foreign income taxed only if remitted",
-  },
-  Ireland: {
-    visa: "No visa required (Common Travel Area)",
-    tax: "High income tax; worldwide income applies",
-  },
-  UAE: {
-    visa: "Retirement or Long-Term Residence Visa",
-    tax: "0% income tax",
-  },
-  Thailand: {
-    visa: "Retirement Visa (50+)",
-    tax: "Foreign income generally not taxed if not remitted",
-  },
-  Malaysia: {
-    visa: "MM2H Programme",
-    tax: "Territorial tax system",
-  },
-  Panama: {
-    visa: "Pensionado Visa",
-    tax: "No tax on foreign income",
-  },
-  Mexico: {
-    visa: "Temporary Resident Visa",
-    tax: "Tax residency depends on days spent",
-  },
-  "Costa Rica": {
-    visa: "Pensionado Visa",
-    tax: "Foreign income not taxed",
-  },
-  Bulgaria: {
-    visa: "D Visa / Long-Term Residence",
-    tax: "Flat 10% income tax",
-  },
-  Hungary: {
-    visa: "Residence Permit",
-    tax: "Flat 15% income tax",
-  },
-  Poland: {
-    visa: "Temporary Residence Permit",
-    tax: "Progressive tax; low cost of living",
-  },
-  Slovakia: {
-    visa: "Temporary Residence",
-    tax: "Progressive income tax",
-  },
-  Slovenia: {
-    visa: "Long-Term Residence",
-    tax: "Moderate EU tax rates",
-  },
-  Indonesia: {
-    visa: "Retirement KITAS (55+)",
-    tax: "Tax residency after 183 days",
-  },
-  Vietnam: {
-    visa: "Temporary Residence Card",
-    tax: "Territorial-style tax system",
-  },
-  Mauritius: {
-    visa: "Retired Non-Citizen Permit",
-    tax: "15% flat income tax",
-  },
-  Ecuador: {
-    visa: "Pensioner Visa",
-    tax: "Foreign income often exempt",
-  },
-  Uruguay: {
-    visa: "Permanent Residency",
-    tax: "Optional territorial taxation",
-  },
-  Argentina: {
-    visa: "Rentista / Pensionado Visa",
-    tax: "High inflation; tax residency rules apply",
-  },
-  USA: {
-    visa: "No retirement visa available",
-    tax: "Worldwide taxation; complex filing",
-  },
-  Canada: {
-    visa: "Family or Skilled Migration only",
-    tax: "Worldwide income taxed",
-  },
-  Australia: {
-    visa: "Parent / Contributory Visas",
-    tax: "Worldwide income taxed",
-  },
-  "New Zealand": {
-    visa: "Investment or Family Route",
-    tax: "Worldwide income after residency",
-  }
-};
-
-/* =========================
-   COUNTRY DROPDOWN
-========================= */
-
+// --- POPULATE PHASE 1 DROPDOWN ---
 const countrySelect = document.getElementById("countrySelect");
-
-countrySelect.innerHTML = `<option value="">Select country</option>`;
-Object.keys(countryData).forEach(country => {
-  const option = document.createElement("option");
-  option.value = country;
-  option.textContent = country;
-  countrySelect.appendChild(option);
+countries.forEach(c => {
+  const opt = document.createElement("option");
+  opt.value = c.name;
+  opt.textContent = c.name;
+  countrySelect.appendChild(opt);
 });
 
-/* =========================
-   SUMMARY GENERATOR
-========================= */
-
+// --- SUMMARY GENERATION ---
 function generateSummary() {
-  const country = countrySelect.value;
-  const age = document.getElementById("age").value;
-  const income = document.getElementById("income").value;
-  const healthcare = document.getElementById("healthcare").value;
-  const housing = document.getElementById("housing").value;
-  const banking = document.getElementById("banking").value;
-  const transport = document.getElementById("transport").value;
-  const visaRoute = document.getElementById("visa").value;
-  const lifestyle = document.getElementById("lifestyle").value;
-  const risk = document.getElementById("risk").value;
-
-  if (!country) {
-    alert("Please select a destination country");
+  const selectedCountryName = countrySelect.value;
+  if (!selectedCountryName) {
+    alert("Please select a country first!");
     return;
   }
 
-  const visaInfo = countryData[country]?.visa || "Visa details pending";
-  const taxInfo = countryData[country]?.tax || "Tax details pending";
+  const country = countries.find(c => c.name === selectedCountryName);
+  const age = document.getElementById("age").value || "N/A";
+  const income = document.getElementById("income").value || "N/A";
+  const healthcare = document.getElementById("healthcare").value || "N/A";
+  const housing = document.getElementById("housing").value || "N/A";
 
-  const output = document.getElementById("output");
+  let summary = `<h3>Relocation Summary for ${country.name}</h3>`;
+  summary += `<p><strong>Visa type:</strong> ${country.visaType}</p>`;
+  summary += `<p><strong>Tax rate:</strong> ${(country.taxRate*100).toFixed(0)}%</p>`;
+  summary += `<p><strong>Minimum income required:</strong> £${country.minIncome}</p>`;
+  summary += `<p><strong>Your age:</strong> ${age}</p>`;
+  summary += `<p><strong>Your monthly income:</strong> £${income}</p>`;
+  summary += `<p><strong>Healthcare preference:</strong> ${healthcare}</p>`;
+  summary += `<p><strong>Housing plan:</strong> ${housing}</p>`;
 
-  output.innerHTML = `
-    <h3>Your Relocation Plan – ${country}</h3>
-
-    <p><strong>Age:</strong> ${age || "Not specified"}</p>
-    <p><strong>Monthly Income:</strong> £${income || "Not specified"}</p>
-    <p><strong>Healthcare:</strong> ${healthcare || "Not specified"}</p>
-    <p><strong>Housing:</strong> ${housing || "Not specified"}</p>
-    <p><strong>Banking:</strong> ${banking || "Not specified"}</p>
-    <p><strong>Transport:</strong> ${transport || "Not specified"}</p>
-    <p><strong>Residency Route:</strong> ${visaRoute || "Not specified"}</p>
-    <p><strong>Lifestyle:</strong> ${lifestyle || "Not specified"}</p>
-    <p><strong>Risk Tolerance:</strong> ${risk || "Not specified"}</p>
-
-    <hr>
-
-    <p><strong>Primary Visa Option:</strong> ${visaInfo}</p>
-    <p><strong>Tax Position:</strong> ${taxInfo}</p>
-
-    <p class="note">
-      Next steps will include documentation checklists,
-      tax residency timing, healthcare setup, and move timelines.
-    </p>
-  `;
+  document.getElementById("output").innerHTML = summary;
 }
