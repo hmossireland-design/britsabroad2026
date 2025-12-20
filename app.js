@@ -1,3 +1,6 @@
+/* ===============================
+   DATA: COUNTRIES
+================================ */
 const countries = [
   { name:"Portugal", flag:"🇵🇹", visa:"D7", tax:10, minIncome:870, lifestyle:["Coastal","City"], risk:"Low", retire:true },
   { name:"Spain", flag:"🇪🇸", visa:"Non-Lucrative", tax:10, minIncome:2400, lifestyle:["Coastal","City"], risk:"Low", retire:true },
@@ -16,76 +19,74 @@ const countries = [
   { name:"Hungary", flag:"🇭🇺", visa:"Residence", tax:9, minIncome:900, lifestyle:["City"], risk:"Medium", retire:true }
 ];
 
-let selectedCountry = null;
-const container = document.getElementById("countryCards");
+/* ===============================
+   PHASE 1 – COUNTRY DROPDOWN
+================================ */
+const countrySelect = document.getElementById("countrySelect");
 
-/* ---------- COUNTRY SELECTION UI ---------- */
 countries.forEach(c => {
-  const div = document.createElement("div");
-  div.className = "countryCard";
-  div.innerHTML = `<div style="font-size:2rem">${c.flag}</div><strong>${c.name}</strong>`;
-  div.onclick = () => {
-    document.querySelectorAll(".countryCard").forEach(d => d.classList.remove("selected"));
-    div.classList.add("selected");
-    selectedCountry = c;
-    updateProgress();
-  };
-  container.appendChild(div);
+  const opt = document.createElement("option");
+  opt.value = c.name;
+  opt.textContent = `${c.flag} ${c.name}`;
+  countrySelect.appendChild(opt);
 });
 
-/* ---------- PROGRESS BAR ---------- */
-function updateProgress() {
-  const fields = ["age","income","healthcare","housing","banking","transport","visa","lifestyle","risk"];
-  let filled = fields.filter(id => document.getElementById(id).value).length;
-  if(selectedCountry) filled++;
-  document.getElementById("progressBar").style.width = ((filled/10)*100)+"%";
-}
-
-/* ---------- SMART SCORING ENGINE ---------- */
+/* ===============================
+   SCORING ENGINE
+================================ */
 function scoreCountry(country, inputs) {
   let score = 0;
-
-  if(inputs.income >= country.minIncome) score += 2;
-  if(country.tax <= 10) score += 2;
-  if(country.lifestyle.includes(inputs.lifestyle)) score += 2;
-  if(country.risk === inputs.risk) score += 1;
-  if(inputs.age >= 50 && country.retire) score += 2;
-
+  if (inputs.income >= country.minIncome) score += 2;
+  if (country.tax <= 10) score += 2;
+  if (country.lifestyle.includes(inputs.lifestyle)) score += 2;
+  if (country.risk === inputs.risk) score += 1;
+  if (inputs.age >= 50 && country.retire) score += 2;
   return score;
 }
 
-/* ---------- FINAL SUMMARY ---------- */
+/* ===============================
+   FINAL SUMMARY (NO BLOCKING)
+================================ */
 function generateSummary() {
-  const age = Number(document.getElementById("age").value);
-  const income = Number(document.getElementById("income").value);
+  const age = Number(document.getElementById("age").value || 0);
+  const income = Number(document.getElementById("income").value || 0);
   const lifestyle = document.getElementById("lifestyle").value;
   const risk = document.getElementById("risk").value;
+  const selectedName = countrySelect.value;
 
-  const inputs = { age, income, lifestyle, risk };
   const output = document.getElementById("output");
+  output.innerHTML = "";
 
-  /* If user picked a country */
-  if(selectedCountry) {
+  /* CASE 1: COUNTRY SELECTED */
+  if (selectedName) {
+    const c = countries.find(x => x.name === selectedName);
     output.innerHTML = `
-      <h3>${selectedCountry.flag} ${selectedCountry.name}</h3>
-      <p><strong>Visa:</strong> ${selectedCountry.visa}</p>
-      <p><strong>Tax Exposure:</strong> ${selectedCountry.tax}%</p>
-      <p>This destination aligns with your profile.</p>
+      <h3>${c.flag} ${c.name}</h3>
+      <p><strong>Visa Route:</strong> ${c.visa}</p>
+      <p><strong>Estimated Tax:</strong> ${c.tax}%</p>
+      <p><strong>Minimum Income:</strong> £${c.minIncome}/month</p>
+      <p>This destination matches your inputs. Next steps include visa prep, tax residency planning, and healthcare setup.</p>
     `;
     return;
   }
 
-  /* Otherwise recommend top 3 */
+  /* CASE 2: NO COUNTRY → RECOMMEND 3 */
+  const inputs = { age, income, lifestyle, risk };
+
   const ranked = countries
     .map(c => ({ ...c, score: scoreCountry(c, inputs) }))
-    .sort((a,b) => b.score - a.score)
-    .slice(0,3);
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 3);
 
-  output.innerHTML = `<h3>🌍 Recommended Countries for You</h3>`;
+  output.innerHTML = `<h3>🌍 Your Top 3 Recommended Countries</h3>`;
   ranked.forEach(c => {
     output.innerHTML += `
-      <p><strong>${c.flag} ${c.name}</strong><br>
-      Visa: ${c.visa} | Tax: ${c.tax}%</p>
+      <p>
+        <strong>${c.flag} ${c.name}</strong><br>
+        Visa: ${c.visa}<br>
+        Tax: ${c.tax}%<br>
+        Min Income: £${c.minIncome}/month
+      </p>
     `;
   });
 }
