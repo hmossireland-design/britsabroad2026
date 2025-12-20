@@ -1,143 +1,92 @@
-/* General Reset */
-* {
+body {
+  font-family: Arial, sans-serif;
+  background: #f5f5f5;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f0f4f8;
-  color: #333;
-  line-height: 1.5;
-}
-
-/* Header */
 header {
-  text-align: center;
-  padding: 20px;
-  background-color: #1a73e8;
+  background-color: #2d6cdf;
   color: white;
+  padding: 20px;
+  text-align: center;
 }
 
-header h1 {
-  margin-bottom: 5px;
+h1 {
+  margin: 0;
 }
 
-/* Progress Bar */
-#progressContainer {
-  background-color: #dfe3ee;
-  border-radius: 20px;
-  margin-top: 10px;
-  height: 12px;
-  width: 80%;
-  margin-left: auto;
-  margin-right: auto;
+.progress-container {
+  width: 90%;
+  background: #ddd;
+  height: 10px;
+  margin: 10px auto 0;
+  border-radius: 5px;
+  overflow: hidden;
 }
 
 #progressBar {
-  height: 12px;
   width: 0%;
-  background-color: #34a853;
-  border-radius: 20px;
-  transition: width 0.3s ease;
+  height: 100%;
+  background: #4CAF50;
+  transition: width 0.3s;
 }
 
-/* Main container */
 main {
-  max-width: 900px;
+  width: 90%;
+  max-width: 800px;
   margin: 20px auto;
-  padding: 10px;
 }
 
-/* Phase cards */
 .phase {
   background: white;
   border-radius: 10px;
   padding: 15px 20px;
-  margin-bottom: 15px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  transition: transform 0.2s ease;
-}
-
-.phase:hover {
-  transform: translateY(-3px);
+  margin-bottom: 20px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
 .phase h2 {
-  margin-bottom: 10px;
-  color: #1a73e8;
+  margin-top: 0;
+  color: #2d6cdf;
 }
 
-/* Inputs and selects */
-.phase select, 
-.phase input {
+select, input {
   width: 100%;
-  padding: 10px 12px;
-  font-size: 1rem;
-  border-radius: 6px;
+  padding: 10px;
+  font-size: 16px;
+  margin-top: 10px;
+  border-radius: 5px;
   border: 1px solid #ccc;
-  transition: border-color 0.2s;
 }
 
-.phase select:focus,
-.phase input:focus {
-  border-color: #1a73e8;
-  outline: none;
-}
-
-/* Generate button */
-.generate-btn {
-  display: inline-block;
-  padding: 12px 25px;
-  background-color: #34a853;
+button {
+  padding: 12px 20px;
+  font-size: 16px;
   color: white;
+  background: #4CAF50;
   border: none;
   border-radius: 5px;
-  font-size: 1.1rem;
   cursor: pointer;
   margin-top: 10px;
-  transition: background-color 0.3s ease;
 }
 
-.generate-btn:hover {
-  background-color: #2c8e46;
-}
-
-/* Output cards */
-#output {
-  margin-top: 15px;
+button:hover {
+  background: #45a049;
 }
 
 .country-card {
-  background: #e8f0fe;
+  border: 1px solid #ccc;
   border-radius: 10px;
   padding: 15px;
-  margin-top: 10px;
-  border-left: 5px solid #1a73e8;
+  margin-top: 15px;
+  background: #eaf2ff;
 }
 
 .country-card h3 {
-  margin-bottom: 8px;
+  margin-top: 0;
 }
 
-.country-card p {
-  margin-bottom: 5px;
-}
-
-/* Footer */
-footer {
-  text-align: center;
-  padding: 15px;
-  margin-top: 30px;
-  background: #1a73e8;
-  color: white;
-}
-
-/* Responsive for smaller screens */
-@media (max-width: 600px) {
-  main {
-    margin: 10px;
-    padding: 5px;
-  }
+#recommended {
+  margin-top: 20px;
 }
