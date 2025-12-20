@@ -12,51 +12,32 @@
 <header>
   <h1>Brits Abroad 2026</h1>
   <p>The Ultimate Relocation & Relaxation Planner</p>
-
-  <!-- PROGRESS BAR -->
-  <div id="progress-container">
-    <div id="progress-bar"></div>
-  </div>
 </header>
 
 <main id="app">
 
   <!-- PHASE 1 -->
-  <section class="phase" data-phase>
-    <h2>Phase 1: Choose Your Destination</h2>
-
-    <select id="countrySelect" style="display:none">
-      <option value="">Select</option>
-      <option>Portugal</option>
-      <option>Spain</option>
-      <option>France</option>
-      <option>Cyprus</option>
-      <option>UAE</option>
-      <option>Thailand</option>
+  <section class="phase">
+    <h2>Phase 1: Choose Destination Country</h2>
+    <select id="countrySelect">
+      <option value="">Select country</option>
     </select>
-
-    <div class="country-grid">
-      <div class="country-card" onclick="selectCountry('Portugal', this)">🇵🇹 Portugal</div>
-      <div class="country-card" onclick="selectCountry('Spain', this)">🇪🇸 Spain</div>
-      <div class="country-card" onclick="selectCountry('France', this)">🇫🇷 France</div>
-      <div class="country-card" onclick="selectCountry('Cyprus', this)">🇨🇾 Cyprus</div>
-      <div class="country-card" onclick="selectCountry('UAE', this)">🇦🇪 UAE</div>
-      <div class="country-card" onclick="selectCountry('Thailand', this)">🇹🇭 Thailand</div>
-    </div>
   </section>
 
-  <!-- PHASES 2–10 -->
-  <section class="phase" data-phase>
+  <!-- PHASE 2 -->
+  <section class="phase">
     <h2>Phase 2: Age</h2>
-    <input type="number" id="age">
+    <input type="number" id="age" placeholder="Your age">
   </section>
 
-  <section class="phase" data-phase>
+  <!-- PHASE 3 -->
+  <section class="phase">
     <h2>Phase 3: Monthly Income (£)</h2>
-    <input type="number" id="income">
+    <input type="number" id="income" placeholder="Monthly income">
   </section>
 
-  <section class="phase" data-phase>
+  <!-- PHASE 4 -->
+  <section class="phase">
     <h2>Phase 4: Healthcare Preference</h2>
     <select id="healthcare">
       <option value="">Select</option>
@@ -66,63 +47,14 @@
     </select>
   </section>
 
-  <section class="phase" data-phase>
+  <!-- PHASE 5 -->
+  <section class="phase">
     <h2>Phase 5: Housing Plan</h2>
     <select id="housing">
       <option value="">Select</option>
       <option>Rent</option>
       <option>Buy</option>
       <option>Undecided</option>
-    </select>
-  </section>
-
-  <section class="phase" data-phase>
-    <h2>Phase 6: Banking</h2>
-    <select id="banking">
-      <option value="">Select</option>
-      <option>UK only</option>
-      <option>Local account</option>
-      <option>UK + Offshore</option>
-    </select>
-  </section>
-
-  <section class="phase" data-phase>
-    <h2>Phase 7: Transport</h2>
-    <select id="transport">
-      <option value="">Select</option>
-      <option>No car</option>
-      <option>Buy locally</option>
-      <option>Import UK vehicle</option>
-    </select>
-  </section>
-
-  <section class="phase" data-phase>
-    <h2>Phase 8: Residency Route</h2>
-    <select id="visa">
-      <option value="">Select</option>
-      <option>Retirement / Passive Income</option>
-      <option>Work / Self-employed</option>
-      <option>Investment</option>
-    </select>
-  </section>
-
-  <section class="phase" data-phase>
-    <h2>Phase 9: Lifestyle Preference</h2>
-    <select id="lifestyle">
-      <option value="">Select</option>
-      <option>Quiet / Rural</option>
-      <option>City</option>
-      <option>Coastal / Island</option>
-    </select>
-  </section>
-
-  <section class="phase" data-phase>
-    <h2>Phase 10: Risk Tolerance</h2>
-    <select id="risk">
-      <option value="">Select</option>
-      <option>Low</option>
-      <option>Medium</option>
-      <option>High</option>
     </select>
   </section>
 
@@ -138,36 +70,6 @@
 <footer>
   <p>© 2026 Brits Abroad</p>
 </footer>
-
-<script>
-function selectCountry(country, el) {
-  document.getElementById("countrySelect").value = country;
-  document.querySelectorAll(".country-card").forEach(c => c.classList.remove("active"));
-  el.classList.add("active");
-  updateProgress();
-}
-
-function updateProgress() {
-  const phases = document.querySelectorAll("[data-phase]");
-  let completed = 0;
-
-  phases.forEach(p => {
-    const input = p.querySelector("input, select");
-    if (input && input.value) {
-      p.classList.add("completed");
-      completed++;
-    } else {
-      p.classList.remove("completed");
-    }
-  });
-
-  const percent = Math.round((completed / phases.length) * 100);
-  document.getElementById("progress-bar").style.width = percent + "%";
-}
-
-document.addEventListener("input", updateProgress);
-document.addEventListener("change", updateProgress);
-</script>
 
 <script src="app.js"></script>
 </body>
