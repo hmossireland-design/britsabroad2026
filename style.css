@@ -1,162 +1,168 @@
-/* RESET */
+/* =====================
+   GLOBAL RESET
+===================== */
+
 * {
   box-sizing: border-box;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
 }
 
 body {
-  margin: 0;
-  background: #f4f7fb;
+  background: linear-gradient(180deg, #f4f7fb, #eef2f7);
   color: #222;
+  line-height: 1.6;
 }
 
-/* HERO */
-.hero {
-  background: linear-gradient(135deg, #0f4c81, #1e90c2);
-  color: white;
-  padding: 2.5rem 1rem;
+/* =====================
+   HEADER
+===================== */
+
+header {
+  background: linear-gradient(135deg, #0a3d62, #1e6fa3);
+  color: #fff;
+  padding: 25px 15px;
   text-align: center;
 }
 
-.hero h1 {
-  margin: 0;
-  font-size: 2.2rem;
+header h1 {
+  font-size: 2rem;
+  margin-bottom: 5px;
 }
 
-.hero p {
+header p {
+  font-size: 1rem;
   opacity: 0.9;
-  margin-top: 0.5rem;
 }
 
-/* PROGRESS */
-.progress-wrapper {
-  max-width: 1100px;
-  margin: 1.5rem auto;
-  padding: 0 1rem;
+/* =====================
+   MAIN APP CONTAINER
+===================== */
+
+#app {
+  max-width: 900px;
+  margin: 25px auto;
+  padding: 0 15px 40px;
 }
 
-.progress-label {
-  font-size: 0.9rem;
-  margin-bottom: 0.4rem;
-  color: #555;
+/* =====================
+   PHASE CARDS
+===================== */
+
+.phase {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.progress-bar {
-  background: #ddd;
-  height: 10px;
+.phase:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.12);
+}
+
+.phase h2 {
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+  color: #0a3d62;
+}
+
+/* =====================
+   INPUTS & SELECTS
+===================== */
+
+input,
+select {
+  width: 100%;
+  padding: 12px 14px;
   border-radius: 10px;
-  overflow: hidden;
+  border: 1px solid #ccd6e0;
+  font-size: 1rem;
+  background: #f9fbfd;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
 }
 
-.progress-fill {
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, #2ecc71, #27ae60);
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #1e6fa3;
+  box-shadow: 0 0 0 3px rgba(30, 111, 163, 0.15);
 }
 
-/* GRID */
-.phase-grid {
-  max-width: 1100px;
-  margin: auto;
-  padding: 1rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1rem;
-}
+/* =====================
+   BUTTON
+===================== */
 
-/* CARDS */
-.phase-card {
-  background: white;
-  border-radius: 12px;
-  padding: 1.2rem;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-}
-
-.phase-card h2 {
-  margin-top: 0;
-  font-size: 1.05rem;
-  color: #0f4c81;
-}
-
-/* FULL WIDTH */
-.full-width {
-  grid-column: 1 / -1;
-}
-
-/* INPUTS */
-input, select {
-  width: 100%;
-  padding: 0.6rem;
-  margin-top: 0.4rem;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-}
-
-/* BUTTON */
-.primary-btn {
-  background: #27ae60;
+button {
+  background: linear-gradient(135deg, #1e6fa3, #0a3d62);
   color: white;
   border: none;
-  padding: 0.8rem 1.2rem;
-  border-radius: 8px;
+  padding: 14px 20px;
   font-size: 1rem;
+  border-radius: 30px;
   cursor: pointer;
+  margin-top: 10px;
+  width: 100%;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
 }
 
-.primary-btn:hover {
-  background: #219150;
+button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  opacity: 0.95;
 }
 
-/* OUTPUT */
-.output-box {
-  margin-top: 1rem;
-  padding: 1rem;
-  background: #f0f8ff;
-  border-left: 5px solid #1e90c2;
-  border-radius: 6px;
+button:active {
+  transform: scale(0.98);
 }
 
-/* FOOTER */
+/* =====================
+   OUTPUT SUMMARY
+===================== */
+
+#output {
+  margin-top: 15px;
+  background: #f0f6ff;
+  border-left: 5px solid #1e6fa3;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+#output h3 {
+  margin-bottom: 10px;
+  color: #0a3d62;
+}
+
+#output p {
+  margin-bottom: 6px;
+  font-size: 0.95rem;
+}
+
+/* =====================
+   FOOTER
+===================== */
+
 footer {
   text-align: center;
-  padding: 1.5rem;
+  padding: 15px;
+  background: #0a3d62;
+  color: #fff;
   font-size: 0.85rem;
-  color: #666;
-}
-/* COUNTRY GRID */
-.country-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 1rem;
-  margin-top: 1rem;
 }
 
-.country-card {
-  background: #f9fafc;
-  border: 2px solid transparent;
-  border-radius: 12px;
-  padding: 1rem;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
+/* =====================
+   RESPONSIVE TWEAKS
+===================== */
 
-.country-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-}
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 1.6rem;
+  }
 
-.country-card.selected {
-  border-color: #27ae60;
-  background: #eafaf1;
-}
-
-.country-flag {
-  font-size: 2rem;
-}
-
-.country-name {
-  margin-top: 0.5rem;
-  font-weight: 600;
-  font-size: 0.95rem;
+  .phase h2 {
+    font-size: 1rem;
+  }
 }
