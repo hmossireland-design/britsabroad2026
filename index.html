@@ -6,117 +6,123 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+  <header>
+    <h1>Brits Abroad 2026</h1>
+    <p>The Ultimate Relocation & Relaxation Planner</p>
+  </header>
 
-<header>
-  <h1>Brits Abroad 2026</h1>
-  <p>The Ultimate Relocation & Relaxation Planner</p>
-</header>
+  <main id="app">
+    <!-- PHASE 1: Destination -->
+    <section class="phase">
+      <h2>Phase 1: Choose Destination Country</h2>
+      <select id="countrySelect">
+        <option value="">Select country</option>
+      </select>
+    </section>
 
-<main id="app">
+    <!-- PHASE 2: Age -->
+    <section class="phase">
+      <h2>Phase 2: Age</h2>
+      <input type="number" id="age" placeholder="Your age">
+    </section>
 
-  <div id="progressContainer">
-    <div id="progressBar"></div>
-  </div>
+    <!-- PHASE 3: Monthly Income -->
+    <section class="phase">
+      <h2>Phase 3: Monthly Income (£)</h2>
+      <input type="number" id="income" placeholder="Monthly income">
+    </section>
 
-  <!-- Phase container -->
-  <div class="phase">
-    <h2>Phase 1: Choose Destination Country</h2>
-    <select id="countrySelect"></select>
-  </div>
+    <!-- PHASE 4: Healthcare -->
+    <section class="phase">
+      <h2>Phase 4: Healthcare Preference</h2>
+      <select id="healthcare">
+        <option value="">Select</option>
+        <option>Private</option>
+        <option>Public</option>
+        <option>Mixed</option>
+      </select>
+    </section>
 
-  <div class="phase">
-    <h2>Phase 2: Age</h2>
-    <input type="number" id="age" placeholder="Your age">
-  </div>
+    <!-- PHASE 5: Housing -->
+    <section class="phase">
+      <h2>Phase 5: Housing Plan</h2>
+      <select id="housing">
+        <option value="">Select</option>
+        <option>Rent</option>
+        <option>Buy</option>
+        <option>Undecided</option>
+      </select>
+    </section>
 
-  <div class="phase">
-    <h2>Phase 3: Monthly Income (£)</h2>
-    <input type="number" id="income" placeholder="Monthly income">
-  </div>
+    <!-- PHASE 6: Banking -->
+    <section class="phase">
+      <h2>Phase 6: Banking</h2>
+      <select id="banking">
+        <option value="">Select</option>
+        <option>UK only</option>
+        <option>Local account</option>
+        <option>UK + Offshore</option>
+      </select>
+    </section>
 
-  <div class="phase">
-    <h2>Phase 4: Healthcare Preference</h2>
-    <select id="healthcare">
-      <option value="">Select</option>
-      <option>Private</option>
-      <option>Public</option>
-      <option>Mixed</option>
-    </select>
-  </div>
+    <!-- PHASE 7: Transport -->
+    <section class="phase">
+      <h2>Phase 7: Transport</h2>
+      <select id="transport">
+        <option value="">Select</option>
+        <option>No car</option>
+        <option>Buy locally</option>
+        <option>Import UK vehicle</option>
+      </select>
+    </section>
 
-  <div class="phase">
-    <h2>Phase 5: Housing Plan</h2>
-    <select id="housing">
-      <option value="">Select</option>
-      <option>Rent</option>
-      <option>Buy</option>
-      <option>Undecided</option>
-    </select>
-  </div>
+    <!-- PHASE 8: Residency Route -->
+    <section class="phase">
+      <h2>Phase 8: Residency Route</h2>
+      <select id="visa">
+        <option value="">Select</option>
+        <option>Retirement / Passive Income</option>
+        <option>Work / Self-employed</option>
+        <option>Investment</option>
+      </select>
+    </section>
 
-  <div class="phase">
-    <h2>Phase 6: Banking</h2>
-    <select id="banking">
-      <option value="">Select</option>
-      <option>UK only</option>
-      <option>Local account</option>
-      <option>UK + Offshore</option>
-    </select>
-  </div>
+    <!-- PHASE 9: Lifestyle -->
+    <section class="phase">
+      <h2>Phase 9: Lifestyle Preference</h2>
+      <select id="lifestyle">
+        <option value="">Select</option>
+        <option>Quiet / Rural</option>
+        <option>City</option>
+        <option>Coastal / Island</option>
+      </select>
+    </section>
 
-  <div class="phase">
-    <h2>Phase 7: Transport</h2>
-    <select id="transport">
-      <option value="">Select</option>
-      <option>No car</option>
-      <option>Buy locally</option>
-      <option>Import UK vehicle</option>
-    </select>
-  </div>
+    <!-- PHASE 10: Risk Tolerance -->
+    <section class="phase">
+      <h2>Phase 10: Risk Tolerance</h2>
+      <select id="risk">
+        <option value="">Select</option>
+        <option>Low</option>
+        <option>Medium</option>
+        <option>High</option>
+      </select>
+    </section>
 
-  <div class="phase">
-    <h2>Phase 8: Residency Route</h2>
-    <select id="visaRoute">
-      <option value="">Select</option>
-      <option>Passive Income / Retirement</option>
-      <option>Work / Self-Employed</option>
-      <option>Investment</option>
-    </select>
-  </div>
+    <!-- PHASE 11: Relocation Summary -->
+    <section class="phase">
+      <h2>Phase 11: Your Relocation Summary</h2>
+      <button onclick="generateSummary()" class="generate-btn">Generate My Summary</button>
+      <div id="output"></div>
+    </section>
+  </main>
 
-  <div class="phase">
-    <h2>Phase 9: Lifestyle Preference</h2>
-    <select id="lifestyle">
-      <option value="">Select</option>
-      <option>Quiet / Rural</option>
-      <option>City</option>
-      <option>Coastal / Island</option>
-    </select>
-  </div>
+  <footer>
+    <p>© 2026 Brits Abroad</p>
+  </footer>
 
-  <div class="phase">
-    <h2>Phase 10: Risk Tolerance</h2>
-    <select id="risk">
-      <option value="">Select</option>
-      <option>Low</option>
-      <option>Medium</option>
-      <option>High</option>
-    </select>
-  </div>
-
-  <div class="phase">
-    <h2>Phase 11: Your Relocation Summary</h2>
-    <button onclick="generateSummary()">Generate My Summary</button>
-    <div id="output"></div>
-  </div>
-
-</main>
-
-<footer>
-  <p>© 2026 Brits Abroad</p>
-</footer>
-
-<script src="app.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
