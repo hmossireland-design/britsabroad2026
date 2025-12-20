@@ -1,98 +1,69 @@
 const countries = [
-  { name: "Portugal", tax: 10, visa: "D7", flag: "🇵🇹" },
-  { name: "Spain", tax: 10, visa: "Non-Lucrative", flag: "🇪🇸" },
-  { name: "Ireland", tax: 20, visa: "None", flag: "🇮🇪" },
-  { name: "Australia", tax: 25, visa: "Parent/Contributory", flag: "🇦🇺" },
-  { name: "Cyprus", tax: 10, visa: "Category F", flag: "🇨🇾" },
-  { name: "Malta", tax: 15, visa: "Retirement Programme", flag: "🇲🇹" },
-  { name: "France", tax: 20, visa: "Long-Stay Visitor", flag: "🇫🇷" },
-  { name: "UAE", tax: 0, visa: "Retirement", flag: "🇦🇪" },
-  { name: "Thailand", tax: 0, visa: "Retirement/Elite", flag: "🇹🇭" },
-  { name: "Italy", tax: 7, visa: "Elective Residence", flag: "🇮🇹" },
-  { name: "Greece", tax: 10, visa: "FIP/Golden Visa", flag: "🇬🇷" },
-  { name: "Canada", tax: 25, visa: "Points/Family", flag: "🇨🇦" },
-  { name: "New Zealand", tax: 25, visa: "Investment/Family", flag: "🇳🇿" },
-  { name: "Malaysia", tax: 5, visa: "MM2H", flag: "🇲🇾" },
-  { name: "Panama", tax: 0, visa: "Pensionado", flag: "🇵🇦" },
-  { name: "Mexico", tax: 10, visa: "Temporary Resident", flag: "🇲🇽" },
-  { name: "Costa Rica", tax: 0, visa: "Pensionado", flag: "🇨🇷" },
-  { name: "Hungary", tax: 9, visa: "Residence Permit", flag: "🇭🇺" },
-  { name: "Poland", tax: 10, visa: "Temporary Residence", flag: "🇵🇱" },
-  { name: "Slovenia", tax: 10, visa: "Long-term Residence", flag: "🇸🇮" },
-  { name: "Slovakia", tax: 10, visa: "Temporary Residence", flag: "🇸🇰" },
-  { name: "Bulgaria", tax: 10, visa: "D Visa", flag: "🇧🇬" },
-  { name: "Indonesia", tax: 5, visa: "Retirement KITAS", flag: "🇮🇩" },
-  { name: "Colombia", tax: 5, visa: "Pension Visa", flag: "🇨🇴" },
-  { name: "Mauritius", tax: 0, visa: "Retired Non-Citizen", flag: "🇲🇺" },
-  { name: "Belize", tax: 0, visa: "QRP", flag: "🇧🇿" },
-  { name: "Ecuador", tax: 0, visa: "Pensioner Visa", flag: "🇪🇨" },
-  { name: "Uruguay", tax: 10, visa: "Residency", flag: "🇺🇾" },
-  { name: "Chile", tax: 10, visa: "Retirement Visa", flag: "🇨🇱" },
-  { name: "Latvia", tax: 10, visa: "Temporary Residence", flag: "🇱🇻" }
+  { name:"Portugal", flag:"🇵🇹", visa:"D7", tax:10 },
+  { name:"Spain", flag:"🇪🇸", visa:"Non-Lucrative", tax:10 },
+  { name:"France", flag:"🇫🇷", visa:"Visitor", tax:20 },
+  { name:"Italy", flag:"🇮🇹", visa:"Elective Residence", tax:7 },
+  { name:"Greece", flag:"🇬🇷", visa:"FIP", tax:10 },
+  { name:"Cyprus", flag:"🇨🇾", visa:"Category F", tax:10 },
+  { name:"Malta", flag:"🇲🇹", visa:"Retirement", tax:15 },
+  { name:"Ireland", flag:"🇮🇪", visa:"CTA", tax:20 },
+  { name:"UAE", flag:"🇦🇪", visa:"Retirement", tax:0 },
+  { name:"Thailand", flag:"🇹🇭", visa:"Retirement", tax:0 },
+  { name:"Malaysia", flag:"🇲🇾", visa:"MM2H", tax:5 },
+  { name:"Panama", flag:"🇵🇦", visa:"Pensionado", tax:0 },
+  { name:"Mexico", flag:"🇲🇽", visa:"Temporary", tax:10 },
+  { name:"Costa Rica", flag:"🇨🇷", visa:"Pensionado", tax:0 },
+  { name:"Bulgaria", flag:"🇧🇬", visa:"D Visa", tax:10 },
+  { name:"Poland", flag:"🇵🇱", visa:"Temporary", tax:10 },
+  { name:"Hungary", flag:"🇭🇺", visa:"Residence", tax:9 },
+  { name:"Slovakia", flag:"🇸🇰", visa:"Temporary", tax:10 },
+  { name:"Slovenia", flag:"🇸🇮", visa:"Residence", tax:10 },
+  { name:"Indonesia", flag:"🇮🇩", visa:"KITAS", tax:5 },
+  { name:"Colombia", flag:"🇨🇴", visa:"Pension", tax:5 },
+  { name:"Mauritius", flag:"🇲🇺", visa:"Retired", tax:0 },
+  { name:"Ecuador", flag:"🇪🇨", visa:"Pensioner", tax:0 },
+  { name:"Uruguay", flag:"🇺🇾", visa:"Residency", tax:10 },
+  { name:"Chile", flag:"🇨🇱", visa:"Retirement", tax:10 },
+  { name:"Latvia", flag:"🇱🇻", visa:"Temporary", tax:10 },
+  { name:"Canada", flag:"🇨🇦", visa:"Family", tax:25 },
+  { name:"Australia", flag:"🇦🇺", visa:"Parent", tax:25 },
+  { name:"New Zealand", flag:"🇳🇿", visa:"Investment", tax:25 },
+  { name:"Belize", flag:"🇧🇿", visa:"QRP", tax:0 }
 ];
 
-const countryCardsContainer = document.getElementById("countryCards");
 let selectedCountry = null;
+const container = document.getElementById("countryCards");
 
-// Create country cards
 countries.forEach(c => {
-  const card = document.createElement("div");
-  card.classList.add("countryCard");
-  card.innerHTML = `${c.flag}<br>${c.name}`;
-  card.onclick = () => {
+  const div = document.createElement("div");
+  div.className = "countryCard";
+  div.innerHTML = `<div style="font-size:2rem">${c.flag}</div><strong>${c.name}</strong>`;
+  div.onclick = () => {
+    document.querySelectorAll(".countryCard").forEach(d => d.classList.remove("selected"));
+    div.classList.add("selected");
     selectedCountry = c;
-    document.querySelectorAll(".countryCard").forEach(d => d.style.opacity = 0.5);
-    card.style.opacity = 1;
     updateProgress();
   };
-  countryCardsContainer.appendChild(card);
+  container.appendChild(div);
 });
 
-// Update progress bar
 function updateProgress() {
-  let total = 10; // Phases 2-10
-  let filled = 0;
-  if(document.getElementById("age").value) filled++;
-  if(document.getElementById("income").value) filled++;
-  if(document.getElementById("healthcare").value) filled++;
-  if(document.getElementById("housing").value) filled++;
-  if(document.getElementById("banking").value) filled++;
-  if(document.getElementById("transport").value) filled++;
-  if(document.getElementById("visa").value) filled++;
-  if(document.getElementById("lifestyle").value) filled++;
-  if(document.getElementById("risk").value) filled++;
+  const fields = ["age","income","healthcare","housing","banking","transport","visa","lifestyle","risk"];
+  let filled = fields.filter(id => document.getElementById(id).value).length;
   if(selectedCountry) filled++;
-  const percent = (filled / total) * 100;
-  document.getElementById("progressBar").style.width = percent + "%";
+  document.getElementById("progressBar").style.width = ((filled/10)*100)+"%";
 }
 
-// Generate summary
 function generateSummary() {
-  const age = document.getElementById("age").value;
-  const income = document.getElementById("income").value;
-  const healthcare = document.getElementById("healthcare").value;
-  const housing = document.getElementById("housing").value;
-  const banking = document.getElementById("banking").value;
-  const transport = document.getElementById("transport").value;
-  const visa = document.getElementById("visa").value;
-  const lifestyle = document.getElementById("lifestyle").value;
-  const risk = document.getElementById("risk").value;
-
-  let outputText = `<h3>Relocation Summary</h3>`;
-  if(selectedCountry) {
-    outputText += `<p>Primary destination: ${selectedCountry.flag} ${selectedCountry.name} (Visa: ${selectedCountry.visa}, Tax: ${selectedCountry.tax}%)</p>`;
-  } else {
-    outputText += `<p>No primary destination selected.</p>`;
+  if(!selectedCountry){
+    alert("Please select a destination country.");
+    return;
   }
 
-  outputText += `<p>Age: ${age || "N/A"}, Monthly Income: £${income || "N/A"}</p>`;
-  outputText += `<p>Healthcare: ${healthcare || "N/A"}, Housing: ${housing || "N/A"}</p>`;
-  outputText += `<p>Banking: ${banking || "N/A"}, Transport: ${transport || "N/A"}</p>`;
-  outputText += `<p>Residency Route: ${visa || "N/A"}, Lifestyle: ${lifestyle || "N/A"}, Risk: ${risk || "N/A"}</p>`;
-
-  // Recommend 3 other countries
-  const recommendations = countries.filter(c => c !== selectedCountry).slice(0,3).map(c => `${c.flag} ${c.name}`);
-  outputText += `<p>Recommended countries: ${recommendations.join(", ")}</p>`;
-
-  document.getElementById("output").innerHTML = outputText;
+  document.getElementById("output").innerHTML = `
+    <h3>${selectedCountry.flag} ${selectedCountry.name}</h3>
+    <p><strong>Visa Route:</strong> ${selectedCountry.visa}</p>
+    <p><strong>Tax Exposure:</strong> ${selectedCountry.tax}%</p>
+    <p>This destination fits your inputs and lifestyle preferences.</p>
+  `;
 }
