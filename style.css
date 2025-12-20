@@ -1,6 +1,6 @@
 body {
   font-family: system-ui, Arial, sans-serif;
-  background: linear-gradient(180deg,#eef6ff,#ffffff);
+  background: #f4f8ff;
   margin: 0;
 }
 
@@ -9,25 +9,6 @@ header {
   color: white;
   padding: 1.5rem;
   text-align: center;
-}
-
-#progress-wrapper {
-  padding: 1rem;
-  background: #fff;
-}
-
-#progress-bar {
-  width: 100%;
-  height: 10px;
-  background: #ddd;
-  border-radius: 5px;
-}
-
-#progress-fill {
-  width: 100%;
-  height: 100%;
-  background: #1e88e5;
-  border-radius: 5px;
 }
 
 main {
@@ -44,38 +25,51 @@ main {
   box-shadow: 0 4px 10px rgba(0,0,0,0.08);
 }
 
-.phase h2 {
-  margin-top: 0;
+#countryGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(120px,1fr));
+  gap: 10px;
 }
 
-select, input {
+.country-card {
+  padding: 1rem;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 1.1rem;
+}
+
+.country-card:hover {
+  border-color: #1e88e5;
+  background: #eef5ff;
+}
+
+.flag {
+  display: block;
+  font-size: 2rem;
+}
+
+input, select {
   width: 100%;
   padding: 0.7rem;
   margin-top: 0.5rem;
-  border-radius: 6px;
-  border: 1px solid #ccc;
 }
 
 button {
   width: 100%;
   padding: 1rem;
-  font-size: 1rem;
   background: #2ecc71;
-  color: white;
   border: none;
   border-radius: 8px;
-  cursor: pointer;
+  color: white;
+  font-size: 1rem;
 }
 
-button:hover {
-  background: #27ae60;
-}
-
-#output {
-  margin-top: 1rem;
-  background: #f0f9ff;
-  padding: 1rem;
-  border-radius: 10px;
+.locked {
+  margin-top: 0.5rem;
+  font-weight: bold;
+  color: #1e88e5;
 }
 
 footer {
