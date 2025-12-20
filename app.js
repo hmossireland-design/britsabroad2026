@@ -1,228 +1,151 @@
-// --- COUNTRY DATA ---
-const countries = {
-  "Portugal": {
-    flag: "🇵🇹",
-    visa: "D7 (Passive Income)",
-    tax: "10% on pensions",
-    notes: "Warm climate, large British community, EU access."
-  },
-  "Spain": {
-    flag: "🇪🇸",
-    visa: "Non-Lucrative Visa",
-    tax: "Varies by region, private health insurance required",
-    notes: "Sunny Mediterranean lifestyle, excellent healthcare."
-  },
-  "Ireland": {
-    flag: "🇮🇪",
-    visa: "No visa needed",
-    tax: "Standard Irish rates",
-    notes: "English-speaking, close to UK."
-  },
-  "Australia": {
-    flag: "🇦🇺",
-    visa: "Parent/Contributory Parent or Skilled/Family",
-    tax: "Standard Australian rates",
-    notes: "High quality of life, outdoors lifestyle."
-  },
-  "Cyprus": {
-    flag: "🇨🇾",
-    visa: "Category F / Property proof €300k",
-    tax: "Low tax on foreign income",
-    notes: "Sunny, English widely spoken."
-  },
-  "Malta": {
-    flag: "🇲🇹",
-    visa: "Retirement Programme",
-    tax: "Low tax on foreign income",
-    notes: "Warm, English official language."
-  },
-  "France": {
-    flag: "🇫🇷",
-    visa: "Long-Stay Visitor",
-    tax: "Income dependent, S1 for pensioners",
-    notes: "Culture, food, S1 healthcare access."
-  },
-  "UAE": {
-    flag: "🇦🇪",
-    visa: "Retirement Visa",
-    tax: "0%",
-    notes: "Luxury lifestyle, modern infrastructure."
-  },
-  "Thailand": {
-    flag: "🇹🇭",
-    visa: "Retirement/Elite",
-    tax: "Variable, mostly low",
-    notes: "Affordable tropical living, friendly locals."
-  },
-  "Italy": {
-    flag: "🇮🇹",
-    visa: "Elective Residence",
-    tax: "7% flat in south",
-    notes: "Food, history, beautiful regions."
-  },
-  "Greece": {
-    flag: "🇬🇷",
-    visa: "Financially Independent / Golden Visa",
-    tax: "Varies by region, property based",
-    notes: "Islands, low cost, warm climate."
-  },
-  "Canada": {
-    flag: "🇨🇦",
-    visa: "Points-based or family sponsorship",
-    tax: "Standard Canadian rates",
-    notes: "Safety, nature, English-speaking."
-  },
-  "New Zealand": {
-    flag: "🇳🇿",
-    visa: "Investment / Family",
-    tax: "Standard NZ rates",
-    notes: "Stunning scenery, safe, English-speaking."
-  },
-  "Malaysia": {
-    flag: "🇲🇾",
-    visa: "MM2H Visa",
-    tax: "Mostly zero for foreigners",
-    notes: "Low cost, tropical, English widely spoken."
-  },
-  "Panama": {
-    flag: "🇵🇦",
-    visa: "Pensionado",
-    tax: "No tax on foreign income",
-    notes: "Dollar economy, senior benefits."
-  },
-  "Mexico": {
-    flag: "🇲🇽",
-    visa: "Temporary Resident",
-    tax: "Varies by region",
-    notes: "Affordable, vibrant culture."
-  },
-  "Costa Rica": {
-    flag: "🇨🇷",
-    visa: "Pensionado",
-    tax: "Low for retirees",
-    notes: "Nature, Pura Vida lifestyle."
-  },
-  "Hungary": {
-    flag: "🇭🇺",
-    visa: "Residence Permit",
-    tax: "Low EU rates",
-    notes: "Low cost, thermal spas."
-  },
-  "Poland": {
-    flag: "🇵🇱",
-    visa: "Temporary Residence",
-    tax: "Low EU rates",
-    notes: "History, cheap EU living."
-  },
-  "Slovenia": {
-    flag: "🇸🇮",
-    visa: "Long-term Residence",
-    tax: "Moderate",
-    notes: "Lakes, mountains, safe."
-  },
-  "Slovakia": {
-    flag: "🇸🇰",
-    visa: "Temporary Residence",
-    tax: "Low",
-    notes: "Bratislava charm, nature."
-  },
-  "Bulgaria": {
-    flag: "🇧🇬",
-    visa: "D Visa",
-    tax: "Low EU rates",
-    notes: "Black Sea coast, cheapest EU."
-  },
-  "Indonesia": {
-    flag: "🇮🇩",
-    visa: "Retirement KITAS",
-    tax: "Low cost",
-    notes: "Bali paradise, retirement visa 55+."
-  },
-  "Colombia": {
-    flag: "🇨🇴",
-    visa: "Pension Visa",
-    tax: "Low",
-    notes: "Affordable, vibrant culture."
-  },
-  "Mauritius": {
-    flag: "🇲🇺",
-    visa: "Retired Non-Citizen",
-    tax: "Low / none",
-    notes: "Island paradise, English/French spoken."
-  },
-  "Belize": {
-    flag: "🇧🇿",
-    visa: "QRP",
-    tax: "0% for retirees",
-    notes: "English speaking, Caribbean."
-  },
-  "Ecuador": {
-    flag: "🇪🇨",
-    visa: "Pensioner Visa",
-    tax: "Low",
-    notes: "Diverse landscapes, cheap cost."
-  },
-  "Uruguay": {
-    flag: "🇺🇾",
-    visa: "Residency",
-    tax: "Low",
-    notes: "Stable, beaches, subtropical."
-  },
-  "Chile": {
-    flag: "🇨🇱",
-    visa: "Retirement Visa",
-    tax: "Varies",
-    notes: "Safe, natural beauty."
-  },
-  "Latvia": {
-    flag: "🇱🇻",
-    visa: "Temporary Residence (Financial)",
-    tax: "Low",
-    notes: "Affordable Riga, Baltic EU."
-  }
-};
+// --- Country Data ---
+const countries = [
+  { name: "Portugal", flag: "🇵🇹", visa: "D7: €870/mo passive income", tax: "10% pension tax" },
+  { name: "Spain", flag: "🇪🇸", visa: "Non-Lucrative: €2,400/mo", tax: "Variable by region" },
+  { name: "Ireland", flag: "🇮🇪", visa: "No visa required", tax: "Standard Irish rates" },
+  { name: "Australia", flag: "🇦🇺", visa: "Family/Skilled Visa", tax: "Standard Australian rates" },
+  { name: "Cyprus", flag: "🇨🇾", visa: "Category F / €300k property", tax: "Low tax on foreign income" },
+  { name: "Malta", flag: "🇲🇹", visa: "Retirement Programme: €10k/yr", tax: "Low foreign income tax" },
+  { name: "France", flag: "🇫🇷", visa: "Long-Stay Visitor: €1,800/mo", tax: "S1 healthcare available" },
+  { name: "UAE", flag: "🇦🇪", visa: "Retirement Visa: £4,200/mo or property", tax: "0% income tax" },
+  { name: "Thailand", flag: "🇹🇭", visa: "Retirement/Elite Visa", tax: "Variable" },
+  { name: "Italy", flag: "🇮🇹", visa: "Elective Residence: €31k/yr", tax: "7% south Italy flat tax option" },
+  { name: "Greece", flag: "🇬🇷", visa: "Financially Independent: €3,500/mo", tax: "Golden Visa possible" },
+  { name: "Canada", flag: "🇨🇦", visa: "Points/Family Sponsorship", tax: "Canadian rates" },
+  { name: "New Zealand", flag: "🇳🇿", visa: "Investment or Family", tax: "Standard NZ tax" },
+  { name: "Malaysia", flag: "🇲🇾", visa: "MM2H: $1,500/mo", tax: "Low foreign income tax" },
+  { name: "Panama", flag: "🇵🇦", visa: "Pensionado: $1,000/mo", tax: "No foreign income tax" },
+  { name: "Mexico", flag: "🇲🇽", visa: "Temporary Resident: $2,500/mo", tax: "Variable" },
+  { name: "Costa Rica", flag: "🇨🇷", visa: "Pensionado: $1,000/mo", tax: "Senior discounts apply" },
+  { name: "Hungary", flag: "🇭🇺", visa: "Residence Permit: €1,700/yr proof", tax: "Low-cost EU taxes" },
+  { name: "Poland", flag: "🇵🇱", visa: "Temporary Residence: £160/mo", tax: "Low EU taxes" },
+  { name: "Slovenia", flag: "🇸🇮", visa: "Long-term Residence: €1,000/mo proof", tax: "Standard EU taxes" },
+  { name: "Slovakia", flag: "🇸🇰", visa: "Temporary Residence: €800/mo", tax: "Low EU taxes" },
+  { name: "Bulgaria", flag: "🇧🇬", visa: "D Visa: €1,000/mo", tax: "Low EU taxes" },
+  { name: "Indonesia", flag: "🇮🇩", visa: "Retirement KITAS: $1,500/mo, 55+", tax: "Low cost living" },
+  { name: "Colombia", flag: "🇨🇴", visa: "Pension Visa: $900/mo", tax: "Affordable" },
+  { name: "Mauritius", flag: "🇲🇺", visa: "Retired Non-Citizen: $1,500/mo", tax: "Low tax island" },
+  { name: "Belize", flag: "🇧🇿", visa: "QRP: $2,000/mo, 45+", tax: "Tax-free pension" },
+  { name: "Ecuador", flag: "🇪🇨", visa: "Pensioner Visa: $800/mo", tax: "Very low cost" },
+  { name: "Uruguay", flag: "🇺🇾", visa: "Residency: income proof", tax: "Stable Latin America" },
+  { name: "Chile", flag: "🇨🇱", visa: "Retirement Visa: pension proof", tax: "South America safe" },
+  { name: "Latvia", flag: "🇱🇻", visa: "Temporary Residence: €1,101/mo", tax: "Low Baltic EU rates" }
+];
 
-// --- POPULATE COUNTRY DROPDOWN ---
-const select = document.getElementById("countrySelect");
-select.innerHTML = `<option value="">Select country</option>`;
-Object.keys(countries).forEach(c => {
-  const opt = document.createElement("option");
-  opt.value = c;
-  opt.textContent = `${countries[c].flag} ${c}`;
-  select.appendChild(opt);
+// --- Populate countries in dropdown ---
+const countrySelect = document.getElementById("countrySelect");
+countries.forEach(country => {
+  const option = document.createElement("option");
+  option.value = country.name;
+  option.text = `${country.flag} ${country.name}`;
+  countrySelect.add(option);
 });
 
-// --- GENERATE SUMMARY ---
+// --- Track user inputs ---
+const userData = {
+  country: "",
+  age: "",
+  income: "",
+  healthcare: "",
+  housing: "",
+  banking: "",
+  transport: "",
+  visa: "",
+  lifestyle: "",
+  risk: ""
+};
+
+// --- Input listeners ---
+countrySelect.addEventListener("change", () => {
+  userData.country = countrySelect.value;
+  updateProgress();
+});
+
+document.getElementById("age").addEventListener("input", e => {
+  userData.age = e.target.value;
+  updateProgress();
+});
+
+document.getElementById("income").addEventListener("input", e => {
+  userData.income = e.target.value;
+  updateProgress();
+});
+
+document.getElementById("healthcare").addEventListener("change", e => {
+  userData.healthcare = e.target.value;
+  updateProgress();
+});
+
+document.getElementById("housing").addEventListener("change", e => {
+  userData.housing = e.target.value;
+  updateProgress();
+});
+
+document.getElementById("banking").addEventListener("change", e => {
+  userData.banking = e.target.value;
+  updateProgress();
+});
+
+document.getElementById("transport").addEventListener("change", e => {
+  userData.transport = e.target.value;
+  updateProgress();
+});
+
+document.getElementById("visa").addEventListener("change", e => {
+  userData.visa = e.target.value;
+  updateProgress();
+});
+
+document.getElementById("lifestyle").addEventListener("change", e => {
+  userData.lifestyle = e.target.value;
+  updateProgress();
+});
+
+document.getElementById("risk").addEventListener("change", e => {
+  userData.risk = e.target.value;
+  updateProgress();
+});
+
+// --- Progress Bar ---
+function updateProgress() {
+  const totalPhases = 11;
+  let completed = 0;
+  for (let key in userData) {
+    if (userData[key] !== "") completed++;
+  }
+  const percent = Math.floor((completed / totalPhases) * 100);
+  document.getElementById("progressBar").style.width = `${percent}%`;
+}
+
+// --- Generate Summary ---
 function generateSummary() {
-  const country = select.value;
-  if (!country) {
-    alert("Please select a country");
+  const output = document.getElementById("output");
+  output.innerHTML = "";
+
+  if (!userData.country) {
+    output.innerHTML = "<p>Please select your destination country first.</p>";
     return;
   }
 
-  const age = document.getElementById("age")?.value || "-";
-  const income = document.getElementById("income")?.value || "-";
-  const healthcare = document.getElementById("healthcare")?.value || "-";
-  const housing = document.getElementById("housing")?.value || "-";
-  const banking = document.getElementById("banking")?.value || "-";
-  const transport = document.getElementById("transport")?.value || "-";
-  const visaRoute = document.getElementById("visa")?.value || "-";
-  const lifestyle = document.getElementById("lifestyle")?.value || "-";
-  const risk = document.getElementById("risk")?.value || "-";
+  const selectedCountry = countries.find(c => c.name === userData.country);
 
-  const c = countries[country];
+  const summaryCard = document.createElement("div");
+  summaryCard.className = "country-card";
 
-  document.getElementById("output").innerHTML = `
-    <div class="country-card">
-      <h3>${c.flag} ${country}</h3>
-      <p><strong>Visa Route:</strong> ${c.visa}</p>
-      <p><strong>Tax Position:</strong> ${c.tax}</p>
-      <p><strong>Notes:</strong> ${c.notes}</p>
-      <hr>
-      <p><strong>Your Profile:</strong> Age ${age}, Income £${income}/month</p>
-      <p><strong>Healthcare:</strong> ${healthcare}, Housing: ${housing}, Banking: ${banking}</p>
-      <p><strong>Transport:</strong> ${transport}, Residency: ${visaRoute}, Lifestyle: ${lifestyle}, Risk: ${risk}</p>
-      <p><strong>Status:</strong> Country locked as primary destination.</p>
-    </div>
+  summaryCard.innerHTML = `
+    <h3>${selectedCountry.flag} ${selectedCountry.name}</h3>
+    <p><strong>Visa/Residency:</strong> ${selectedCountry.visa}</p>
+    <p><strong>Tax Info:</strong> ${selectedCountry.tax}</p>
+    <p><strong>Age:</strong> ${userData.age || "N/A"}</p>
+    <p><strong>Income:</strong> £${userData.income || "N/A"}</p>
+    <p><strong>Healthcare:</strong> ${userData.healthcare || "N/A"}</p>
+    <p><strong>Housing:</strong> ${userData.housing || "N/A"}</p>
+    <p><strong>Banking:</strong> ${userData.banking || "N/A"}</p>
+    <p><strong>Transport:</strong> ${userData.transport || "N/A"}</p>
+    <p><strong>Residency Route:</strong> ${userData.visa || "N/A"}</p>
+    <p><strong>Lifestyle Preference:</strong> ${userData.lifestyle || "N/A"}</p>
+    <p><strong>Risk Tolerance:</strong> ${userData.risk || "N/A"}</p>
   `;
+
+  output.appendChild(summaryCard);
 }
