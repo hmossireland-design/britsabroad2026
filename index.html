@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <header>
@@ -16,22 +15,27 @@
 
 <main id="app">
 
-  <section class="phase">
+  <div id="progressContainer">
+    <div id="progressBar"></div>
+  </div>
+
+  <!-- Phase container -->
+  <div class="phase">
     <h2>Phase 1: Choose Destination Country</h2>
     <select id="countrySelect"></select>
-  </section>
+  </div>
 
-  <section class="phase">
+  <div class="phase">
     <h2>Phase 2: Age</h2>
     <input type="number" id="age" placeholder="Your age">
-  </section>
+  </div>
 
-  <section class="phase">
+  <div class="phase">
     <h2>Phase 3: Monthly Income (£)</h2>
     <input type="number" id="income" placeholder="Monthly income">
-  </section>
+  </div>
 
-  <section class="phase">
+  <div class="phase">
     <h2>Phase 4: Healthcare Preference</h2>
     <select id="healthcare">
       <option value="">Select</option>
@@ -39,9 +43,9 @@
       <option>Public</option>
       <option>Mixed</option>
     </select>
-  </section>
+  </div>
 
-  <section class="phase">
+  <div class="phase">
     <h2>Phase 5: Housing Plan</h2>
     <select id="housing">
       <option value="">Select</option>
@@ -49,9 +53,9 @@
       <option>Buy</option>
       <option>Undecided</option>
     </select>
-  </section>
+  </div>
 
-  <section class="phase">
+  <div class="phase">
     <h2>Phase 6: Banking</h2>
     <select id="banking">
       <option value="">Select</option>
@@ -59,9 +63,9 @@
       <option>Local account</option>
       <option>UK + Offshore</option>
     </select>
-  </section>
+  </div>
 
-  <section class="phase">
+  <div class="phase">
     <h2>Phase 7: Transport</h2>
     <select id="transport">
       <option value="">Select</option>
@@ -69,9 +73,9 @@
       <option>Buy locally</option>
       <option>Import UK vehicle</option>
     </select>
-  </section>
+  </div>
 
-  <section class="phase">
+  <div class="phase">
     <h2>Phase 8: Residency Route</h2>
     <select id="visaRoute">
       <option value="">Select</option>
@@ -79,9 +83,9 @@
       <option>Work / Self-Employed</option>
       <option>Investment</option>
     </select>
-  </section>
+  </div>
 
-  <section class="phase">
+  <div class="phase">
     <h2>Phase 9: Lifestyle Preference</h2>
     <select id="lifestyle">
       <option value="">Select</option>
@@ -89,9 +93,9 @@
       <option>City</option>
       <option>Coastal / Island</option>
     </select>
-  </section>
+  </div>
 
-  <section class="phase">
+  <div class="phase">
     <h2>Phase 10: Risk Tolerance</h2>
     <select id="risk">
       <option value="">Select</option>
@@ -99,13 +103,13 @@
       <option>Medium</option>
       <option>High</option>
     </select>
-  </section>
+  </div>
 
-  <section class="phase">
+  <div class="phase">
     <h2>Phase 11: Your Relocation Summary</h2>
     <button onclick="generateSummary()">Generate My Summary</button>
     <div id="output"></div>
-  </section>
+  </div>
 
 </main>
 
