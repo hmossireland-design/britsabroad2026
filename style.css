@@ -1,113 +1,48 @@
-* {
-  box-sizing: border-box;
-}
-
 body {
-  font-family: "Segoe UI", Arial, sans-serif;
+  font-family: Arial, sans-serif;
+  background: #f4f6f8;
   margin: 0;
-  background: linear-gradient(to bottom, #f0f4f8, #ffffff);
-  color: #333;
+  padding: 0;
 }
 
-header {
-  background: linear-gradient(135deg, #1e3c72, #2a5298);
+header, footer {
+  background: #1f2933;
   color: white;
-  padding: 1.5rem;
   text-align: center;
-}
-
-#progressBarContainer {
-  background: rgba(255,255,255,0.3);
-  height: 10px;
-  border-radius: 20px;
-  margin-top: 1rem;
-}
-
-#progressBar {
-  height: 100%;
-  width: 0%;
-  background: #2ecc71;
-  border-radius: 20px;
-  transition: width 0.4s ease;
-}
-
-main {
-  max-width: 900px;
-  margin: auto;
-  padding: 1rem;
+  padding: 1.5rem;
 }
 
 .phase {
   background: white;
-  border-radius: 14px;
-  padding: 1.2rem;
-  margin-bottom: 1.2rem;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  margin: 1.5rem auto;
+  padding: 1.5rem;
+  max-width: 600px;
+  border-radius: 8px;
 }
 
 .phase h2 {
-  margin-top: 0;
-  color: #1e3c72;
+  margin-bottom: 0.75rem;
 }
 
-input, select {
+select, input {
   width: 100%;
   padding: 0.6rem;
   margin-top: 0.5rem;
-  font-size: 1rem;
-  border-radius: 8px;
-  border: 1px solid #ccc;
 }
 
 button {
-  background: linear-gradient(135deg, #27ae60, #2ecc71);
+  background: #2ecc71;
   color: white;
   border: none;
-  padding: 0.8rem 1.6rem;
-  border-radius: 30px;
+  padding: 0.75rem 1.25rem;
   font-size: 1rem;
+  border-radius: 5px;
   cursor: pointer;
-}
-
-button:hover {
-  opacity: 0.9;
 }
 
 #output {
   margin-top: 1rem;
-  background: #f7f9fb;
+  background: #eef6f0;
   padding: 1rem;
-  border-radius: 10px;
-}
-
-/* COUNTRY CARDS */
-#countryCards {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  gap: 12px;
-}
-
-.countryCard {
-  background: linear-gradient(135deg, #3498db, #2980b9);
-  color: white;
-  border-radius: 14px;
-  padding: 1rem;
-  text-align: center;
-  cursor: pointer;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-.countryCard:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-}
-
-.countryCard.selected {
-  outline: 4px solid #2ecc71;
-}
-
-footer {
-  text-align: center;
-  padding: 1rem;
-  color: #777;
+  border-radius: 5px;
 }
