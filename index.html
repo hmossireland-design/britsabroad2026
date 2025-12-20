@@ -11,31 +11,34 @@
   <header>
     <h1>Brits Abroad 2026</h1>
     <p>The Ultimate Relocation & Relaxation Planner</p>
+    <div id="progressContainer">
+      <div id="progressBar"></div>
+    </div>
   </header>
 
   <main id="app">
-    <!-- PHASE 1: Destination -->
-    <section class="phase">
+    <!-- PHASE 1 -->
+    <section class="phase" data-phase="1">
       <h2>Phase 1: Choose Destination Country</h2>
       <select id="countrySelect">
         <option value="">Select country</option>
       </select>
     </section>
 
-    <!-- PHASE 2: Age -->
-    <section class="phase">
+    <!-- PHASE 2 -->
+    <section class="phase" data-phase="2">
       <h2>Phase 2: Age</h2>
       <input type="number" id="age" placeholder="Your age">
     </section>
 
-    <!-- PHASE 3: Monthly Income -->
-    <section class="phase">
+    <!-- PHASE 3 -->
+    <section class="phase" data-phase="3">
       <h2>Phase 3: Monthly Income (£)</h2>
       <input type="number" id="income" placeholder="Monthly income">
     </section>
 
-    <!-- PHASE 4: Healthcare -->
-    <section class="phase">
+    <!-- PHASE 4 -->
+    <section class="phase" data-phase="4">
       <h2>Phase 4: Healthcare Preference</h2>
       <select id="healthcare">
         <option value="">Select</option>
@@ -45,8 +48,8 @@
       </select>
     </section>
 
-    <!-- PHASE 5: Housing -->
-    <section class="phase">
+    <!-- PHASE 5 -->
+    <section class="phase" data-phase="5">
       <h2>Phase 5: Housing Plan</h2>
       <select id="housing">
         <option value="">Select</option>
@@ -56,8 +59,8 @@
       </select>
     </section>
 
-    <!-- PHASE 6: Banking -->
-    <section class="phase">
+    <!-- PHASE 6 -->
+    <section class="phase" data-phase="6">
       <h2>Phase 6: Banking</h2>
       <select id="banking">
         <option value="">Select</option>
@@ -67,8 +70,8 @@
       </select>
     </section>
 
-    <!-- PHASE 7: Transport -->
-    <section class="phase">
+    <!-- PHASE 7 -->
+    <section class="phase" data-phase="7">
       <h2>Phase 7: Transport</h2>
       <select id="transport">
         <option value="">Select</option>
@@ -78,8 +81,8 @@
       </select>
     </section>
 
-    <!-- PHASE 8: Residency Route -->
-    <section class="phase">
+    <!-- PHASE 8 -->
+    <section class="phase" data-phase="8">
       <h2>Phase 8: Residency Route</h2>
       <select id="visa">
         <option value="">Select</option>
@@ -89,8 +92,8 @@
       </select>
     </section>
 
-    <!-- PHASE 9: Lifestyle -->
-    <section class="phase">
+    <!-- PHASE 9 -->
+    <section class="phase" data-phase="9">
       <h2>Phase 9: Lifestyle Preference</h2>
       <select id="lifestyle">
         <option value="">Select</option>
@@ -100,8 +103,8 @@
       </select>
     </section>
 
-    <!-- PHASE 10: Risk Tolerance -->
-    <section class="phase">
+    <!-- PHASE 10 -->
+    <section class="phase" data-phase="10">
       <h2>Phase 10: Risk Tolerance</h2>
       <select id="risk">
         <option value="">Select</option>
@@ -111,8 +114,8 @@
       </select>
     </section>
 
-    <!-- PHASE 11: Relocation Summary -->
-    <section class="phase">
+    <!-- PHASE 11 -->
+    <section class="phase" data-phase="11">
       <h2>Phase 11: Your Relocation Summary</h2>
       <button onclick="generateSummary()" class="generate-btn">Generate My Summary</button>
       <div id="output"></div>
