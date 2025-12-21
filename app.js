@@ -1,124 +1,136 @@
-/**********************
-  COUNTRY DATABASE
-***********************/
+// ===============================
+// COUNTRY DATA
+// ===============================
+const countries = {
+  Portugal: {
+    tax: "10% flat tax on foreign pension (NHR-style legacy rules)",
+    visa: "D7 Passive Income Visa",
+    banking: "Revolut & Wise fully supported. Portuguese bank often required for residency."
+  },
+  Spain: {
+    tax: "Progressive tax up to ~47%",
+    visa: "Non-Lucrative Visa",
+    banking: "Spanish bank required. Revolut works with limitations."
+  },
+  France: {
+    tax: "Progressive tax + social charges",
+    visa: "Visitor Visa",
+    banking: "French bank required. Online banks limited for admin."
+  },
+  Italy: {
+    tax: "7% flat tax (southern regions)",
+    visa: "Elective Residency Visa",
+    banking: "Italian bank usually required. Wise works short-term."
+  },
+  Greece: {
+    tax: "7% flat tax for retirees",
+    visa: "Financially Independent Person Visa",
+    banking: "Local bank required. Revolut works well."
+  },
+  UAE: {
+    tax: "0% personal income tax",
+    visa: "Retirement / Property / Golden Visa",
+    banking: "Local UAE bank required. Wise useful but limited."
+  },
+  Cyprus: {
+    tax: "Low tax with non-dom benefits",
+    visa: "Category F / Permanent Residency",
+    banking: "Local bank required. Revolut widely used."
+  },
+  Thailand: {
+    tax: "Territorial-style taxation",
+    visa: "Retirement Visa",
+    banking: "Thai bank required. Wise useful for transfers."
+  },
+  Malaysia: {
+    tax: "Territorial tax system",
+    visa: "MM2H",
+    banking: "Local bank required. Wise supported."
+  }
+};
 
-const countries = [
-  { name: "Portugal", flag: "🇵🇹", visa: "D7 Passive Income Visa", tax: "10% pensions", min: 870 },
-  { name: "Spain", flag: "🇪🇸", visa: "Non-Lucrative Visa", tax: "15–24%", min: 2400 },
-  { name: "Ireland", flag: "🇮🇪", visa: "No visa required", tax: "Progressive", min: 0 },
-  { name: "Australia", flag: "🇦🇺", visa: "Family / Skilled", tax: "Progressive", min: 2500 },
-  { name: "Cyprus", flag: "🇨🇾", visa: "Pink Slip / Category F", tax: "10%", min: 300 },
-  { name: "Malta", flag: "🇲🇹", visa: "Retirement Programme", tax: "Low foreign tax", min: 830 },
-  { name: "France", flag: "🇫🇷", visa: "Long-Stay Visitor", tax: "Progressive", min: 1800 },
-  { name: "UAE", flag: "🇦🇪", visa: "Retirement Visa", tax: "0%", min: 4200 },
-  { name: "Thailand", flag: "🇹🇭", visa: "Retirement / Elite", tax: "5–15%", min: 1500 },
-  { name: "Italy", flag: "🇮🇹", visa: "Elective Residence", tax: "7% (south)", min: 2600 },
-  { name: "Greece", flag: "🇬🇷", visa: "FIP / Golden Visa", tax: "10%", min: 3500 },
-  { name: "Canada", flag: "🇨🇦", visa: "Family / Skilled", tax: "Progressive", min: 2200 },
-  { name: "New Zealand", flag: "🇳🇿", visa: "Investment / Family", tax: "Progressive", min: 2500 },
-  { name: "Malaysia", flag: "🇲🇾", visa: "MM2H", tax: "Territorial", min: 1200 },
-  { name: "Panama", flag: "🇵🇦", visa: "Pensionado", tax: "0% foreign", min: 1000 },
-  { name: "Mexico", flag: "🇲🇽", visa: "Temporary Resident", tax: "Progressive", min: 2500 },
-  { name: "Costa Rica", flag: "🇨🇷", visa: "Pensionado", tax: "Territorial", min: 1000 },
-  { name: "Hungary", flag: "🇭🇺", visa: "Residence Permit", tax: "15%", min: 150 },
-  { name: "Poland", flag: "🇵🇱", visa: "Temporary Residence", tax: "12–32%", min: 160 },
-  { name: "Slovenia", flag: "🇸🇮", visa: "Long-Term Residence", tax: "Progressive", min: 1000 },
-  { name: "Slovakia", flag: "🇸🇰", visa: "Temporary Residence", tax: "19%", min: 800 },
-  { name: "Bulgaria", flag: "🇧🇬", visa: "D Visa", tax: "10%", min: 1000 },
-  { name: "Indonesia", flag: "🇮🇩", visa: "Retirement KITAS", tax: "Territorial", min: 1500 },
-  { name: "Colombia", flag: "🇨🇴", visa: "Pension Visa", tax: "Territorial", min: 900 },
-  { name: "Mauritius", flag: "🇲🇺", visa: "Retired Non-Citizen", tax: "15%", min: 1500 },
-  { name: "Belize", flag: "🇧🇿", visa: "QRP", tax: "0% foreign", min: 2000 },
-  { name: "Ecuador", flag: "🇪🇨", visa: "Pensioner Visa", tax: "Territorial", min: 800 },
-  { name: "Uruguay", flag: "🇺🇾", visa: "Residency", tax: "Progressive", min: 1500 },
-  { name: "Chile", flag: "🇨🇱", visa: "Retirement Visa", tax: "Progressive", min: 1500 },
-  { name: "Latvia", flag: "🇱🇻", visa: "Temporary Residence", tax: "20%", min: 1100 }
-];
+// ===============================
+// POPULATE COUNTRY DROPDOWN
+// ===============================
+const countrySelect = document.getElementById("countrySelect");
 
-/**********************
-  APP STATE
-***********************/
-
-let selectedCountry = null;
-
-/**********************
-  INIT
-***********************/
-
-const grid = document.getElementById("countryGrid");
-
-countries.forEach(country => {
-  const card = document.createElement("div");
-  card.className = "country-card";
-  card.innerHTML = `
-    <span class="flag">${country.flag}</span>
-    <span>${country.name}</span>
-  `;
-  card.onclick = () => selectCountry(country);
-  grid.appendChild(card);
+Object.keys(countries).forEach(country => {
+  const option = document.createElement("option");
+  option.value = country;
+  option.textContent = country;
+  countrySelect.appendChild(option);
 });
 
-/**********************
-  FUNCTIONS
-***********************/
-
-function selectCountry(country) {
-  selectedCountry = country;
-  document.getElementById("selectedCountry").textContent =
-    `Destination locked: ${country.flag} ${country.name}`;
-}
-
+// ===============================
+// GENERATE SUMMARY
+// ===============================
 function generateSummary() {
-  if (!selectedCountry) {
-    alert("Please choose a destination country first.");
+  const country = countrySelect.value;
+  const age = document.getElementById("age").value;
+  const income = document.getElementById("income").value;
+  const healthcare = document.getElementById("healthcare").value;
+  const housing = document.getElementById("housing").value;
+  const banking = document.getElementById("banking").value;
+  const transport = document.getElementById("transport").value;
+  const visaRoute = document.getElementById("visa").value;
+  const lifestyle = document.getElementById("lifestyle").value;
+  const risk = document.getElementById("risk").value;
+
+  if (!country) {
+    document.getElementById("output").innerHTML =
+      "<p style='color:red;'>Please select a destination country.</p>";
     return;
   }
 
-  const age = document.getElementById("age").value || "Not provided";
-  const income = document.getElementById("income").value || "Not provided";
-  const healthcare = document.getElementById("healthcare").value || "Not selected";
-  const housing = document.getElementById("housing")?.value || "Not selected";
+  const countryData = countries[country];
+
+  let bankingAdvice = "";
+
+  if (banking.includes("Online")) {
+    bankingAdvice = `
+      You prefer online banking. Wise and Revolut work well initially in ${country},
+      but you will still need a local bank account for residency, utilities, and tax.
+    `;
+  } else if (banking.includes("Combination")) {
+    bankingAdvice = `
+      A mixed banking setup is ideal. Keep UK accounts, use Wise/Revolut for transfers,
+      and open a local ${country} bank for compliance.
+    `;
+  } else if (banking.includes("Local")) {
+    bankingAdvice = `
+      A local bank account will be required in ${country}. Expect compliance checks
+      and in-person verification.
+    `;
+  } else {
+    bankingAdvice = `
+      Relying only on UK banking may cause issues with residency, healthcare,
+      and long-term stability in ${country}.
+    `;
+  }
 
   document.getElementById("output").innerHTML = `
-    <h3>${selectedCountry.flag} ${selectedCountry.name}</h3>
-    <p><strong>Visa Route:</strong> ${selectedCountry.visa}</p>
-    <p><strong>Tax Reality:</strong> ${selectedCountry.tax}</p>
-    <p><strong>Minimum Income Requirement:</strong> £${selectedCountry.min}</p>
-    <hr>
-    <p><strong>Your Age:</strong> ${age}</p>
-    <p><strong>Your Monthly Income:</strong> £${income}</p>
+    <h3>Your Relocation Plan for ${country}</h3>
+
+    <p><strong>Visa Route:</strong> ${countryData.visa}</p>
+    <p><strong>Tax Overview:</strong> ${countryData.tax}</p>
+
+    <p><strong>Banking Strategy:</strong> ${banking}</p>
+    <p>${bankingAdvice}</p>
+
     <p><strong>Healthcare Preference:</strong> ${healthcare}</p>
     <p><strong>Housing Plan:</strong> ${housing}</p>
+    <p><strong>Transport:</strong> ${transport}</p>
+    <p><strong>Lifestyle Preference:</strong> ${lifestyle}</p>
+    <p><strong>Risk Tolerance:</strong> ${risk}</p>
+
     <hr>
-    <p>Next steps include visa preparation, tax residency planning, and healthcare registration specific to ${selectedCountry.name}.</p>
+
+    <p><strong>Next Steps:</strong></p>
+    <ul>
+      <li>Confirm visa eligibility for ${country}</li>
+      <li>Prepare banking documentation</li>
+      <li>Assess tax residency exposure</li>
+      <li>Arrange healthcare access</li>
+    </ul>
   `;
 }
-// =========================
-// PROGRESS BAR LOGIC
-// =========================
-const inputs = document.querySelectorAll(
-  "input, select"
-);
-
-function updateProgress() {
-  let completed = 0;
-
-  inputs.forEach(input => {
-    if (input.value && input.value !== "") {
-      completed++;
-    }
-  });
-
-  // Cap at 11 phases
-  const phasesCompleted = Math.min(completed, 11);
-  const percent = (phasesCompleted / 11) * 100;
-
-  document.getElementById("progressFill").style.width = percent + "%";
-  document.getElementById("progressText").innerText =
-    `Progress: ${phasesCompleted} of 11 completed`;
-}
-
-// Listen for changes
-inputs.forEach(input => {
-  input.addEventListener("change", updateProgress);
-});
