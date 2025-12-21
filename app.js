@@ -1,5 +1,7 @@
 let selectedCountry = "";
 
+const totalPhases = 11;
+
 const countries = [
   { name: "Portugal", flag: "🇵🇹" },
   { name: "Spain", flag: "🇪🇸" },
@@ -32,9 +34,36 @@ countries.forEach(country => {
     selectedCountry = country.name;
     document.getElementById("selectedCountry").innerText =
       `Selected destination: ${country.name}`;
+    updateProgress();
   };
 
   grid.appendChild(card);
+});
+
+function updateProgress() {
+  let completed = 0;
+
+  if (selectedCountry) completed++;
+  if (document.getElementById("age").value) completed++;
+  if (document.getElementById("income").value) completed++;
+  if (document.getElementById("healthcare").value) completed++;
+  if (document.getElementById("housing").value) completed++;
+  if (document.getElementById("banking").value) completed++;
+  if (document.getElementById("transport").value) completed++;
+  if (document.getElementById("visa").value) completed++;
+  if (document.getElementById("lifestyle").value) completed++;
+  if (document.getElementById("risk").value) completed++;
+
+  document.getElementById("progressText").innerText =
+    `${completed} / ${totalPhases} completed`;
+
+  document.getElementById("progressFill").style.width =
+    `${(completed / totalPhases) * 100}%`;
+}
+
+document.querySelectorAll("input, select").forEach(el => {
+  el.addEventListener("change", updateProgress);
+  el.addEventListener("input", updateProgress);
 });
 
 function generateSummary() {
@@ -43,28 +72,9 @@ function generateSummary() {
     return;
   }
 
-  const age = document.getElementById("age").value;
-  const income = document.getElementById("income").value;
-  const healthcare = document.getElementById("healthcare").value;
-  const housing = document.getElementById("housing").value;
-  const banking = document.getElementById("banking").value;
-  const transport = document.getElementById("transport").value;
-  const visa = document.getElementById("visa").value;
-  const lifestyle = document.getElementById("lifestyle").value;
-  const risk = document.getElementById("risk").value;
-
   document.getElementById("output").innerHTML = `
     <h3>Your Relocation Plan</h3>
     <p><strong>Destination:</strong> ${selectedCountry}</p>
-    <p><strong>Age:</strong> ${age}</p>
-    <p><strong>Income:</strong> £${income} / month</p>
-    <p><strong>Healthcare:</strong> ${healthcare}</p>
-    <p><strong>Housing:</strong> ${housing}</p>
-    <p><strong>Banking:</strong> ${banking}</p>
-    <p><strong>Transport:</strong> ${transport}</p>
-    <p><strong>Residency Route:</strong> ${visa}</p>
-    <p><strong>Lifestyle:</strong> ${lifestyle}</p>
-    <p><strong>Risk Tolerance:</strong> ${risk}</p>
     <p><em>Next steps will include visa rules, tax exposure, and healthcare setup specific to ${selectedCountry}.</em></p>
   `;
 }
