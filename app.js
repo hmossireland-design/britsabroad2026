@@ -93,3 +93,32 @@ function generateSummary() {
     <p>Next steps include visa preparation, tax residency planning, and healthcare registration specific to ${selectedCountry.name}.</p>
   `;
 }
+// =========================
+// PROGRESS BAR LOGIC
+// =========================
+const inputs = document.querySelectorAll(
+  "input, select"
+);
+
+function updateProgress() {
+  let completed = 0;
+
+  inputs.forEach(input => {
+    if (input.value && input.value !== "") {
+      completed++;
+    }
+  });
+
+  // Cap at 11 phases
+  const phasesCompleted = Math.min(completed, 11);
+  const percent = (phasesCompleted / 11) * 100;
+
+  document.getElementById("progressFill").style.width = percent + "%";
+  document.getElementById("progressText").innerText =
+    `Progress: ${phasesCompleted} of 11 completed`;
+}
+
+// Listen for changes
+inputs.forEach(input => {
+  input.addEventListener("change", updateProgress);
+});
