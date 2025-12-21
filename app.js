@@ -1,117 +1,70 @@
-const app = document.getElementById("app");
+let selectedCountry = "";
 
-/* ===============================
-   COUNTRY DATA (PHASE 1)
-================================ */
 const countries = [
-  { name: "Portugal", flag: "🇵🇹", tax: "10% pension tax", visa: "D7 Passive Income" },
-  { name: "Spain", flag: "🇪🇸", tax: "Progressive tax", visa: "Non-Lucrative Visa" },
-  { name: "France", flag: "🇫🇷", tax: "Worldwide income", visa: "Long-Stay Visitor" },
-  { name: "Ireland", flag: "🇮🇪", tax: "High income tax", visa: "No visa required" },
-  { name: "Cyprus", flag: "🇨🇾", tax: "Low tax, non-dom", visa: "Category F / Pink Slip" },
-  { name: "Italy", flag: "🇮🇹", tax: "7% flat tax (south)", visa: "Elective Residence" },
-  { name: "Greece", flag: "🇬🇷", tax: "Flat tax options", visa: "Financially Independent" },
-  { name: "UAE", flag: "🇦🇪", tax: "0% income tax", visa: "Retirement / Property Visa" },
-  { name: "Thailand", flag: "🇹🇭", tax: "Territorial tax", visa: "Retirement Visa" },
-  { name: "Malaysia", flag: "🇲🇾", tax: "Territorial tax", visa: "MM2H" },
-  { name: "Mexico", flag: "🇲🇽", tax: "Progressive", visa: "Temporary Resident" },
-  { name: "Panama", flag: "🇵🇦", tax: "No foreign income tax", visa: "Pensionado" },
-  { name: "Costa Rica", flag: "🇨🇷", tax: "Territorial", visa: "Pensionado" },
-  { name: "Hungary", flag: "🇭🇺", tax: "15% flat tax", visa: "Residence Permit" },
-  { name: "Poland", flag: "🇵🇱", tax: "Low EU costs", visa: "Temporary Residence" },
-  { name: "Bulgaria", flag: "🇧🇬", tax: "10% flat tax", visa: "D Visa" },
-  { name: "Slovakia", flag: "🇸🇰", tax: "Low cost EU", visa: "Temporary Residence" },
-  { name: "Slovenia", flag: "🇸🇮", tax: "EU resident tax", visa: "Long-Term Residence" },
-  { name: "Indonesia", flag: "🇮🇩", tax: "Territorial", visa: "Retirement KITAS" },
-  { name: "Colombia", flag: "🇨🇴", tax: "Progressive", visa: "Pension Visa" },
-  { name: "Ecuador", flag: "🇪🇨", tax: "Low cost", visa: "Pensioner Visa" },
-  { name: "Mauritius", flag: "🇲🇺", tax: "15% flat tax", visa: "Retired Non-Citizen" },
-  { name: "Argentina", flag: "🇦🇷", tax: "Worldwide", visa: "Rentista" },
-  { name: "USA", flag: "🇺🇸", tax: "Worldwide", visa: "Various routes" },
-  { name: "Vietnam", flag: "🇻🇳", tax: "Territorial", visa: "Temporary Residence" },
-  { name: "New Zealand", flag: "🇳🇿", tax: "Worldwide", visa: "Investor / Family" }
+  { name: "Portugal", flag: "🇵🇹" },
+  { name: "Spain", flag: "🇪🇸" },
+  { name: "France", flag: "🇫🇷" },
+  { name: "Italy", flag: "🇮🇹" },
+  { name: "Greece", flag: "🇬🇷" },
+  { name: "Cyprus", flag: "🇨🇾" },
+  { name: "Serbia", flag: "🇷🇸" },
+  { name: "Poland", flag: "🇵🇱" },
+  { name: "Czech Republic", flag: "🇨🇿" },
+  { name: "Hungary", flag: "🇭🇺" },
+  { name: "USA", flag: "🇺🇸" },
+  { name: "Argentina", flag: "🇦🇷" },
+  { name: "Vietnam", flag: "🇻🇳" },
+  { name: "New Zealand", flag: "🇳🇿" },
+  { name: "Mauritius", flag: "🇲🇺" },
+  { name: "UAE", flag: "🇦🇪" }
 ];
 
-/* ===============================
-   APP STATE
-================================ */
-let state = {
-  country: "",
-  age: "",
-  income: "",
-  healthcare: "",
-  housing: "",
-  banking: "",
-  transport: "",
-  visaRoute: "",
-  lifestyle: "",
-  risk: ""
-};
+const grid = document.getElementById("countryGrid");
 
-/* ===============================
-   RENDER APP
-================================ */
-function renderApp() {
-  app.innerHTML = `
-    <div id="progress-container">
-      <div id="progress-text">Step 1 of 11</div>
-      <div id="progress-bar">
-        <div id="progress-fill"></div>
-      </div>
-    </div>
+countries.forEach(country => {
+  const card = document.createElement("div");
+  card.className = "country-card";
+  card.innerHTML = `<span>${country.flag}</span>${country.name}`;
 
-    <section class="phase">
-      <h2>🌍 Phase 1: Choose Destination</h2>
+  card.onclick = () => {
+    document.querySelectorAll(".country-card").forEach(c => c.classList.remove("selected"));
+    card.classList.add("selected");
+    selectedCountry = country.name;
+    document.getElementById("selectedCountry").innerText =
+      `Selected destination: ${country.name}`;
+  };
 
-      <select id="countrySelect">
-        <option value="">Select a country</option>
-        ${countries.map(c =>
-          `<option value="${c.name}">${c.flag} ${c.name}</option>`
-        ).join("")}
-      </select>
+  grid.appendChild(card);
+});
 
-      <div class="nav-buttons">
-        <button class="primary" onclick="saveCountry()">Continue</button>
-      </div>
-    </section>
-  `;
-}
-
-/* ===============================
-   SAVE COUNTRY
-================================ */
-function saveCountry() {
-  const select = document.getElementById("countrySelect");
-  if (!select.value) {
-    alert("Please select a country");
+function generateSummary() {
+  if (!selectedCountry) {
+    alert("Please select a destination country.");
     return;
   }
 
-  state.country = select.value;
-  renderSummary();
-}
+  const age = document.getElementById("age").value;
+  const income = document.getElementById("income").value;
+  const healthcare = document.getElementById("healthcare").value;
+  const housing = document.getElementById("housing").value;
+  const banking = document.getElementById("banking").value;
+  const transport = document.getElementById("transport").value;
+  const visa = document.getElementById("visa").value;
+  const lifestyle = document.getElementById("lifestyle").value;
+  const risk = document.getElementById("risk").value;
 
-/* ===============================
-   SUMMARY (TEMP)
-================================ */
-function renderSummary() {
-  const c = countries.find(x => x.name === state.country);
-
-  app.innerHTML = `
-    <section class="phase">
-      <h2>✅ Country Selected</h2>
-      <p><strong>${c.flag} ${c.name}</strong></p>
-      <p><strong>Visa:</strong> ${c.visa}</p>
-      <p><strong>Tax:</strong> ${c.tax}</p>
-
-      <p style="margin-top:20px;">
-        ✔ Country selection with flags is now working.
-      </p>
-    </section>
+  document.getElementById("output").innerHTML = `
+    <h3>Your Relocation Plan</h3>
+    <p><strong>Destination:</strong> ${selectedCountry}</p>
+    <p><strong>Age:</strong> ${age}</p>
+    <p><strong>Income:</strong> £${income} / month</p>
+    <p><strong>Healthcare:</strong> ${healthcare}</p>
+    <p><strong>Housing:</strong> ${housing}</p>
+    <p><strong>Banking:</strong> ${banking}</p>
+    <p><strong>Transport:</strong> ${transport}</p>
+    <p><strong>Residency Route:</strong> ${visa}</p>
+    <p><strong>Lifestyle:</strong> ${lifestyle}</p>
+    <p><strong>Risk Tolerance:</strong> ${risk}</p>
+    <p><em>Next steps will include visa rules, tax exposure, and healthcare setup specific to ${selectedCountry}.</em></p>
   `;
 }
-
-/* ===============================
-   INIT
-================================ */
-renderApp();
