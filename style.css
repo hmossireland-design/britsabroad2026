@@ -108,3 +108,10 @@ button:hover {
   background: #2ecc71;
   transition: width 0.3s ease;
 }
+.progress-bar-fill {
+  display: block;              /* 🔑 REQUIRED */
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #2ecc71, #27ae60);
+  transition: width 0.4s ease;
+}
