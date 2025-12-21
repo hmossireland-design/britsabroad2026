@@ -144,3 +144,6 @@ button.secondary:hover {
     transform: translateY(0);
   }
 }
+select option {
+  font-size: 16px;
+}
