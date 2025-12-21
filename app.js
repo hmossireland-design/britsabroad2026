@@ -1,172 +1,117 @@
 const app = document.getElementById("app");
-const progressText = document.getElementById("progress-text");
-const progressFill = document.getElementById("progress-fill");
 
-let currentPhase = 0;
-
-const data = {};
-
+/* ===============================
+   COUNTRY DATA (PHASE 1)
+================================ */
 const countries = [
-  "Portugal","Spain","France","Ireland","Cyprus","Malta","Italy","Greece",
-  "UAE","Thailand","Malaysia","Panama","Mexico","Costa Rica","Hungary",
-  "Poland","Bulgaria","Slovakia","Slovenia","Indonesia","Colombia",
-  "Mauritius","Belize","Ecuador","Uruguay","Chile","Latvia",
-  "Australia","New Zealand","Canada"
+  { name: "Portugal", flag: "🇵🇹", tax: "10% pension tax", visa: "D7 Passive Income" },
+  { name: "Spain", flag: "🇪🇸", tax: "Progressive tax", visa: "Non-Lucrative Visa" },
+  { name: "France", flag: "🇫🇷", tax: "Worldwide income", visa: "Long-Stay Visitor" },
+  { name: "Ireland", flag: "🇮🇪", tax: "High income tax", visa: "No visa required" },
+  { name: "Cyprus", flag: "🇨🇾", tax: "Low tax, non-dom", visa: "Category F / Pink Slip" },
+  { name: "Italy", flag: "🇮🇹", tax: "7% flat tax (south)", visa: "Elective Residence" },
+  { name: "Greece", flag: "🇬🇷", tax: "Flat tax options", visa: "Financially Independent" },
+  { name: "UAE", flag: "🇦🇪", tax: "0% income tax", visa: "Retirement / Property Visa" },
+  { name: "Thailand", flag: "🇹🇭", tax: "Territorial tax", visa: "Retirement Visa" },
+  { name: "Malaysia", flag: "🇲🇾", tax: "Territorial tax", visa: "MM2H" },
+  { name: "Mexico", flag: "🇲🇽", tax: "Progressive", visa: "Temporary Resident" },
+  { name: "Panama", flag: "🇵🇦", tax: "No foreign income tax", visa: "Pensionado" },
+  { name: "Costa Rica", flag: "🇨🇷", tax: "Territorial", visa: "Pensionado" },
+  { name: "Hungary", flag: "🇭🇺", tax: "15% flat tax", visa: "Residence Permit" },
+  { name: "Poland", flag: "🇵🇱", tax: "Low EU costs", visa: "Temporary Residence" },
+  { name: "Bulgaria", flag: "🇧🇬", tax: "10% flat tax", visa: "D Visa" },
+  { name: "Slovakia", flag: "🇸🇰", tax: "Low cost EU", visa: "Temporary Residence" },
+  { name: "Slovenia", flag: "🇸🇮", tax: "EU resident tax", visa: "Long-Term Residence" },
+  { name: "Indonesia", flag: "🇮🇩", tax: "Territorial", visa: "Retirement KITAS" },
+  { name: "Colombia", flag: "🇨🇴", tax: "Progressive", visa: "Pension Visa" },
+  { name: "Ecuador", flag: "🇪🇨", tax: "Low cost", visa: "Pensioner Visa" },
+  { name: "Mauritius", flag: "🇲🇺", tax: "15% flat tax", visa: "Retired Non-Citizen" },
+  { name: "Argentina", flag: "🇦🇷", tax: "Worldwide", visa: "Rentista" },
+  { name: "USA", flag: "🇺🇸", tax: "Worldwide", visa: "Various routes" },
+  { name: "Vietnam", flag: "🇻🇳", tax: "Territorial", visa: "Temporary Residence" },
+  { name: "New Zealand", flag: "🇳🇿", tax: "Worldwide", visa: "Investor / Family" }
 ];
 
-const phases = [
-  {
-    title: "Choose Destination Country",
-    content: () => `
-      <select id="country">
-        <option value="">Select a country</option>
-        ${countries.map(c => `<option>${c}</option>`).join("")}
-      </select>
-    `,
-    save: () => data.country = document.getElementById("country").value
-  },
-  {
-    title: "Your Age",
-    content: () => `<input type="number" id="age" placeholder="Your age">`,
-    save: () => data.age = document.getElementById("age").value
-  },
-  {
-    title: "Monthly Income (£)",
-    content: () => `<input type="number" id="income" placeholder="Monthly income">`,
-    save: () => data.income = document.getElementById("income").value
-  },
-  {
-    title: "Healthcare Preference",
-    content: () => `
-      <select id="healthcare">
-        <option value="">Select</option>
-        <option>Private</option>
-        <option>Public</option>
-        <option>Mixed</option>
-      </select>
-    `,
-    save: () => data.healthcare = document.getElementById("healthcare").value
-  },
-  {
-    title: "Housing Plan",
-    content: () => `
-      <select id="housing">
-        <option value="">Select</option>
-        <option>Rent</option>
-        <option>Buy</option>
-        <option>Undecided</option>
-      </select>
-    `,
-    save: () => data.housing = document.getElementById("housing").value
-  },
-  {
-    title: "Banking Setup",
-    content: () => `
-      <select id="banking">
-        <option value="">Select</option>
-        <option>UK bank only</option>
-        <option>Local bank</option>
-        <option>Wise / Revolut</option>
-      </select>
-    `,
-    save: () => data.banking = document.getElementById("banking").value
-  },
-  {
-    title: "Transport",
-    content: () => `
-      <select id="transport">
-        <option value="">Select</option>
-        <option>No car</option>
-        <option>Buy locally</option>
-        <option>Import UK vehicle</option>
-      </select>
-    `,
-    save: () => data.transport = document.getElementById("transport").value
-  },
-  {
-    title: "Residency Route",
-    content: () => `
-      <select id="visa">
-        <option value="">Select</option>
-        <option>Passive income / Retirement</option>
-        <option>Work / Self-employed</option>
-        <option>Investment</option>
-      </select>
-    `,
-    save: () => data.visa = document.getElementById("visa").value
-  },
-  {
-    title: "Lifestyle Preference",
-    content: () => `
-      <select id="lifestyle">
-        <option value="">Select</option>
-        <option>Quiet / Rural</option>
-        <option>City</option>
-        <option>Coastal / Island</option>
-      </select>
-    `,
-    save: () => data.lifestyle = document.getElementById("lifestyle").value
-  },
-  {
-    title: "Risk Tolerance",
-    content: () => `
-      <select id="risk">
-        <option value="">Select</option>
-        <option>Low</option>
-        <option>Medium</option>
-        <option>High</option>
-      </select>
-    `,
-    save: () => data.risk = document.getElementById("risk").value
-  },
-  {
-    title: "Your Relocation Summary",
-    content: () => `
-      <p><strong>Destination:</strong> ${data.country}</p>
-      <p><strong>Age:</strong> ${data.age}</p>
-      <p><strong>Income:</strong> £${data.income}</p>
-      <p><strong>Healthcare:</strong> ${data.healthcare}</p>
-      <p><strong>Housing:</strong> ${data.housing}</p>
-      <p><strong>Banking:</strong> ${data.banking}</p>
-      <p><strong>Transport:</strong> ${data.transport}</p>
-      <p><strong>Visa Route:</strong> ${data.visa}</p>
-      <p><strong>Lifestyle:</strong> ${data.lifestyle}</p>
-      <p><strong>Risk:</strong> ${data.risk}</p>
-      <p><em>Your next steps will include visa rules, tax exposure, and healthcare setup specific to ${data.country}.</em></p>
-    `,
-    save: () => {}
-  }
-];
+/* ===============================
+   APP STATE
+================================ */
+let state = {
+  country: "",
+  age: "",
+  income: "",
+  healthcare: "",
+  housing: "",
+  banking: "",
+  transport: "",
+  visaRoute: "",
+  lifestyle: "",
+  risk: ""
+};
 
-function renderPhase() {
-  const phase = phases[currentPhase];
-
-  progressText.textContent = `Phase ${currentPhase + 1} of ${phases.length}`;
-  progressFill.style.width = `${((currentPhase + 1) / phases.length) * 100}%`;
-
+/* ===============================
+   RENDER APP
+================================ */
+function renderApp() {
   app.innerHTML = `
-    <div class="phase">
-      <h2>Phase ${currentPhase + 1}: ${phase.title}</h2>
-      ${phase.content()}
-      <div class="nav-buttons">
-        ${currentPhase > 0 ? `<button class="secondary" onclick="prevPhase()">Back</button>` : `<span></span>`}
-        ${currentPhase < phases.length - 1
-          ? `<button class="primary" onclick="nextPhase()">Next</button>`
-          : `<span></span>`}
+    <div id="progress-container">
+      <div id="progress-text">Step 1 of 11</div>
+      <div id="progress-bar">
+        <div id="progress-fill"></div>
       </div>
     </div>
+
+    <section class="phase">
+      <h2>🌍 Phase 1: Choose Destination</h2>
+
+      <select id="countrySelect">
+        <option value="">Select a country</option>
+        ${countries.map(c =>
+          `<option value="${c.name}">${c.flag} ${c.name}</option>`
+        ).join("")}
+      </select>
+
+      <div class="nav-buttons">
+        <button class="primary" onclick="saveCountry()">Continue</button>
+      </div>
+    </section>
   `;
 }
 
-function nextPhase() {
-  phases[currentPhase].save();
-  currentPhase++;
-  renderPhase();
+/* ===============================
+   SAVE COUNTRY
+================================ */
+function saveCountry() {
+  const select = document.getElementById("countrySelect");
+  if (!select.value) {
+    alert("Please select a country");
+    return;
+  }
+
+  state.country = select.value;
+  renderSummary();
 }
 
-function prevPhase() {
-  currentPhase--;
-  renderPhase();
+/* ===============================
+   SUMMARY (TEMP)
+================================ */
+function renderSummary() {
+  const c = countries.find(x => x.name === state.country);
+
+  app.innerHTML = `
+    <section class="phase">
+      <h2>✅ Country Selected</h2>
+      <p><strong>${c.flag} ${c.name}</strong></p>
+      <p><strong>Visa:</strong> ${c.visa}</p>
+      <p><strong>Tax:</strong> ${c.tax}</p>
+
+      <p style="margin-top:20px;">
+        ✔ Country selection with flags is now working.
+      </p>
+    </section>
+  `;
 }
 
-renderPhase();
+/* ===============================
+   INIT
+================================ */
+renderApp();
