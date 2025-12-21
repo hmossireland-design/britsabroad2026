@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <title>Brits Abroad 2026</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -12,45 +11,17 @@
 
 <header>
   <h1>Brits Abroad 2026</h1>
-  <p>The Ultimate Relocation Planner</p>
+  <p>The Ultimate Relocation & Relaxation Planner</p>
 </header>
 
-<main>
-
-  <!-- DEBUG CONFIRMATION -->
-  <div id="jsStatus" style="color:red;font-weight:bold;">
-    JS NOT LOADED
+<div id="progress-container">
+  <div id="progress-text">Phase 1 of 11</div>
+  <div id="progress-bar">
+    <div id="progress-fill"></div>
   </div>
+</div>
 
-  <!-- PHASE 1 -->
-  <section class="phase">
-    <h2>Phase 1: Choose Destination</h2>
-
-    <select id="countrySelect">
-      <option value="">-- Select Country --</option>
-    </select>
-  </section>
-
-  <!-- PHASE 2 -->
-  <section class="phase">
-    <h2>Phase 2: Age</h2>
-    <input type="number" id="age">
-  </section>
-
-  <!-- PHASE 3 -->
-  <section class="phase">
-    <h2>Phase 3: Monthly Income (£)</h2>
-    <input type="number" id="income">
-  </section>
-
-  <!-- PHASE 11 -->
-  <section class="phase">
-    <h2>Phase 11: Summary</h2>
-    <button onclick="generateSummary()">Generate Summary</button>
-    <div id="output"></div>
-  </section>
-
-</main>
+<main id="app"></main>
 
 <footer>
   <p>© 2026 Brits Abroad</p>
