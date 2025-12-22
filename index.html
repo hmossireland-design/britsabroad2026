@@ -21,7 +21,56 @@
   </div>
 </div>
 
-<main id="app"></main>
+<main id="app">
+
+  <!-- PHASE 1 -->
+  <section class="phase-card">
+    <h2>Phase 1: Choose Your Destination</h2>
+    <div id="country-grid"></div>
+  </section>
+
+  <!-- PHASE 2 -->
+  <section class="phase-card">
+    <h2>Phase 2: Your Age</h2>
+    <input type="number" id="age" placeholder="Enter your age">
+  </section>
+
+  <!-- PHASE 3 -->
+  <section class="phase-card">
+    <h2>Phase 3: Monthly Income (£)</h2>
+    <input type="number" id="income" placeholder="Enter monthly income">
+  </section>
+
+  <!-- PHASE 4 -->
+  <section class="phase-card">
+    <h2>Phase 4: Healthcare Preference</h2>
+    <select id="healthcare">
+      <option value="">Select</option>
+      <option>Private</option>
+      <option>Public</option>
+      <option>Mixed</option>
+    </select>
+  </section>
+
+  <!-- PHASE 5 -->
+  <section class="phase-card">
+    <h2>Phase 5: Housing Plan</h2>
+    <select id="housing">
+      <option value="">Select</option>
+      <option>Rent</option>
+      <option>Buy</option>
+      <option>Undecided</option>
+    </select>
+  </section>
+
+  <!-- PHASE 11 -->
+  <section class="phase-card">
+    <h2>Phase 11: Your Relocation Summary</h2>
+    <button onclick="generateSummary()">Generate My Summary</button>
+    <div id="output"></div>
+  </section>
+
+</main>
 
 <footer class="footer">
   <p>© 2026 Brits Abroad</p>
