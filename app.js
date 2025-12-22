@@ -12,13 +12,100 @@ const data = {
   housing: ""
 };
 
-const countries = [
-  "Portugal","Spain","France","Cyprus","Italy","Greece","Ireland",
-  "UAE","Thailand","Malaysia","Panama","Mexico","Costa Rica",
-  "Bulgaria","Poland","Hungary","Slovakia","Slovenia",
-  "Mauritius","Ecuador","Colombia","Indonesia","New Zealand",
-  "Australia","Canada","USA","Argentina","Chile","Uruguay","Latvia"
-];
+/* ===============================
+   COUNTRY VISA + TAX DATABASE
+================================ */
+
+const countryRules = {
+  Portugal: {
+    visa: "D7 Passive Income Visa",
+    income: "€870/month minimum",
+    tax: "10% pension tax (NHR, ending soon)",
+    notes: "Very popular with British retirees. Rising costs in Lisbon/Algarve."
+  },
+  Spain: {
+    visa: "Non-Lucrative Visa",
+    income: "€2,400/month",
+    tax: "Progressive tax up to ~47%",
+    notes: "Excellent healthcare, but higher income requirement."
+  },
+  France: {
+    visa: "Long-Stay Visitor Visa",
+    income: "€1,800/month",
+    tax: "Worldwide income taxable",
+    notes: "S1 healthcare available for UK pensioners."
+  },
+  Cyprus: {
+    visa: "Category F / Pink Slip",
+    income: "€1,000+/month",
+    tax: "0–12.5% low tax bands",
+    notes: "English widely spoken, very UK-friendly."
+  },
+  Italy: {
+    visa: "Elective Residence Visa",
+    income: "€31,000/year",
+    tax: "7% flat tax (southern regions)",
+    notes: "Excellent lifestyle but heavy bureaucracy."
+  },
+  Greece: {
+    visa: "Financially Independent Person (FIP)",
+    income: "€3,500/month",
+    tax: "7% flat tax option",
+    notes: "Island lifestyle with Golden Visa alternatives."
+  },
+  Ireland: {
+    visa: "No visa required",
+    income: "None",
+    tax: "High income tax",
+    notes: "CTA access, but expensive living."
+  },
+  UAE: {
+    visa: "Retirement Visa",
+    income: "£4,200/month or property",
+    tax: "0% income tax",
+    notes: "No permanent residency path, extreme summers."
+  },
+  Thailand: {
+    visa: "Retirement Visa (50+)",
+    income: "£1,500/month",
+    tax: "Territorial tax system",
+    notes: "Affordable, renewals required."
+  },
+  Malaysia: {
+    visa: "MM2H",
+    income: "$1,500/month",
+    tax: "Territorial",
+    notes: "English widely spoken, policy changes possible."
+  },
+  Panama: {
+    visa: "Pensionado",
+    income: "$1,000/month",
+    tax: "No tax on foreign income",
+    notes: "Strong expat benefits."
+  },
+  Mexico: {
+    visa: "Temporary Resident",
+    income: "$2,500/month",
+    tax: "Progressive",
+    notes: "Regional safety varies."
+  },
+  Bulgaria: {
+    visa: "D Visa",
+    income: "€1,000/month",
+    tax: "10% flat tax",
+    notes: "Cheapest EU option."
+  }
+};
+
+/* ===============================
+   COUNTRY LIST
+================================ */
+
+const countries = Object.keys(countryRules);
+
+/* ===============================
+   RENDER LOGIC
+================================ */
 
 function render() {
   updateProgress();
@@ -84,24 +171,43 @@ function render() {
   }
 
   if (currentPhase === 11) {
+    const rules = countryRules[data.country];
+
     html = `
       <div class="phase-card">
         <h2>Your Relocation Summary</h2>
+
         <p><strong>Country:</strong> ${data.country}</p>
-        <p><strong>Age:</strong> ${data.age}</p>
-        <p><strong>Income:</strong> £${data.income}</p>
+        <p><strong>Visa Route:</strong> ${rules.visa}</p>
+        <p><strong>Income Requirement:</strong> ${rules.income}</p>
+        <p><strong>Tax Position:</strong> ${rules.tax}</p>
         <p><strong>Healthcare:</strong> ${data.healthcare}</p>
         <p><strong>Housing:</strong> ${data.housing}</p>
-        <p><em>Next steps will include visa rules, tax exposure and healthcare setup.</em></p>
+
+        <hr>
+
+        <p><strong>Key Insight:</strong> ${rules.notes}</p>
+
+        <p style="margin-top:15px;">
+          Next steps will include visa paperwork, tax residency planning,
+          and healthcare setup specific to <strong>${data.country}</strong>.
+        </p>
       </div>`;
   }
 
   app.innerHTML = html;
 }
 
+/* ===============================
+   HELPERS
+================================ */
+
 function saveAndNext(field) {
   const el = document.getElementById(field);
-  if (!el || !el.value) return alert("Please complete this step");
+  if (!el || !el.value) {
+    alert("Please complete this step");
+    return;
+  }
   data[field] = el.value;
   currentPhase++;
   if (currentPhase > 11) currentPhase = 11;
