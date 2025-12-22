@@ -1,3 +1,4 @@
+/* RESET */
 * {
   box-sizing: border-box;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
@@ -5,77 +6,125 @@
 
 body {
   margin: 0;
-  background: #f4f6f8;
-  color: #333;
+  background: linear-gradient(180deg, #0f2027, #203a43, #2c5364);
+  color: #fff;
+  min-height: 100vh;
 }
 
-header {
+/* HEADER */
+.header {
   text-align: center;
-  padding: 20px;
-  background: #1f2937;
-  color: white;
+  padding: 25px 15px;
 }
 
-.progress-wrapper {
-  padding: 15px;
-  background: white;
+.header h1 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.header p {
+  opacity: 0.85;
+}
+
+/* PROGRESS */
+.progress-container {
+  padding: 10px 20px 20px;
+  max-width: 500px;
+  margin: auto;
 }
 
 #progress-text {
-  font-weight: bold;
-  margin-bottom: 8px;
+  text-align: center;
+  margin-bottom: 6px;
+  font-size: 0.9rem;
 }
 
 .progress-bar {
+  background: rgba(255,255,255,0.15);
+  border-radius: 20px;
   height: 10px;
-  background: #ddd;
-  border-radius: 6px;
   overflow: hidden;
 }
 
-.progress-bar-fill {
-  display: block;
+#progress-fill {
   height: 100%;
   width: 0%;
-  background: linear-gradient(90deg, #16a34a, #22c55e);
+  background: linear-gradient(90deg, #00c6ff, #0072ff);
   transition: width 0.4s ease;
 }
 
+/* APP */
 #app {
-  padding: 20px;
+  max-width: 500px;
+  margin: auto;
+  padding: 15px;
 }
 
+/* PHASE CARD */
 .phase-card {
-  background: white;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-  max-width: 600px;
-  margin: auto;
+  background: rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding: 22px;
+  margin-bottom: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  animation: fadeIn 0.4s ease;
 }
 
 .phase-card h2 {
   margin-top: 0;
+  font-size: 1.3rem;
 }
 
-select, input {
+/* INPUTS */
+select,
+input {
   width: 100%;
   padding: 12px;
-  margin: 15px 0;
-  font-size: 16px;
+  border-radius: 10px;
+  border: none;
+  margin-top: 10px;
+  font-size: 1rem;
 }
 
+select:focus,
+input:focus {
+  outline: none;
+}
+
+/* BUTTON */
 button {
-  background: #16a34a;
-  color: white;
-  border: none;
-  padding: 14px;
-  font-size: 16px;
   width: 100%;
-  border-radius: 8px;
+  margin-top: 15px;
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  font-size: 1rem;
+  background: linear-gradient(90deg, #00c853, #64dd17);
+  color: #000;
+  font-weight: bold;
   cursor: pointer;
 }
 
 button:hover {
-  background: #15803d;
+  opacity: 0.9;
+}
+
+/* FOOTER */
+.footer {
+  text-align: center;
+  padding: 15px;
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+/* ANIMATION */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
