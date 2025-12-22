@@ -1,80 +1,116 @@
-let selectedCountry = "";
+const app = document.getElementById("app");
+const progressText = document.getElementById("progress-text");
+const progressFill = document.getElementById("progress-fill");
 
-const totalPhases = 11;
+let currentPhase = 1;
+
+const data = {
+  country: "",
+  age: "",
+  income: "",
+  healthcare: "",
+  housing: ""
+};
 
 const countries = [
-  { name: "Portugal", flag: "🇵🇹" },
-  { name: "Spain", flag: "🇪🇸" },
-  { name: "France", flag: "🇫🇷" },
-  { name: "Italy", flag: "🇮🇹" },
-  { name: "Greece", flag: "🇬🇷" },
-  { name: "Cyprus", flag: "🇨🇾" },
-  { name: "Serbia", flag: "🇷🇸" },
-  { name: "Poland", flag: "🇵🇱" },
-  { name: "Czech Republic", flag: "🇨🇿" },
-  { name: "Hungary", flag: "🇭🇺" },
-  { name: "USA", flag: "🇺🇸" },
-  { name: "Argentina", flag: "🇦🇷" },
-  { name: "Vietnam", flag: "🇻🇳" },
-  { name: "New Zealand", flag: "🇳🇿" },
-  { name: "Mauritius", flag: "🇲🇺" },
-  { name: "UAE", flag: "🇦🇪" }
+  "Portugal","Spain","France","Cyprus","Italy","Greece","Ireland",
+  "UAE","Thailand","Malaysia","Panama","Mexico","Costa Rica",
+  "Bulgaria","Poland","Hungary","Slovakia","Slovenia",
+  "Mauritius","Ecuador","Colombia","Indonesia","New Zealand",
+  "Australia","Canada","USA","Argentina","Chile","Uruguay","Latvia"
 ];
 
-const grid = document.getElementById("countryGrid");
+function render() {
+  updateProgress();
 
-countries.forEach(country => {
-  const card = document.createElement("div");
-  card.className = "country-card";
-  card.innerHTML = `<span>${country.flag}</span>${country.name}`;
+  let html = "";
 
-  card.onclick = () => {
-    document.querySelectorAll(".country-card").forEach(c => c.classList.remove("selected"));
-    card.classList.add("selected");
-    selectedCountry = country.name;
-    document.getElementById("selectedCountry").innerText =
-      `Selected destination: ${country.name}`;
-    updateProgress();
-  };
-
-  grid.appendChild(card);
-});
-
-function updateProgress() {
-  let completed = 0;
-
-  if (selectedCountry) completed++;
-  if (document.getElementById("age").value) completed++;
-  if (document.getElementById("income").value) completed++;
-  if (document.getElementById("healthcare").value) completed++;
-  if (document.getElementById("housing").value) completed++;
-  if (document.getElementById("banking").value) completed++;
-  if (document.getElementById("transport").value) completed++;
-  if (document.getElementById("visa").value) completed++;
-  if (document.getElementById("lifestyle").value) completed++;
-  if (document.getElementById("risk").value) completed++;
-
-  document.getElementById("progressText").innerText =
-    `${completed} / ${totalPhases} completed`;
-
-  document.getElementById("progressFill").style.width =
-    `${(completed / totalPhases) * 100}%`;
-}
-
-document.querySelectorAll("input, select").forEach(el => {
-  el.addEventListener("change", updateProgress);
-  el.addEventListener("input", updateProgress);
-});
-
-function generateSummary() {
-  if (!selectedCountry) {
-    alert("Please select a destination country.");
-    return;
+  if (currentPhase === 1) {
+    html = `
+      <div class="phase-card">
+        <h2>Phase 1: Choose Destination</h2>
+        <select id="country">
+          <option value="">Select country</option>
+          ${countries.map(c => `<option>${c}</option>`).join("")}
+        </select>
+        <button onclick="saveAndNext('country')">Continue</button>
+      </div>`;
   }
 
-  document.getElementById("output").innerHTML = `
-    <h3>Your Relocation Plan</h3>
-    <p><strong>Destination:</strong> ${selectedCountry}</p>
-    <p><em>Next steps will include visa rules, tax exposure, and healthcare setup specific to ${selectedCountry}.</em></p>
-  `;
+  if (currentPhase === 2) {
+    html = `
+      <div class="phase-card">
+        <h2>Phase 2: Your Age</h2>
+        <input id="age" type="number" placeholder="Your age">
+        <button onclick="saveAndNext('age')">Continue</button>
+      </div>`;
+  }
+
+  if (currentPhase === 3) {
+    html = `
+      <div class="phase-card">
+        <h2>Phase 3: Monthly Income (£)</h2>
+        <input id="income" type="number" placeholder="Monthly income">
+        <button onclick="saveAndNext('income')">Continue</button>
+      </div>`;
+  }
+
+  if (currentPhase === 4) {
+    html = `
+      <div class="phase-card">
+        <h2>Phase 4: Healthcare Preference</h2>
+        <select id="healthcare">
+          <option value="">Select</option>
+          <option>Private</option>
+          <option>Public</option>
+          <option>Mixed</option>
+        </select>
+        <button onclick="saveAndNext('healthcare')">Continue</button>
+      </div>`;
+  }
+
+  if (currentPhase === 5) {
+    html = `
+      <div class="phase-card">
+        <h2>Phase 5: Housing Plan</h2>
+        <select id="housing">
+          <option value="">Select</option>
+          <option>Rent</option>
+          <option>Buy</option>
+          <option>Undecided</option>
+        </select>
+        <button onclick="saveAndNext('housing')">Continue</button>
+      </div>`;
+  }
+
+  if (currentPhase === 11) {
+    html = `
+      <div class="phase-card">
+        <h2>Your Relocation Summary</h2>
+        <p><strong>Country:</strong> ${data.country}</p>
+        <p><strong>Age:</strong> ${data.age}</p>
+        <p><strong>Income:</strong> £${data.income}</p>
+        <p><strong>Healthcare:</strong> ${data.healthcare}</p>
+        <p><strong>Housing:</strong> ${data.housing}</p>
+        <p><em>Next steps will include visa rules, tax exposure and healthcare setup.</em></p>
+      </div>`;
+  }
+
+  app.innerHTML = html;
 }
+
+function saveAndNext(field) {
+  const el = document.getElementById(field);
+  if (!el || !el.value) return alert("Please complete this step");
+  data[field] = el.value;
+  currentPhase++;
+  if (currentPhase > 11) currentPhase = 11;
+  render();
+}
+
+function updateProgress() {
+  progressText.textContent = `Phase ${currentPhase} of 11`;
+  progressFill.style.width = `${(currentPhase / 11) * 100}%`;
+}
+
+render();
