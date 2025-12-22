@@ -1,55 +1,44 @@
-* {
-  box-sizing: border-box;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-}
-
 body {
   margin: 0;
-  background: linear-gradient(180deg, #0f2027, #203a43, #2c5364);
+  background: #0f2027;
   color: #fff;
+  font-family: system-ui;
 }
 
 .header {
   text-align: center;
-  padding: 25px 15px;
+  padding: 20px;
 }
 
 .progress-container {
-  max-width: 520px;
+  max-width: 500px;
   margin: auto;
-  padding: 10px 20px;
-}
-
-#progress-text {
-  text-align: center;
-  margin-bottom: 6px;
+  padding: 10px;
 }
 
 .progress-bar {
-  background: rgba(255,255,255,0.2);
-  border-radius: 20px;
-  height: 10px;
-  overflow: hidden;
+  background: #444;
+  height: 8px;
+  border-radius: 10px;
 }
 
 #progress-fill {
   height: 100%;
   width: 0%;
-  background: linear-gradient(90deg, #00c6ff, #0072ff);
-  transition: width 0.4s ease;
+  background: #00c6ff;
+  transition: width 0.3s;
 }
 
-#app {
-  max-width: 520px;
-  margin: auto;
-  padding: 15px;
-}
-
-.phase-card {
-  background: rgba(255,255,255,0.08);
-  border-radius: 16px;
+.phase {
+  display: none;
+  background: rgba(255,255,255,0.1);
   padding: 20px;
-  margin-bottom: 20px;
+  border-radius: 12px;
+  margin: 20px;
+}
+
+.phase.active {
+  display: block;
 }
 
 input, select, button {
@@ -60,37 +49,26 @@ input, select, button {
   border: none;
 }
 
-button {
-  background: linear-gradient(90deg, #00c853, #64dd17);
-  font-weight: bold;
-  cursor: pointer;
+.nav-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px;
 }
 
-/* COUNTRY GRID */
 #country-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  margin-top: 15px;
+  grid-template-columns: repeat(3,1fr);
+  gap: 10px;
 }
 
 .country-card {
-  background: rgba(255,255,255,0.15);
-  border-radius: 12px;
-  padding: 10px;
+  background: rgba(255,255,255,0.2);
   text-align: center;
+  padding: 10px;
+  border-radius: 10px;
   cursor: pointer;
-  transition: transform 0.2s, background 0.2s;
-}
-
-.country-card img {
-  width: 40px;
-  height: 28px;
-  object-fit: cover;
-  border-radius: 4px;
 }
 
 .country-card.selected {
-  background: linear-gradient(135deg, #00c6ff, #0072ff);
-  transform: scale(1.05);
+  background: #00c6ff;
 }
