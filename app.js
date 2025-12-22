@@ -7,39 +7,22 @@ const countries = [
   { name: "Spain", flag: "🇪🇸", tax: "Progressive up to 47%", visa: "Non-Lucrative Visa" },
   { name: "France", flag: "🇫🇷", tax: "Progressive", visa: "Long Stay Visitor Visa" },
   { name: "Ireland", flag: "🇮🇪", tax: "Progressive", visa: "No visa required" },
-  { name: "Cyprus", flag: "🇨🇾", tax: "5–10% pension tax", visa: "Category F / Pink Slip" },
+  { name: "Cyprus", flag: "🇨🇾", tax: "5–10% pension tax", visa: "Pink Slip / Category F" },
   { name: "Italy", flag: "🇮🇹", tax: "7% flat tax (south)", visa: "Elective Residence" },
   { name: "Greece", flag: "🇬🇷", tax: "7% flat tax option", visa: "Financially Independent Visa" },
   { name: "UAE", flag: "🇦🇪", tax: "0% income tax", visa: "Retirement Visa" },
   { name: "Thailand", flag: "🇹🇭", tax: "Territorial", visa: "Retirement Visa" },
-  { name: "Malaysia", flag: "🇲🇾", tax: "Territorial", visa: "MM2H" },
-  { name: "Panama", flag: "🇵🇦", tax: "Territorial", visa: "Pensionado" },
-  { name: "Mexico", flag: "🇲🇽", tax: "Progressive", visa: "Temporary Resident" },
-  { name: "Costa Rica", flag: "🇨🇷", tax: "Territorial", visa: "Pensionado" },
-  { name: "Poland", flag: "🇵🇱", tax: "Progressive", visa: "Temporary Residence" },
-  { name: "Hungary", flag: "🇭🇺", tax: "15% flat tax", visa: "Residence Permit" },
-  { name: "Bulgaria", flag: "🇧🇬", tax: "10% flat tax", visa: "D Visa" },
-  { name: "Slovakia", flag: "🇸🇰", tax: "Progressive", visa: "Temporary Residence" },
-  { name: "Slovenia", flag: "🇸🇮", tax: "Progressive", visa: "Long-Term Residence" },
-  { name: "Latvia", flag: "🇱🇻", tax: "Progressive", visa: "Temporary Residence" },
-  { name: "Indonesia", flag: "🇮🇩", tax: "Territorial", visa: "Retirement KITAS" },
-  { name: "Colombia", flag: "🇨🇴", tax: "Progressive", visa: "Pension Visa" },
-  { name: "Mauritius", flag: "🇲🇺", tax: "15% flat tax", visa: "Retired Non-Citizen Permit" },
-  { name: "Ecuador", flag: "🇪🇨", tax: "Territorial", visa: "Pensioner Visa" },
-  { name: "Argentina", flag: "🇦🇷", tax: "Worldwide", visa: "Rentista Visa" },
-  { name: "USA", flag: "🇺🇸", tax: "Worldwide", visa: "Various (complex)" },
-  { name: "Vietnam", flag: "🇻🇳", tax: "Territorial", visa: "Temporary Residence" },
-  { name: "New Zealand", flag: "🇳🇿", tax: "Progressive", visa: "Investor / Family" }
+  { name: "Malaysia", flag: "🇲🇾", tax: "Territorial", visa: "MM2H" }
 ];
 
 function renderPhase() {
   app.innerHTML = "";
-
   const card = document.createElement("div");
   card.className = "phase-card";
 
   let html = "";
 
+  /* PHASE 1 */
   if (currentPhase === 1) {
     html = `
       <h2>Phase 1: Choose Destination</h2>
@@ -51,6 +34,7 @@ function renderPhase() {
     `;
   }
 
+  /* PHASE 2 */
   else if (currentPhase === 2) {
     html = `
       <h2>Phase 2: Age</h2>
@@ -59,14 +43,115 @@ function renderPhase() {
     `;
   }
 
+  /* PHASE 3 */
   else if (currentPhase === 3) {
     html = `
       <h2>Phase 3: Monthly Income (£)</h2>
-      <input id="income" type="number">
+      <input id="income" type="number" placeholder="e.g. 2500">
       <button onclick="next()">Next</button>
     `;
   }
 
+  /* PHASE 4 */
+  else if (currentPhase === 4) {
+    html = `
+      <h2>Phase 4: Healthcare Preference</h2>
+      <select id="healthcare">
+        <option value="">Select</option>
+        <option>Private</option>
+        <option>Public</option>
+        <option>Mixed</option>
+      </select>
+      <button onclick="next()">Next</button>
+    `;
+  }
+
+  /* PHASE 5 */
+  else if (currentPhase === 5) {
+    html = `
+      <h2>Phase 5: Housing Plan</h2>
+      <select id="housing">
+        <option value="">Select</option>
+        <option>Rent</option>
+        <option>Buy</option>
+        <option>Undecided</option>
+      </select>
+      <button onclick="next()">Next</button>
+    `;
+  }
+
+  /* PHASE 6 */
+  else if (currentPhase === 6) {
+    html = `
+      <h2>Phase 6: Banking Setup</h2>
+      <select id="banking">
+        <option value="">Select</option>
+        <option>UK bank only</option>
+        <option>Local bank account</option>
+        <option>Online banks (Wise / Revolut)</option>
+        <option>Combination of all</option>
+      </select>
+      <button onclick="next()">Next</button>
+    `;
+  }
+
+  /* PHASE 7 */
+  else if (currentPhase === 7) {
+    html = `
+      <h2>Phase 7: Transport</h2>
+      <select id="transport">
+        <option value="">Select</option>
+        <option>No car</option>
+        <option>Buy locally</option>
+        <option>Import UK vehicle</option>
+      </select>
+      <button onclick="next()">Next</button>
+    `;
+  }
+
+  /* PHASE 8 */
+  else if (currentPhase === 8) {
+    html = `
+      <h2>Phase 8: Residency Route</h2>
+      <select id="visaRoute">
+        <option value="">Select</option>
+        <option>Retirement / Passive Income</option>
+        <option>Work / Self-employed</option>
+        <option>Investment</option>
+      </select>
+      <button onclick="next()">Next</button>
+    `;
+  }
+
+  /* PHASE 9 */
+  else if (currentPhase === 9) {
+    html = `
+      <h2>Phase 9: Lifestyle Preference</h2>
+      <select id="lifestyle">
+        <option value="">Select</option>
+        <option>Quiet / Rural</option>
+        <option>City</option>
+        <option>Coastal / Island</option>
+      </select>
+      <button onclick="next()">Next</button>
+    `;
+  }
+
+  /* PHASE 10 */
+  else if (currentPhase === 10) {
+    html = `
+      <h2>Phase 10: Risk Tolerance</h2>
+      <select id="risk">
+        <option value="">Select</option>
+        <option>Low</option>
+        <option>Medium</option>
+        <option>High</option>
+      </select>
+      <button onclick="next()">Next</button>
+    `;
+  }
+
+  /* PHASE 11 */
   else if (currentPhase === 11) {
     const country = countries.find(c => c.name === answers.country);
     html = `
@@ -75,16 +160,13 @@ function renderPhase() {
       <p><strong>Visa Route:</strong> ${country.visa}</p>
       <p><strong>Tax Profile:</strong> ${country.tax}</p>
       <p><strong>Age:</strong> ${answers.age}</p>
-      <p><strong>Monthly Income:</strong> £${answers.income}</p>
-      <p><em>This is an initial planning summary. Legal advice always recommended.</em></p>
-    `;
-  }
-
-  else {
-    html = `
-      <h2>Phase ${currentPhase}</h2>
-      <p>Details collected.</p>
-      <button onclick="next()">Next</button>
+      <p><strong>Income:</strong> £${answers.income}</p>
+      <p><strong>Healthcare:</strong> ${answers.healthcare}</p>
+      <p><strong>Housing:</strong> ${answers.housing}</p>
+      <p><strong>Banking:</strong> ${answers.banking}</p>
+      <p><strong>Transport:</strong> ${answers.transport}</p>
+      <p><strong>Lifestyle:</strong> ${answers.lifestyle}</p>
+      <p><strong>Risk Tolerance:</strong> ${answers.risk}</p>
     `;
   }
 
@@ -94,19 +176,16 @@ function renderPhase() {
 }
 
 function next() {
-  if (currentPhase === 1) {
-    const val = document.getElementById("country").value;
-    if (!val) return alert("Select a country");
-    answers.country = val;
-  }
-
-  if (currentPhase === 2) {
-    answers.age = document.getElementById("age").value;
-  }
-
-  if (currentPhase === 3) {
-    answers.income = document.getElementById("income").value;
-  }
+  if (currentPhase === 1) answers.country = document.getElementById("country").value;
+  if (currentPhase === 2) answers.age = document.getElementById("age").value;
+  if (currentPhase === 3) answers.income = document.getElementById("income").value;
+  if (currentPhase === 4) answers.healthcare = document.getElementById("healthcare").value;
+  if (currentPhase === 5) answers.housing = document.getElementById("housing").value;
+  if (currentPhase === 6) answers.banking = document.getElementById("banking").value;
+  if (currentPhase === 7) answers.transport = document.getElementById("transport").value;
+  if (currentPhase === 8) answers.visaRoute = document.getElementById("visaRoute").value;
+  if (currentPhase === 9) answers.lifestyle = document.getElementById("lifestyle").value;
+  if (currentPhase === 10) answers.risk = document.getElementById("risk").value;
 
   if (currentPhase < 11) {
     currentPhase++;
