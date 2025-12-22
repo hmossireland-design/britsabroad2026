@@ -87,11 +87,10 @@ countries.forEach(c => {
 
 function selectCountry(name, el) {
   selectedCountry = name;
-  document.querySelectorAll(".country-card")
-    .forEach(c => c.classList.remove("selected"));
-  el.classList.add("selected");
-  updateProgress();
-}
+  document.querySelectorAll("input, select").forEach(el => {
+  el.addEventListener("change", updateProgress);
+  el.addEventListener("input", updateProgress);
+});
 
 /* =============================
    PROGRESS BAR
