@@ -1,4 +1,7 @@
+let currentPhase = 0;
 let selectedCountry = null;
+
+const phases = document.querySelectorAll(".phase");
 
 const countries = [
   { name: "Portugal", code: "pt" },
@@ -12,51 +15,48 @@ const countries = [
   { name: "Malaysia", code: "my" }
 ];
 
-const countryGrid = document.getElementById("country-grid");
+const grid = document.getElementById("country-grid");
 
-countries.forEach(country => {
-  const card = document.createElement("div");
-  card.className = "country-card";
-  card.innerHTML = `
-    <img src="https://flagcdn.com/w40/${country.code}.png">
-    <div>${country.name}</div>
-  `;
-
-  card.onclick = () => {
-    document.querySelectorAll(".country-card").forEach(c => c.classList.remove("selected"));
-    card.classList.add("selected");
-    selectedCountry = country.name;
+countries.forEach(c => {
+  const div = document.createElement("div");
+  div.className = "country-card";
+  div.innerHTML = `<img src="https://flagcdn.com/w40/${c.code}.png"><br>${c.name}`;
+  div.onclick = () => {
+    document.querySelectorAll(".country-card").forEach(x => x.classList.remove("selected"));
+    div.classList.add("selected");
+    selectedCountry = c.name;
     updateProgress();
   };
-
-  countryGrid.appendChild(card);
+  grid.appendChild(div);
 });
 
-function updateProgress() {
-  let completed = 0;
-  if (selectedCountry) completed++;
-  if (document.getElementById("age").value) completed++;
-  if (document.getElementById("income").value) completed++;
-  if (document.getElementById("healthcare").value) completed++;
-  if (document.getElementById("housing").value) completed++;
-
-  const percent = (completed / 11) * 100;
-  document.getElementById("progress-fill").style.width = percent + "%";
-  document.getElementById("progress-text").innerText = `Completed ${completed} of 11 phases`;
+function showPhase(n) {
+  phases.forEach(p => p.classList.remove("active"));
+  phases[n].classList.add("active");
+  document.getElementById("progress-text").innerText = `Phase ${n + 1} of 11`;
+  document.getElementById("progress-fill").style.width = ((n + 1) / 11 * 100) + "%";
 }
 
-document.querySelectorAll("input, select").forEach(el => {
-  el.addEventListener("change", updateProgress);
-});
+function nextPhase() {
+  if (currentPhase < phases.length - 1) {
+    currentPhase++;
+    showPhase(currentPhase);
+  }
+}
+
+function prevPhase() {
+  if (currentPhase > 0) {
+    currentPhase--;
+    showPhase(currentPhase);
+  }
+}
+
+function updateProgress() {}
 
 function generateSummary() {
-  if (!selectedCountry) {
-    alert("Please select a destination country.");
-    return;
-  }
-
-  document.getElementById("output").innerHTML = `
-    <p><strong>Destination:</strong> ${selectedCountry}</p>
-    <p>This plan will next include visa rules, tax exposure, healthcare access and banking guidance specific to ${selectedCountry}.</p>
-  `;
+  document.getElementById("output").innerHTML =
+    `<p><strong>Destination:</strong> ${selectedCountry}</p>
+     <p>Your personalised relocation roadmap will now be built.</p>`;
 }
+
+showPhase(0);
