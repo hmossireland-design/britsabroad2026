@@ -9,12 +9,12 @@
 
 <body>
 
-<header class="header">
+<header class="site-header">
   <h1>Brits Abroad 2026</h1>
-  <p>Step-by-Step Relocation Planner</p>
+  <p>The Ultimate Relocation & Relaxation Planner</p>
 </header>
 
-<div class="progress-container">
+<div class="progress-wrapper">
   <div id="progress-text">Phase 1 of 11</div>
   <div class="progress-bar">
     <div id="progress-fill"></div>
@@ -22,115 +22,12 @@
 </div>
 
 <main id="app">
-
-  <!-- PHASE 1 -->
-  <section class="phase active">
-    <h2>Choose Your Destination</h2>
-    <div id="country-grid"></div>
-  </section>
-
-  <!-- PHASE 2 -->
-  <section class="phase">
-    <h2>Your Age</h2>
-    <input type="number" id="age">
-  </section>
-
-  <!-- PHASE 3 -->
-  <section class="phase">
-    <h2>Monthly Income (£)</h2>
-    <input type="number" id="income">
-  </section>
-
-  <!-- PHASE 4 -->
-  <section class="phase">
-    <h2>Healthcare Preference</h2>
-    <select id="healthcare">
-      <option value="">Select</option>
-      <option>Private</option>
-      <option>Public</option>
-      <option>Mixed</option>
-    </select>
-  </section>
-
-  <!-- PHASE 5 -->
-  <section class="phase">
-    <h2>Housing Plan</h2>
-    <select id="housing">
-      <option value="">Select</option>
-      <option>Rent</option>
-      <option>Buy</option>
-      <option>Undecided</option>
-    </select>
-  </section>
-
-  <!-- PHASE 6 -->
-  <section class="phase">
-    <h2>Banking</h2>
-    <select id="banking">
-      <option value="">Select</option>
-      <option>UK Bank</option>
-      <option>Local Bank</option>
-      <option>Online (Wise / Revolut)</option>
-    </select>
-  </section>
-
-  <!-- PHASE 7 -->
-  <section class="phase">
-    <h2>Transport</h2>
-    <select id="transport">
-      <option value="">Select</option>
-      <option>No car</option>
-      <option>Buy locally</option>
-      <option>Import UK vehicle</option>
-    </select>
-  </section>
-
-  <!-- PHASE 8 -->
-  <section class="phase">
-    <h2>Residency Route</h2>
-    <select id="visa">
-      <option value="">Select</option>
-      <option>Passive Income</option>
-      <option>Work / Self-employed</option>
-      <option>Investment</option>
-    </select>
-  </section>
-
-  <!-- PHASE 9 -->
-  <section class="phase">
-    <h2>Lifestyle Preference</h2>
-    <select id="lifestyle">
-      <option value="">Select</option>
-      <option>Quiet / Rural</option>
-      <option>City</option>
-      <option>Coastal / Island</option>
-    </select>
-  </section>
-
-  <!-- PHASE 10 -->
-  <section class="phase">
-    <h2>Risk Tolerance</h2>
-    <select id="risk">
-      <option value="">Select</option>
-      <option>Low</option>
-      <option>Medium</option>
-      <option>High</option>
-    </select>
-  </section>
-
-  <!-- PHASE 11 -->
-  <section class="phase">
-    <h2>Your Relocation Summary</h2>
-    <button onclick="generateSummary()">Generate My Plan</button>
-    <div id="output"></div>
-  </section>
-
-  <div class="nav-buttons">
-    <button onclick="prevPhase()">Back</button>
-    <button onclick="nextPhase()">Next</button>
-  </div>
-
+  <!-- JS injects phases here -->
 </main>
+
+<footer class="site-footer">
+  <p>© 2026 Brits Abroad</p>
+</footer>
 
 <script src="app.js"></script>
 </body>
