@@ -1,74 +1,93 @@
+* {
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
 body {
   margin: 0;
-  background: #0f2027;
+  background: #f4f6f8;
+  color: #222;
+}
+
+.site-header {
+  background: #0f172a;
   color: #fff;
-  font-family: system-ui;
-}
-
-.header {
+  padding: 2rem 1rem;
   text-align: center;
-  padding: 20px;
 }
 
-.progress-container {
-  max-width: 500px;
-  margin: auto;
-  padding: 10px;
+.site-header h1 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.site-header p {
+  margin-top: 0.5rem;
+  opacity: 0.9;
+}
+
+.progress-wrapper {
+  max-width: 800px;
+  margin: 1.5rem auto;
+  padding: 0 1rem;
+}
+
+#progress-text {
+  margin-bottom: 0.5rem;
+  font-weight: bold;
 }
 
 .progress-bar {
-  background: #444;
-  height: 8px;
+  height: 14px;
+  background: #ddd;
   border-radius: 10px;
+  overflow: hidden;
 }
 
 #progress-fill {
   height: 100%;
   width: 0%;
-  background: #00c6ff;
-  transition: width 0.3s;
+  background: #22c55e;
+  transition: width 0.4s ease;
 }
 
-.phase {
-  display: none;
-  background: rgba(255,255,255,0.1);
-  padding: 20px;
-  border-radius: 12px;
-  margin: 20px;
+.phase-card {
+  background: #fff;
+  max-width: 800px;
+  margin: 1.5rem auto;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
 }
 
-.phase.active {
-  display: block;
+.phase-card h2 {
+  margin-top: 0;
 }
 
-input, select, button {
+.phase-card select,
+.phase-card input {
   width: 100%;
-  padding: 12px;
-  margin-top: 10px;
-  border-radius: 10px;
+  padding: 0.6rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+button {
+  background: #22c55e;
+  color: #fff;
   border: none;
-}
-
-.nav-buttons {
-  display: flex;
-  justify-content: space-between;
-  margin: 20px;
-}
-
-#country-grid {
-  display: grid;
-  grid-template-columns: repeat(3,1fr);
-  gap: 10px;
-}
-
-.country-card {
-  background: rgba(255,255,255,0.2);
-  text-align: center;
-  padding: 10px;
-  border-radius: 10px;
+  padding: 0.7rem 1.2rem;
+  font-size: 1rem;
+  border-radius: 6px;
   cursor: pointer;
 }
 
-.country-card.selected {
-  background: #00c6ff;
+button:hover {
+  background: #16a34a;
+}
+
+.site-footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: #666;
 }
