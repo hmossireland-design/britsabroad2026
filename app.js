@@ -1,250 +1,122 @@
-let currentPhase = 0;
-let selectedCountry = null;
+const app = document.getElementById("app");
+let currentPhase = 1;
+let answers = {};
 
-const phases = document.querySelectorAll(".phase");
+const countries = [
+  { name: "Portugal", flag: "🇵🇹", tax: "10% pension tax", visa: "D7 Passive Income Visa" },
+  { name: "Spain", flag: "🇪🇸", tax: "Progressive up to 47%", visa: "Non-Lucrative Visa" },
+  { name: "France", flag: "🇫🇷", tax: "Progressive", visa: "Long Stay Visitor Visa" },
+  { name: "Ireland", flag: "🇮🇪", tax: "Progressive", visa: "No visa required" },
+  { name: "Cyprus", flag: "🇨🇾", tax: "5–10% pension tax", visa: "Category F / Pink Slip" },
+  { name: "Italy", flag: "🇮🇹", tax: "7% flat tax (south)", visa: "Elective Residence" },
+  { name: "Greece", flag: "🇬🇷", tax: "7% flat tax option", visa: "Financially Independent Visa" },
+  { name: "UAE", flag: "🇦🇪", tax: "0% income tax", visa: "Retirement Visa" },
+  { name: "Thailand", flag: "🇹🇭", tax: "Territorial", visa: "Retirement Visa" },
+  { name: "Malaysia", flag: "🇲🇾", tax: "Territorial", visa: "MM2H" },
+  { name: "Panama", flag: "🇵🇦", tax: "Territorial", visa: "Pensionado" },
+  { name: "Mexico", flag: "🇲🇽", tax: "Progressive", visa: "Temporary Resident" },
+  { name: "Costa Rica", flag: "🇨🇷", tax: "Territorial", visa: "Pensionado" },
+  { name: "Poland", flag: "🇵🇱", tax: "Progressive", visa: "Temporary Residence" },
+  { name: "Hungary", flag: "🇭🇺", tax: "15% flat tax", visa: "Residence Permit" },
+  { name: "Bulgaria", flag: "🇧🇬", tax: "10% flat tax", visa: "D Visa" },
+  { name: "Slovakia", flag: "🇸🇰", tax: "Progressive", visa: "Temporary Residence" },
+  { name: "Slovenia", flag: "🇸🇮", tax: "Progressive", visa: "Long-Term Residence" },
+  { name: "Latvia", flag: "🇱🇻", tax: "Progressive", visa: "Temporary Residence" },
+  { name: "Indonesia", flag: "🇮🇩", tax: "Territorial", visa: "Retirement KITAS" },
+  { name: "Colombia", flag: "🇨🇴", tax: "Progressive", visa: "Pension Visa" },
+  { name: "Mauritius", flag: "🇲🇺", tax: "15% flat tax", visa: "Retired Non-Citizen Permit" },
+  { name: "Ecuador", flag: "🇪🇨", tax: "Territorial", visa: "Pensioner Visa" },
+  { name: "Argentina", flag: "🇦🇷", tax: "Worldwide", visa: "Rentista Visa" },
+  { name: "USA", flag: "🇺🇸", tax: "Worldwide", visa: "Various (complex)" },
+  { name: "Vietnam", flag: "🇻🇳", tax: "Territorial", visa: "Temporary Residence" },
+  { name: "New Zealand", flag: "🇳🇿", tax: "Progressive", visa: "Investor / Family" }
+];
 
-/* ======================
-   COUNTRY INTELLIGENCE
-   ====================== */
-const countryData = {
-  Portugal: {
-    visa: "D7 Passive Income Visa",
-    income: "€870/month minimum",
-    tax: "10% pension tax (NHR style regime ending soon)",
-    notes: "Very popular with British retirees"
-  },
-  Spain: {
-    visa: "Non-Lucrative Visa",
-    income: "€2,400/month",
-    tax: "Worldwide taxation once resident",
-    notes: "No work allowed on this visa"
-  },
-  Ireland: {
-    visa: "No visa required (CTA)",
-    income: "None",
-    tax: "Worldwide tax resident",
-    notes: "High cost of living"
-  },
-  Australia: {
-    visa: "Parent / Contributory Parent",
-    income: "High financial thresholds",
-    tax: "Worldwide taxation",
-    notes: "Long processing times"
-  },
-  Cyprus: {
-    visa: "Category F / Pink Slip",
-    income: "€2,000+/month",
-    tax: "Non-dom & low pension tax",
-    notes: "English widely spoken"
-  },
-  Malta: {
-    visa: "Retirement Programme",
-    income: "€10,000/year",
-    tax: "Remittance-based taxation",
-    notes: "English official language"
-  },
-  France: {
-    visa: "Long-Stay Visitor",
-    income: "€1,800/month",
-    tax: "Worldwide taxation",
-    notes: "Excellent healthcare"
-  },
-  UAE: {
-    visa: "Retirement / Property Visa",
-    income: "£4,200/month or property",
-    tax: "0% income tax",
-    notes: "No permanent residency path"
-  },
-  Thailand: {
-    visa: "Retirement Visa (50+)",
-    income: "£1,500/month",
-    tax: "Territorial taxation",
-    notes: "Very affordable lifestyle"
-  },
-  Italy: {
-    visa: "Elective Residence",
-    income: "€31,000/year",
-    tax: "7% flat tax in southern regions",
-    notes: "Regional bureaucracy varies"
-  },
-  Greece: {
-    visa: "Financially Independent",
-    income: "€3,500/month",
-    tax: "7% pension tax option",
-    notes: "Golden Visa alternative"
-  },
-  Canada: {
-    visa: "Family / Points Based",
-    income: "Varies",
-    tax: "Worldwide taxation",
-    notes: "Cold winters"
-  },
-  "New Zealand": {
-    visa: "Investment / Family",
-    income: "High thresholds",
-    tax: "Worldwide taxation",
-    notes: "Very safe, expensive"
-  },
-  Malaysia: {
-    visa: "MM2H",
-    income: "$1,500/month",
-    tax: "Territorial taxation",
-    notes: "English widely spoken"
-  },
-  Panama: {
-    visa: "Pensionado",
-    income: "$1,000/month",
-    tax: "No tax on foreign income",
-    notes: "Senior discounts"
-  },
-  Mexico: {
-    visa: "Temporary Resident",
-    income: "$2,500/month",
-    tax: "Worldwide tax if resident",
-    notes: "Regional safety varies"
-  },
-  "Costa Rica": {
-    visa: "Pensionado",
-    income: "$1,000/month",
-    tax: "Territorial taxation",
-    notes: "Excellent nature lifestyle"
-  },
-  Hungary: {
-    visa: "Residence Permit",
-    income: "Low threshold",
-    tax: "15% flat tax",
-    notes: "Low cost EU option"
-  },
-  Poland: {
-    visa: "Temporary Residence",
-    income: "Very low",
-    tax: "Worldwide taxation",
-    notes: "Cold winters"
-  },
-  Slovenia: {
-    visa: "Long-Term Residence",
-    income: "€1,000/month",
-    tax: "Worldwide taxation",
-    notes: "Safe & scenic"
-  },
-  Slovakia: {
-    visa: "Temporary Residence",
-    income: "€800/month",
-    tax: "Worldwide taxation",
-    notes: "Affordable EU"
-  },
-  Bulgaria: {
-    visa: "D Visa",
-    income: "€1,000/month",
-    tax: "10% flat tax",
-    notes: "Cheapest EU country"
-  },
-  Indonesia: {
-    visa: "Retirement KITAS",
-    income: "$1,500/month",
-    tax: "Territorial taxation",
-    notes: "Bali popular"
-  },
-  Colombia: {
-    visa: "Pension Visa",
-    income: "$900/month",
-    tax: "Worldwide if resident",
-    notes: "Emerging expat hubs"
-  },
-  Mauritius: {
-    visa: "Retired Non-Citizen",
-    income: "$1,500/month",
-    tax: "Low territorial tax",
-    notes: "Island lifestyle"
-  },
-  Belize: {
-    visa: "QRP",
-    income: "$2,000/month",
-    tax: "Tax-free pensions",
-    notes: "English speaking"
-  },
-  Ecuador: {
-    visa: "Pensioner Visa",
-    income: "$800/month",
-    tax: "Territorial taxation",
-    notes: "Very low cost"
-  },
-  Uruguay: {
-    visa: "Residency",
-    income: "$1,500/month",
-    tax: "Optional territorial tax",
-    notes: "Stable economy"
-  },
-  Chile: {
-    visa: "Retirement Visa",
-    income: "Pension proof",
-    tax: "Worldwide tax",
-    notes: "Strong healthcare"
-  },
-  Latvia: {
-    visa: "Temporary Residence",
-    income: "€1,100/month",
-    tax: "Worldwide taxation",
-    notes: "Affordable EU capital"
+function renderPhase() {
+  app.innerHTML = "";
+
+  const card = document.createElement("div");
+  card.className = "phase-card";
+
+  let html = "";
+
+  if (currentPhase === 1) {
+    html = `
+      <h2>Phase 1: Choose Destination</h2>
+      <select id="country">
+        <option value="">Select country</option>
+        ${countries.map(c => `<option value="${c.name}">${c.flag} ${c.name}</option>`).join("")}
+      </select>
+      <button onclick="next()">Next</button>
+    `;
   }
-};
 
-/* ======================
-   COUNTRY SELECTION
-   ====================== */
-document.querySelectorAll(".country-card").forEach(card => {
-  card.onclick = () => {
-    document.querySelectorAll(".country-card").forEach(c =>
-      c.classList.remove("selected")
-    );
-    card.classList.add("selected");
-    selectedCountry = card.innerText.trim();
-  };
-});
+  else if (currentPhase === 2) {
+    html = `
+      <h2>Phase 2: Age</h2>
+      <input id="age" type="number" placeholder="Your age">
+      <button onclick="next()">Next</button>
+    `;
+  }
 
-/* ======================
-   PHASE NAVIGATION
-   ====================== */
-function showPhase(index) {
-  phases.forEach(p => p.classList.remove("active"));
-  phases[index].classList.add("active");
+  else if (currentPhase === 3) {
+    html = `
+      <h2>Phase 3: Monthly Income (£)</h2>
+      <input id="income" type="number">
+      <button onclick="next()">Next</button>
+    `;
+  }
 
-  document.getElementById("progress-text").innerText =
-    `Phase ${index + 1} of 11`;
+  else if (currentPhase === 11) {
+    const country = countries.find(c => c.name === answers.country);
+    html = `
+      <h2>Your Relocation Summary</h2>
+      <p><strong>Destination:</strong> ${country.flag} ${country.name}</p>
+      <p><strong>Visa Route:</strong> ${country.visa}</p>
+      <p><strong>Tax Profile:</strong> ${country.tax}</p>
+      <p><strong>Age:</strong> ${answers.age}</p>
+      <p><strong>Monthly Income:</strong> £${answers.income}</p>
+      <p><em>This is an initial planning summary. Legal advice always recommended.</em></p>
+    `;
+  }
 
-  document.getElementById("progress-fill").style.width =
-    ((index + 1) / 11) * 100 + "%";
+  else {
+    html = `
+      <h2>Phase ${currentPhase}</h2>
+      <p>Details collected.</p>
+      <button onclick="next()">Next</button>
+    `;
+  }
+
+  card.innerHTML = html;
+  app.appendChild(card);
+  updateProgress();
 }
 
-function nextPhase() {
-  if (currentPhase < phases.length - 1) {
+function next() {
+  if (currentPhase === 1) {
+    const val = document.getElementById("country").value;
+    if (!val) return alert("Select a country");
+    answers.country = val;
+  }
+
+  if (currentPhase === 2) {
+    answers.age = document.getElementById("age").value;
+  }
+
+  if (currentPhase === 3) {
+    answers.income = document.getElementById("income").value;
+  }
+
+  if (currentPhase < 11) {
     currentPhase++;
-    showPhase(currentPhase);
+    renderPhase();
   }
 }
 
-/* ======================
-   SUMMARY
-   ====================== */
-function generateSummary() {
-  if (!selectedCountry || !countryData[selectedCountry]) {
-    alert("Please select a destination country.");
-    return;
-  }
-
-  const c = countryData[selectedCountry];
-
-  document.getElementById("output").innerHTML = `
-    <h3>${selectedCountry} Relocation Summary</h3>
-    <p><strong>Visa Route:</strong> ${c.visa}</p>
-    <p><strong>Income Requirement:</strong> ${c.income}</p>
-    <p><strong>Tax Position:</strong> ${c.tax}</p>
-    <p><strong>Notes:</strong> ${c.notes}</p>
-    <p><em>This guidance is informational — always confirm with the embassy.</em></p>
-  `;
+function updateProgress() {
+  document.getElementById("progress-text").innerText = `Phase ${currentPhase} of 11`;
+  document.getElementById("progress-fill").style.width = `${(currentPhase / 11) * 100}%`;
 }
 
-/* ======================
-   INIT
-   ====================== */
-showPhase(0);
+renderPhase();
