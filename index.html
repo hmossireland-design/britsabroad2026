@@ -22,28 +22,23 @@
     <span id="progressText">0/11 completed</span>
   </div>
 
-  <!-- PHASE 1 -->
-  <section class="phase">
+  <!-- PHASES -->
+  <section class="phase card">
     <h2>Phase 1: Choose Destination Country</h2>
-    <select id="countrySelect" data-phase="1">
-      <option value="">Select country</option>
-    </select>
+    <select id="countrySelect" data-phase="1"></select>
   </section>
 
-  <!-- PHASE 2 -->
-  <section class="phase">
+  <section class="phase card">
     <h2>Phase 2: Age</h2>
     <input type="number" id="age" placeholder="Your age" data-phase="2">
   </section>
 
-  <!-- PHASE 3 -->
-  <section class="phase">
+  <section class="phase card">
     <h2>Phase 3: Monthly Income (£)</h2>
     <input type="number" id="income" placeholder="Monthly income" data-phase="3">
   </section>
 
-  <!-- PHASE 4 -->
-  <section class="phase">
+  <section class="phase card">
     <h2>Phase 4: Healthcare Preference</h2>
     <select id="healthcare" data-phase="4">
       <option value="">Select</option>
@@ -53,8 +48,7 @@
     </select>
   </section>
 
-  <!-- PHASE 5 -->
-  <section class="phase">
+  <section class="phase card">
     <h2>Phase 5: Housing Plan</h2>
     <select id="housing" data-phase="5">
       <option value="">Select</option>
@@ -64,8 +58,7 @@
     </select>
   </section>
 
-  <!-- PHASE 6 -->
-  <section class="phase">
+  <section class="phase card">
     <h2>Phase 6: Banking</h2>
     <select id="banking" data-phase="6">
       <option value="">Select</option>
@@ -76,8 +69,7 @@
     </select>
   </section>
 
-  <!-- PHASE 7 -->
-  <section class="phase">
+  <section class="phase card">
     <h2>Phase 7: Transport</h2>
     <select id="transport" data-phase="7">
       <option value="">Select</option>
@@ -87,8 +79,7 @@
     </select>
   </section>
 
-  <!-- PHASE 8 -->
-  <section class="phase">
+  <section class="phase card">
     <h2>Phase 8: Residency Route</h2>
     <select id="visa" data-phase="8">
       <option value="">Select</option>
@@ -98,8 +89,7 @@
     </select>
   </section>
 
-  <!-- PHASE 9 -->
-  <section class="phase">
+  <section class="phase card">
     <h2>Phase 9: Lifestyle Preference</h2>
     <select id="lifestyle" data-phase="9">
       <option value="">Select</option>
@@ -109,8 +99,7 @@
     </select>
   </section>
 
-  <!-- PHASE 10 -->
-  <section class="phase">
+  <section class="phase card">
     <h2>Phase 10: Risk Tolerance</h2>
     <select id="risk" data-phase="10">
       <option value="">Select</option>
@@ -120,8 +109,7 @@
     </select>
   </section>
 
-  <!-- PHASE 11 -->
-  <section class="phase">
+  <section class="phase card">
     <h2>Phase 11: Your Relocation Summary</h2>
     <button onclick="generateSummary()">Generate My Summary</button>
     <div id="output"></div>
