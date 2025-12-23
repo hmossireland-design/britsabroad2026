@@ -14,10 +14,11 @@
   <p>The Ultimate Relocation & Relaxation Planner</p>
 </header>
 
-<div id="progress-container">
-  <div id="progress-text">0 / 11 completed</div>
-  <div id="progress-bar">
-    <div id="progress-fill"></div>
+<!-- PROGRESS BAR -->
+<div class="progress-container">
+  <div class="progress-text" id="progressText">0 / 10 completed</div>
+  <div class="progress-bar">
+    <div class="progress-fill" id="progressFill"></div>
   </div>
 </div>
 
@@ -25,14 +26,16 @@
 
   <!-- PHASE 1 -->
   <section class="phase">
-    <h2>Phase 1: Choose Destination</h2>
-    <div id="countryCards" class="country-cards"></div>
+    <h2>Phase 1: Choose Destination Country</h2>
+    <select id="countrySelect">
+      <option value="">Loading countries...</option>
+    </select>
   </section>
 
   <!-- PHASE 2 -->
   <section class="phase">
-    <h2>Phase 2: Your Age</h2>
-    <input type="number" id="age" placeholder="Enter your age">
+    <h2>Phase 2: Age</h2>
+    <input type="number" id="age" placeholder="Your age">
   </section>
 
   <!-- PHASE 3 -->
@@ -68,10 +71,10 @@
     <h2>Phase 6: Banking</h2>
     <select id="banking">
       <option value="">Select</option>
-      <option>UK Bank Only</option>
-      <option>Local Bank</option>
-      <option>Online Banks (Wise/Revolut)</option>
-      <option>Combination</option>
+      <option>UK only</option>
+      <option>Local account</option>
+      <option>Online (Wise / Revolut)</option>
+      <option>UK + Offshore</option>
     </select>
   </section>
 
@@ -91,7 +94,7 @@
     <h2>Phase 8: Residency Route</h2>
     <select id="visa">
       <option value="">Select</option>
-      <option>Passive / Retirement</option>
+      <option>Retirement / Passive Income</option>
       <option>Work / Self-employed</option>
       <option>Investment</option>
     </select>
