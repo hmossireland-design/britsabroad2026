@@ -1,154 +1,83 @@
-/* RESET */
-* {
-  box-sizing: border-box;
+body {
+  font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-}
-
-/* PAGE BACKGROUND */
-body {
-  background: linear-gradient(180deg, #f4f7fb, #e9eef6);
-  color: #222;
-  line-height: 1.5;
-}
-
-/* HEADER */
-header {
-  text-align: center;
-  padding: 24px 16px;
-  background: linear-gradient(135deg, #0f4c81, #1e90c8);
-  color: white;
-}
-
-header h1 {
-  font-size: 2rem;
-  margin-bottom: 6px;
-}
-
-header p {
-  opacity: 0.9;
-  font-size: 1rem;
-}
-
-/* PROGRESS BAR */
-.progress-container {
-  padding: 16px;
-  background: #ffffff;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.06);
-}
-
-.progress-text {
-  font-size: 0.9rem;
-  margin-bottom: 8px;
+  background: #f9f9f9;
   color: #333;
 }
 
-.progress-bar {
-  width: 100%;
-  height: 10px;
-  background: #e1e6ef;
-  border-radius: 6px;
-  overflow: hidden;
+header, footer {
+  background: #2a2a72;
+  color: #fff;
+  text-align: center;
+  padding: 15px;
 }
 
-.progress-fill {
-  height: 100%;
-  width: 0%;
-  background: linear-gradient(90deg, #1e90c8, #32b37a);
-  transition: width 0.3s ease;
+header h1 {
+  margin: 0;
 }
 
-/* MAIN CONTAINER */
 main {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 20px 14px 40px;
+  max-width: 700px;
+  margin: 20px auto;
+  padding: 0 15px;
 }
 
-/* PHASE CARDS */
 .phase {
-  background: #ffffff;
-  margin-bottom: 18px;
-  padding: 18px;
-  border-radius: 14px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.phase:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 24px rgba(0,0,0,0.12);
+  background: #fff;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  box-shadow: 0 0 6px rgba(0,0,0,0.1);
 }
 
 .phase h2 {
-  font-size: 1.15rem;
-  margin-bottom: 12px;
-  color: #0f4c81;
+  margin-top: 0;
+  color: #2a2a72;
 }
 
-/* INPUTS & SELECTS */
-input,
-select {
+input, select, button {
   width: 100%;
-  padding: 12px 14px;
-  font-size: 1rem;
-  border-radius: 8px;
-  border: 1px solid #cfd6e3;
-  background: #fdfefe;
+  padding: 10px;
+  margin-top: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
 }
 
-input:focus,
-select:focus {
-  outline: none;
-  border-color: #1e90c8;
-  box-shadow: 0 0 0 2px rgba(30,144,200,0.15);
-}
-
-/* BUTTON */
 button {
-  background: linear-gradient(135deg, #32b37a, #1e90c8);
+  background: green;
   color: white;
+  font-weight: bold;
   border: none;
-  padding: 14px 18px;
-  font-size: 1rem;
-  border-radius: 10px;
   cursor: pointer;
-  width: 100%;
-  margin-top: 10px;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 button:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+  background: darkgreen;
 }
 
-/* SUMMARY OUTPUT */
-#output {
-  margin-top: 14px;
-  padding: 14px;
-  background: #f4f9ff;
-  border-left: 4px solid #1e90c8;
-  border-radius: 8px;
-  font-size: 0.95rem;
+#progressContainer {
+  width: 100%;
+  background-color: #eee;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  position: relative;
 }
 
-/* FOOTER */
-footer {
+#progressBar {
+  width: 0%;
+  height: 20px;
+  background-color: green;
+  border-radius: 5px;
+  transition: width 0.3s ease;
+}
+
+#progressText {
+  position: absolute;
+  width: 100%;
   text-align: center;
-  padding: 20px;
-  font-size: 0.85rem;
-  color: #666;
-}
-
-/* MOBILE OPTIMISATION */
-@media (max-width: 600px) {
-  header h1 {
-    font-size: 1.6rem;
-  }
-
-  .phase h2 {
-    font-size: 1.05rem;
-  }
+  top: 0;
+  line-height: 20px;
+  font-weight: bold;
 }
