@@ -14,40 +14,38 @@
   <p>The Ultimate Relocation & Relaxation Planner</p>
 </header>
 
-<!-- PROGRESS BAR -->
-<div class="progress-container">
-  <div class="progress-text" id="progressText">0 / 10 completed</div>
-  <div class="progress-bar">
-    <div class="progress-fill" id="progressFill"></div>
-  </div>
-</div>
-
 <main id="app">
+
+  <!-- Progress Bar -->
+  <div id="progressContainer">
+    <div id="progressBar"></div>
+    <span id="progressText">0/11 completed</span>
+  </div>
 
   <!-- PHASE 1 -->
   <section class="phase">
     <h2>Phase 1: Choose Destination Country</h2>
-    <select id="countrySelect">
-      <option value="">Loading countries...</option>
+    <select id="countrySelect" data-phase="1">
+      <option value="">Select country</option>
     </select>
   </section>
 
   <!-- PHASE 2 -->
   <section class="phase">
     <h2>Phase 2: Age</h2>
-    <input type="number" id="age" placeholder="Your age">
+    <input type="number" id="age" placeholder="Your age" data-phase="2">
   </section>
 
   <!-- PHASE 3 -->
   <section class="phase">
     <h2>Phase 3: Monthly Income (£)</h2>
-    <input type="number" id="income" placeholder="Monthly income">
+    <input type="number" id="income" placeholder="Monthly income" data-phase="3">
   </section>
 
   <!-- PHASE 4 -->
   <section class="phase">
     <h2>Phase 4: Healthcare Preference</h2>
-    <select id="healthcare">
+    <select id="healthcare" data-phase="4">
       <option value="">Select</option>
       <option>Private</option>
       <option>Public</option>
@@ -58,7 +56,7 @@
   <!-- PHASE 5 -->
   <section class="phase">
     <h2>Phase 5: Housing Plan</h2>
-    <select id="housing">
+    <select id="housing" data-phase="5">
       <option value="">Select</option>
       <option>Rent</option>
       <option>Buy</option>
@@ -69,19 +67,19 @@
   <!-- PHASE 6 -->
   <section class="phase">
     <h2>Phase 6: Banking</h2>
-    <select id="banking">
+    <select id="banking" data-phase="6">
       <option value="">Select</option>
       <option>UK only</option>
       <option>Local account</option>
-      <option>Online (Wise / Revolut)</option>
       <option>UK + Offshore</option>
+      <option>Online Bank (Wise/Revolut)</option>
     </select>
   </section>
 
   <!-- PHASE 7 -->
   <section class="phase">
     <h2>Phase 7: Transport</h2>
-    <select id="transport">
+    <select id="transport" data-phase="7">
       <option value="">Select</option>
       <option>No car</option>
       <option>Buy locally</option>
@@ -92,7 +90,7 @@
   <!-- PHASE 8 -->
   <section class="phase">
     <h2>Phase 8: Residency Route</h2>
-    <select id="visa">
+    <select id="visa" data-phase="8">
       <option value="">Select</option>
       <option>Retirement / Passive Income</option>
       <option>Work / Self-employed</option>
@@ -103,7 +101,7 @@
   <!-- PHASE 9 -->
   <section class="phase">
     <h2>Phase 9: Lifestyle Preference</h2>
-    <select id="lifestyle">
+    <select id="lifestyle" data-phase="9">
       <option value="">Select</option>
       <option>Quiet / Rural</option>
       <option>City</option>
@@ -114,7 +112,7 @@
   <!-- PHASE 10 -->
   <section class="phase">
     <h2>Phase 10: Risk Tolerance</h2>
-    <select id="risk">
+    <select id="risk" data-phase="10">
       <option value="">Select</option>
       <option>Low</option>
       <option>Medium</option>
