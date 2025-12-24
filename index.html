@@ -4,44 +4,26 @@
   <meta charset="UTF-8">
   <title>Brits Abroad 2026</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- MAIN STYLES -->
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<header>
+<header class="site-header">
   <h1>Brits Abroad 2026</h1>
-  <p>The Ultimate Relocation & Relaxation Planner</p>
+  <p>The Ultimate Relocation & Lifestyle Planner</p>
 </header>
 
 <main id="app">
 
   <!-- PHASE 1 -->
   <section class="phase">
-    <h2>Phase 1: Choose Destination Country</h2>
+    <h2>Phase 1: Choose Your Destination</h2>
     <select id="countrySelect">
-      <option value="">Select country</option>
-      <option value="Portugal">🇵🇹 Portugal</option>
-      <option value="Spain">🇪🇸 Spain</option>
-      <option value="Ireland">🇮🇪 Ireland</option>
-      <option value="Cyprus">🇨🇾 Cyprus</option>
-      <option value="France">🇫🇷 France</option>
-      <option value="Italy">🇮🇹 Italy</option>
-      <option value="UAE">🇦🇪 UAE</option>
-      <option value="Thailand">🇹🇭 Thailand</option>
-      <option value="Malaysia">🇲🇾 Malaysia</option>
-      <option value="Mexico">🇲🇽 Mexico</option>
-      <option value="Panama">🇵🇦 Panama</option>
-      <option value="Greece">🇬🇷 Greece</option>
-      <option value="Hungary">🇭🇺 Hungary</option>
-      <option value="Poland">🇵🇱 Poland</option>
-      <option value="Bulgaria">🇧🇬 Bulgaria</option>
-      <option value="Mauritius">🇲🇺 Mauritius</option>
-      <option value="Ecuador">🇪🇨 Ecuador</option>
-      <option value="Vietnam">🇻🇳 Vietnam</option>
-      <option value="New Zealand">🇳🇿 New Zealand</option>
-      <option value="Australia">🇦🇺 Australia</option>
-      <option value="USA">🇺🇸 USA</option>
+      <option value="">Select a country</option>
+      <!-- Countries are injected by app.js -->
     </select>
   </section>
 
@@ -54,7 +36,7 @@
   <!-- PHASE 3 -->
   <section class="phase">
     <h2>Phase 3: Monthly Income (£)</h2>
-    <input type="number" id="income" placeholder="Monthly income">
+    <input type="number" id="income" placeholder="Monthly income in GBP">
   </section>
 
   <!-- PHASE 4 -->
@@ -81,12 +63,12 @@
 
   <!-- PHASE 6 -->
   <section class="phase">
-    <h2>Phase 6: Banking</h2>
+    <h2>Phase 6: Banking Setup</h2>
     <select id="banking">
       <option value="">Select</option>
-      <option value="UK only">UK only</option>
-      <option value="Local account">Local account</option>
-      <option value="Online banks (Wise/Revolut)">Online banks (Wise / Revolut)</option>
+      <option value="UK only">UK bank only</option>
+      <option value="Local account">Local bank account</option>
+      <option value="Digital banks">Digital banks (Wise / Revolut)</option>
       <option value="UK + Offshore">UK + Offshore</option>
     </select>
   </section>
@@ -107,7 +89,7 @@
     <h2>Phase 8: Residency Route</h2>
     <select id="visa">
       <option value="">Select</option>
-      <option value="Passive Income / Retirement">Passive Income / Retirement</option>
+      <option value="Passive income / Retirement">Passive income / Retirement</option>
       <option value="Work / Self-employed">Work / Self-employed</option>
       <option value="Investment">Investment</option>
     </select>
@@ -137,35 +119,25 @@
 
   <!-- PHASE 11 -->
   <section class="phase">
-  <h2>Phase 11: Your Relocation Summary</h2>
+    <h2>Phase 11: Your Relocation Summary</h2>
 
-  <button class="primary-btn" onclick="generateSummary()">
-    Generate My Summary
-  </button>
+    <button class="primary-btn" onclick="generateSummary()">
+      Generate My Summary
+    </button>
 
-  <div id="output" class="summary-box">
-    <!-- Summary will appear here -->
-  </div>
-</section>
-
-  <!-- NAVIGATION -->
-  <div class="navigation">
-    <button id="backBtn">Back</button>
-    <button id="nextBtn">Next</button>
-  </div>
-
-  <!-- PROGRESS -->
-  <div class="progress-container">
-    <div id="progress-bar"></div>
-    <span id="progress-text">Phase 1 of 11</span>
-  </div>
+    <div id="output" class="summary-box">
+      <!-- Summary appears here -->
+    </div>
+  </section>
 
 </main>
 
-<footer>
+<footer class="site-footer">
   <p>© 2026 Brits Abroad</p>
 </footer>
 
+<!-- MAIN SCRIPT -->
 <script src="app.js"></script>
+
 </body>
 </html>
