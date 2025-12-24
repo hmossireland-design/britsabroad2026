@@ -170,3 +170,38 @@ footer {
     width: 48%;
   }
 }
+.phase {
+  background: #ffffff;
+  padding: 20px;
+  margin: 20px auto;
+  border-radius: 10px;
+  max-width: 800px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.primary-btn {
+  background: #2c7be5;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.primary-btn:hover {
+  background: #1a5dcc;
+}
+
+.summary-box {
+  margin-top: 20px;
+  padding: 20px;
+  background: #f4f7fb;
+  border-radius: 8px;
+  border-left: 5px solid #2c7be5;
+}
+
+.summary-box h3 {
+  margin-top: 0;
+}
