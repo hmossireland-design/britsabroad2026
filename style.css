@@ -23,15 +23,13 @@ header {
 
 header h1 {
   font-size: 2rem;
-  margin-bottom: 5px;
 }
 
 header p {
-  font-size: 1rem;
   opacity: 0.9;
 }
 
-/* PROGRESS BAR */
+/* PROGRESS */
 #progress-container {
   width: 90%;
   max-width: 800px;
@@ -53,10 +51,9 @@ header p {
   text-align: center;
   font-size: 0.85rem;
   color: #555;
-  margin-bottom: 20px;
 }
 
-/* MAIN APP */
+/* MAIN */
 main {
   width: 95%;
   max-width: 900px;
@@ -70,7 +67,7 @@ main {
   border-radius: 14px;
   padding: 22px;
   margin-bottom: 20px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
   border-left: 6px solid #0057a8;
 }
 
@@ -79,7 +76,27 @@ main {
   font-size: 1.2rem;
   margin-bottom: 14px;
   color: #003366;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
+
+/* ICONS PER PHASE */
+.phase h2::before {
+  font-size: 1.4rem;
+}
+
+.phase h2[data-phase="1"]::before { content: "🌍"; }
+.phase h2[data-phase="2"]::before { content: "🎂"; }
+.phase h2[data-phase="3"]::before { content: "💷"; }
+.phase h2[data-phase="4"]::before { content: "🏥"; }
+.phase h2[data-phase="5"]::before { content: "🏠"; }
+.phase h2[data-phase="6"]::before { content: "🏦"; }
+.phase h2[data-phase="7"]::before { content: "🚗"; }
+.phase h2[data-phase="8"]::before { content: "🛂"; }
+.phase h2[data-phase="9"]::before { content: "🌴"; }
+.phase h2[data-phase="10"]::before { content: "⚖️"; }
+.phase h2[data-phase="11"]::before { content: "📋"; }
 
 /* INPUTS */
 input,
@@ -96,37 +113,33 @@ input:focus,
 select:focus {
   outline: none;
   border-color: #0057a8;
-  box-shadow: 0 0 0 2px rgba(0, 87, 168, 0.15);
+  box-shadow: 0 0 0 2px rgba(0,87,168,0.15);
 }
 
 /* BUTTON */
 button {
-  margin-top: 10px;
+  margin-top: 12px;
   padding: 14px;
   width: 100%;
-  border: none;
   border-radius: 12px;
+  border: none;
   font-size: 1rem;
   font-weight: 600;
   background: linear-gradient(135deg, #00c853, #64dd17);
-  color: #003300;
   cursor: pointer;
-  transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
 
 button:hover {
   transform: translateY(-1px);
-  box-shadow: 0 6px 14px rgba(0, 200, 83, 0.3);
 }
 
-/* OUTPUT SUMMARY */
+/* SUMMARY */
 #output {
   margin-top: 18px;
   padding: 18px;
   border-radius: 12px;
   background: #f1f8ff;
   border-left: 6px solid #00c853;
-  font-size: 0.95rem;
 }
 
 /* FOOTER */
@@ -135,15 +148,4 @@ footer {
   padding: 25px;
   font-size: 0.8rem;
   color: #666;
-}
-
-/* MOBILE TWEAKS */
-@media (max-width: 600px) {
-  header h1 {
-    font-size: 1.6rem;
-  }
-
-  .phase h2 {
-    font-size: 1.05rem;
-  }
 }
