@@ -1,74 +1,95 @@
-const countries = [
-  { name: "Portugal", flag: "🇵🇹", visa: "D7 (Passive Income)", minIncome: "€870/mo", pensionTax: "10%" },
-  { name: "Spain", flag: "🇪🇸", visa: "Non-Lucrative Visa", minIncome: "€2,400/mo", pensionTax: "10%" },
-  { name: "Ireland", flag: "🇮🇪", visa: "No visa required", minIncome: "N/A", pensionTax: "Standard" },
-  { name: "Australia", flag: "🇦🇺", visa: "Parent/Family Visa", minIncome: "High Contribution (~£30k+)", pensionTax: "Standard" },
-  { name: "Cyprus", flag: "🇨🇾", visa: "Category F / PR", minIncome: "€300k property or proof", pensionTax: "Low" },
-  { name: "Malta", flag: "🇲🇹", visa: "Retirement Programme", minIncome: "€10k/yr", pensionTax: "Low" },
-  { name: "France", flag: "🇫🇷", visa: "Long-Stay Visitor", minIncome: "€1,800/mo", pensionTax: "Standard" },
-  { name: "UAE", flag: "🇦🇪", visa: "Retirement Visa", minIncome: "£4,200/mo or property", pensionTax: "0%" },
-  { name: "Thailand", flag: "🇹🇭", visa: "Retirement/Elite", minIncome: "£1,500/mo", pensionTax: "Low" },
-  { name: "Italy", flag: "🇮🇹", visa: "Elective Residence", minIncome: "€31k/yr", pensionTax: "7% South" }
-];
+// ===== GLOBAL STATE =====
+const totalPhases = 11;
+let completedPhases = new Set();
 
-// Populate country dropdown
-function populateCountries() {
-  const select = document.getElementById("countrySelect");
-  countries.forEach(c => {
-    const option = document.createElement("option");
-    option.value = c.name;
-    option.textContent = `${c.flag} ${c.name}`;
-    select.appendChild(option);
-  });
-}
+// ===== ELEMENTS =====
+const progressBar = document.getElementById("progress-bar");
+const progressText = document.getElementById("progress-text");
+const output = document.getElementById("output");
 
-// Track progress
-const phases = document.querySelectorAll(".phase select, .phase input");
-phases.forEach(el => el.addEventListener("change", updateProgress));
-
+// ===== UPDATE PROGRESS =====
 function updateProgress() {
-  let completed = 0;
-  phases.forEach(el => { if(el.value) completed++; });
-  const percent = (completed / phases.length) * 100;
-  document.getElementById("progress-bar").style.width = percent + "%";
-  document.getElementById("progress-text").textContent = `${completed} / ${phases.length} completed`;
+  const completed = completedPhases.size;
+  const percent = (completed / totalPhases) * 100;
+
+  progressBar.style.width = percent + "%";
+  progressText.innerText = `${completed} / ${totalPhases} completed`;
 }
 
-// Generate Summary with icons & country info
+// ===== SAVE PHASE =====
+function savePhase(phaseNumber) {
+  let valid = false;
+
+  switch (phaseNumber) {
+    case 1:
+      valid = document.getElementById("country").value !== "";
+      break;
+    case 2:
+      valid = document.getElementById("age").value !== "";
+      break;
+    case 3:
+      valid = document.getElementById("income").value !== "";
+      break;
+    case 4:
+      valid = document.getElementById("healthcare").value !== "";
+      break;
+    case 5:
+      valid = document.getElementById("housing").value !== "";
+      break;
+    case 6:
+      valid = document.getElementById("banking").value !== "";
+      break;
+    case 7:
+      valid = document.getElementById("transport").value !== "";
+      break;
+    case 8:
+      valid = document.getElementById("visa").value !== "";
+      break;
+    case 9:
+      valid = document.getElementById("lifestyle").value !== "";
+      break;
+    case 10:
+      valid = document.getElementById("tax").value !== "";
+      break;
+  }
+
+  if (!valid) {
+    alert("Please complete this phase before saving.");
+    return;
+  }
+
+  completedPhases.add(phaseNumber);
+  updateProgress();
+}
+
+// ===== GENERATE SUMMARY =====
 function generateSummary() {
-  const countryName = document.getElementById("countrySelect").value;
-  const country = countries.find(c => c.name === countryName);
-  
-  const age = document.getElementById("age").value;
-  const income = document.getElementById("income").value;
-  const healthcare = document.getElementById("healthcare").value;
-  const housing = document.getElementById("housing").value;
-  const banking = document.getElementById("banking").value;
-  const transport = document.getElementById("transport").value;
-  const visa = document.getElementById("visa").value;
-  const lifestyle = document.getElementById("lifestyle").value;
-  const risk = document.getElementById("risk").value;
+  if (completedPhases.size < totalPhases - 1) {
+    alert("Please complete all phases before generating your summary.");
+    return;
+  }
 
-  const outputHTML = `
-    <div class="summary-card">
-      <h3>${country ? country.flag + " " + country.name : "No country selected"}</h3>
-      <p>Age: ${age}</p>
-      <p>Monthly Income: £${income}</p>
-      <p>Healthcare: 🏥 ${healthcare}</p>
-      <p>Housing: 🏠 ${housing}</p>
-      <p>Banking: 💰 ${banking}</p>
-      <p>Transport: 🚗 ${transport}</p>
-      <p>Residency Route: ✈️ ${visa}</p>
-      <p>Lifestyle: 🌴 ${lifestyle}</p>
-      <p>Risk Tolerance: ⚠️ ${risk}</p>
-      ${country ? `<p><strong>Visa:</strong> ${country.visa}</p>
-      <p><strong>Minimum Income Required:</strong> ${country.minIncome}</p>
-      <p><strong>Pension Tax Rate:</strong> ${country.pensionTax}</p>` : ''}
-    </div>
+  const summary = `
+    <h3>Your Relocation Summary</h3>
+    <ul>
+      <li><strong>Destination:</strong> ${document.getElementById("country").value}</li>
+      <li><strong>Age:</strong> ${document.getElementById("age").value}</li>
+      <li><strong>Monthly Income:</strong> €${document.getElementById("income").value}</li>
+      <li><strong>Healthcare:</strong> ${document.getElementById("healthcare").value}</li>
+      <li><strong>Housing:</strong> ${document.getElementById("housing").value}</li>
+      <li><strong>Banking:</strong> ${document.getElementById("banking").value}</li>
+      <li><strong>Transport:</strong> ${document.getElementById("transport").value}</li>
+      <li><strong>Residency:</strong> ${document.getElementById("visa").value}</li>
+      <li><strong>Lifestyle:</strong> ${document.getElementById("lifestyle").value}</li>
+      <li><strong>Tax Awareness:</strong> ${document.getElementById("tax").value}</li>
+    </ul>
+    <p><em>This is a planning guide, not legal or tax advice.</em></p>
   `;
-  document.getElementById("output").innerHTML = outputHTML;
+
+  output.innerHTML = summary;
+  completedPhases.add(11);
+  updateProgress();
 }
 
-// Initialize
-populateCountries();
+// ===== INITIALISE =====
 updateProgress();
