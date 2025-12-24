@@ -1,80 +1,112 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  const phases = document.querySelectorAll(".phase");
-  const nextBtn = document.getElementById("nextBtn");
-  const backBtn = document.getElementById("backBtn");
-  const progressBar = document.getElementById("progress-bar");
-  const progressText = document.getElementById("progress-text");
-  const output = document.getElementById("output");
+  /* =============================
+     COUNTRY DATA (CORE LOGIC)
+  ============================= */
 
-  let currentPhase = 0;
-
-  function showPhase(index) {
-    phases.forEach((phase, i) => {
-      phase.style.display = i === index ? "block" : "none";
-    });
-
-    // Progress
-    const percent = Math.round((index / (phases.length - 1)) * 100);
-    progressBar.style.width = percent + "%";
-    progressText.textContent = `Phase ${index + 1} of ${phases.length}`;
-
-    backBtn.style.display = index === 0 ? "none" : "inline-block";
-    nextBtn.textContent = index === phases.length - 1 ? "Finish" : "Next";
-  }
-
-  function validatePhase(index) {
-    const phase = phases[index];
-    const input = phase.querySelector("input, select");
-
-    if (!input) return true;
-
-    if (input.value === "" || input.value === null) {
-      alert("Please complete this step before continuing.");
-      return false;
+  const countryData = {
+    Portugal: {
+      visa: "D7 Passive Income Visa (popular with retirees)",
+      tax: "Pensions taxed at ~10% under current regime",
+      healthcare: "Public healthcare via S1 or private insurance initially"
+    },
+    Spain: {
+      visa: "Non-Lucrative Visa (no work allowed)",
+      tax: "Worldwide income taxable once resident",
+      healthcare: "Private insurance required initially"
+    },
+    Cyprus: {
+      visa: "Category F / Pink Slip",
+      tax: "0% tax on pensions up to €19,500",
+      healthcare: "GESY public system after residency"
+    },
+    France: {
+      visa: "Long-Stay Visitor Visa",
+      tax: "Progressive income tax; S1 accepted",
+      healthcare: "Excellent public healthcare with S1"
+    },
+    UAE: {
+      visa: "Retirement or Property-Based Visa",
+      tax: "0% income tax",
+      healthcare: "Private insurance mandatory"
+    },
+    Thailand: {
+      visa: "Retirement Visa (50+)",
+      tax: "Territorial tax system",
+      healthcare: "Private healthcare recommended"
+    },
+    Italy: {
+      visa: "Elective Residence Visa",
+      tax: "Optional 7% flat tax in southern regions",
+      healthcare: "Public healthcare after registration"
+    },
+    Greece: {
+      visa: "Financially Independent Person Visa",
+      tax: "Flat tax options available",
+      healthcare: "Private initially, public later"
+    },
+    Malta: {
+      visa: "Retirement Programme",
+      tax: "Foreign income taxed when remitted",
+      healthcare: "Private insurance required"
+    },
+    Ireland: {
+      visa: "No visa required (Common Travel Area)",
+      tax: "Worldwide income taxable",
+      healthcare: "Public healthcare access"
     }
-    return true;
-  }
+  };
 
-  function generateSummary() {
-    const country = document.getElementById("countrySelect")?.value || "N/A";
+  /* =============================
+     READ USER INPUTS
+  ============================= */
+
+  window.generateSummary = function () {
+    const country = document.getElementById("countrySelect").value;
+    const age = document.getElementById("age").value;
+    const income = document.getElementById("income").value;
+    const healthcare = document.getElementById("healthcare").value;
+    const housing = document.getElementById("housing").value;
+    const banking = document.getElementById("banking").value;
+
+    const output = document.getElementById("output");
+
+    if (!country) {
+      alert("Please select a destination country");
+      return;
+    }
+
+    const data = countryData[country];
 
     output.innerHTML = `
-      <h3>Your Relocation Summary</h3>
+      <h3>📍 ${country} — Relocation Overview</h3>
+
+      <p><strong>Visa Route:</strong><br>${data.visa}</p>
+
+      <p><strong>Tax Position:</strong><br>${data.tax}</p>
+
+      <p><strong>Healthcare:</strong><br>${data.healthcare}</p>
+
+      <hr>
+
+      <p><strong>Your Profile:</strong></p>
       <ul>
-        <li><strong>Country:</strong> ${country}</li>
-        <li><strong>Age:</strong> ${document.getElementById("age")?.value || "-"}</li>
-        <li><strong>Income:</strong> £${document.getElementById("income")?.value || "-"}</li>
-        <li><strong>Healthcare:</strong> ${document.getElementById("healthcare")?.value || "-"}</li>
-        <li><strong>Housing:</strong> ${document.getElementById("housing")?.value || "-"}</li>
-        <li><strong>Banking:</strong> ${document.getElementById("banking")?.value || "-"}</li>
-        <li><strong>Transport:</strong> ${document.getElementById("transport")?.value || "-"}</li>
-        <li><strong>Residency Route:</strong> ${document.getElementById("visa")?.value || "-"}</li>
-        <li><strong>Lifestyle:</strong> ${document.getElementById("lifestyle")?.value || "-"}</li>
-        <li><strong>Risk Tolerance:</strong> ${document.getElementById("risk")?.value || "-"}</li>
+        <li>Age: ${age || "Not specified"}</li>
+        <li>Monthly Income: £${income || "Not specified"}</li>
+        <li>Healthcare Preference: ${healthcare || "Not specified"}</li>
+        <li>Housing Plan: ${housing || "Not specified"}</li>
+        <li>Banking: ${banking || "Not specified"}</li>
+      </ul>
+
+      <hr>
+
+      <p><strong>Next Steps:</strong></p>
+      <ul>
+        <li>Confirm visa eligibility with embassy</li>
+        <li>Plan tax residency timing carefully</li>
+        <li>Arrange healthcare cover before arrival</li>
       </ul>
     `;
-  }
+  };
 
-  nextBtn.addEventListener("click", () => {
-    if (!validatePhase(currentPhase)) return;
-
-    if (currentPhase < phases.length - 1) {
-      currentPhase++;
-      showPhase(currentPhase);
-
-      if (currentPhase === phases.length - 1) {
-        generateSummary();
-      }
-    }
-  });
-
-  backBtn.addEventListener("click", () => {
-    if (currentPhase > 0) {
-      currentPhase--;
-      showPhase(currentPhase);
-    }
-  });
-
-  showPhase(currentPhase);
 });
