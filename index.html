@@ -14,134 +14,151 @@
   <p>The Ultimate Relocation & Relaxation Planner</p>
 </header>
 
-<div class="progress-container">
-  <div id="progress-bar"></div>
-</div>
-<p id="progress-text">Phase 1 of 11</p>
-
-<main id="wizard">
+<main id="app">
 
   <!-- PHASE 1 -->
-  <section class="phase active">
-    <h2>Choose Your Destination</h2>
-    <select id="country">
+  <section class="phase">
+    <h2>Phase 1: Choose Destination Country</h2>
+    <select id="countrySelect">
       <option value="">Select country</option>
-      <option>Portugal</option>
-      <option>Spain</option>
-      <option>France</option>
-      <option>Italy</option>
-      <option>Cyprus</option>
-      <option>Greece</option>
-      <option>UAE</option>
-      <option>Thailand</option>
-      <option>Malaysia</option>
-      <option>Mexico</option>
+      <option value="Portugal">🇵🇹 Portugal</option>
+      <option value="Spain">🇪🇸 Spain</option>
+      <option value="Ireland">🇮🇪 Ireland</option>
+      <option value="Cyprus">🇨🇾 Cyprus</option>
+      <option value="France">🇫🇷 France</option>
+      <option value="Italy">🇮🇹 Italy</option>
+      <option value="UAE">🇦🇪 UAE</option>
+      <option value="Thailand">🇹🇭 Thailand</option>
+      <option value="Malaysia">🇲🇾 Malaysia</option>
+      <option value="Mexico">🇲🇽 Mexico</option>
+      <option value="Panama">🇵🇦 Panama</option>
+      <option value="Greece">🇬🇷 Greece</option>
+      <option value="Hungary">🇭🇺 Hungary</option>
+      <option value="Poland">🇵🇱 Poland</option>
+      <option value="Bulgaria">🇧🇬 Bulgaria</option>
+      <option value="Mauritius">🇲🇺 Mauritius</option>
+      <option value="Ecuador">🇪🇨 Ecuador</option>
+      <option value="Vietnam">🇻🇳 Vietnam</option>
+      <option value="New Zealand">🇳🇿 New Zealand</option>
+      <option value="Australia">🇦🇺 Australia</option>
+      <option value="USA">🇺🇸 USA</option>
     </select>
   </section>
 
   <!-- PHASE 2 -->
   <section class="phase">
-    <h2>Your Age</h2>
+    <h2>Phase 2: Your Age</h2>
     <input type="number" id="age" placeholder="Enter your age">
   </section>
 
   <!-- PHASE 3 -->
   <section class="phase">
-    <h2>Monthly Income (€)</h2>
+    <h2>Phase 3: Monthly Income (£)</h2>
     <input type="number" id="income" placeholder="Monthly income">
   </section>
 
   <!-- PHASE 4 -->
   <section class="phase">
-    <h2>Healthcare Preference</h2>
+    <h2>Phase 4: Healthcare Preference</h2>
     <select id="healthcare">
       <option value="">Select</option>
-      <option>Private</option>
-      <option>Public</option>
-      <option>Mixed</option>
+      <option value="Private">Private</option>
+      <option value="Public">Public</option>
+      <option value="Mixed">Mixed</option>
     </select>
   </section>
 
   <!-- PHASE 5 -->
   <section class="phase">
-    <h2>Housing Plan</h2>
+    <h2>Phase 5: Housing Plan</h2>
     <select id="housing">
       <option value="">Select</option>
-      <option>Rent</option>
-      <option>Buy</option>
-      <option>Undecided</option>
+      <option value="Rent">Rent</option>
+      <option value="Buy">Buy</option>
+      <option value="Undecided">Undecided</option>
     </select>
   </section>
 
   <!-- PHASE 6 -->
   <section class="phase">
-    <h2>Banking Preference</h2>
+    <h2>Phase 6: Banking</h2>
     <select id="banking">
       <option value="">Select</option>
-      <option>UK bank only</option>
-      <option>Local bank</option>
-      <option>Online banks (Wise / Revolut)</option>
-      <option>Combination</option>
+      <option value="UK only">UK only</option>
+      <option value="Local account">Local account</option>
+      <option value="Online banks (Wise/Revolut)">Online banks (Wise / Revolut)</option>
+      <option value="UK + Offshore">UK + Offshore</option>
     </select>
   </section>
 
   <!-- PHASE 7 -->
   <section class="phase">
-    <h2>Transport</h2>
+    <h2>Phase 7: Transport</h2>
     <select id="transport">
       <option value="">Select</option>
-      <option>No car</option>
-      <option>Buy locally</option>
-      <option>Import UK vehicle</option>
+      <option value="No car">No car</option>
+      <option value="Buy locally">Buy locally</option>
+      <option value="Import UK vehicle">Import UK vehicle</option>
     </select>
   </section>
 
   <!-- PHASE 8 -->
   <section class="phase">
-    <h2>Residency Route</h2>
+    <h2>Phase 8: Residency Route</h2>
     <select id="visa">
       <option value="">Select</option>
-      <option>Passive income / retirement</option>
-      <option>Work / self-employed</option>
-      <option>Investment</option>
+      <option value="Passive Income / Retirement">Passive Income / Retirement</option>
+      <option value="Work / Self-employed">Work / Self-employed</option>
+      <option value="Investment">Investment</option>
     </select>
   </section>
 
   <!-- PHASE 9 -->
   <section class="phase">
-    <h2>Lifestyle Preference</h2>
+    <h2>Phase 9: Lifestyle Preference</h2>
     <select id="lifestyle">
       <option value="">Select</option>
-      <option>Quiet / rural</option>
-      <option>City</option>
-      <option>Coastal / island</option>
+      <option value="Quiet / Rural">Quiet / Rural</option>
+      <option value="City">City</option>
+      <option value="Coastal / Island">Coastal / Island</option>
     </select>
   </section>
 
   <!-- PHASE 10 -->
   <section class="phase">
-    <h2>Tax Awareness</h2>
-    <select id="tax">
+    <h2>Phase 10: Risk Tolerance</h2>
+    <select id="risk">
       <option value="">Select</option>
-      <option>Low concern</option>
-      <option>Medium concern</option>
-      <option>High concern</option>
+      <option value="Low">Low</option>
+      <option value="Medium">Medium</option>
+      <option value="High">High</option>
     </select>
   </section>
 
   <!-- PHASE 11 -->
   <section class="phase">
-    <h2>Your Relocation Summary</h2>
+    <h2>Phase 11: Your Relocation Summary</h2>
     <div id="output"></div>
   </section>
 
+  <!-- NAVIGATION -->
+  <div class="navigation">
+    <button id="backBtn">Back</button>
+    <button id="nextBtn">Next</button>
+  </div>
+
+  <!-- PROGRESS -->
+  <div class="progress-container">
+    <div id="progress-bar"></div>
+    <span id="progress-text">Phase 1 of 11</span>
+  </div>
+
 </main>
 
-<div class="nav-buttons">
-  <button id="backBtn">Back</button>
-  <button id="nextBtn">Next</button>
-</div>
+<footer>
+  <p>© 2026 Brits Abroad</p>
+</footer>
 
-<script src="script.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
