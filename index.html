@@ -11,146 +11,136 @@
 
 <header>
   <h1>Brits Abroad 2026</h1>
-  <p>Step-by-step relocation planner</p>
+  <p>The Ultimate Relocation & Relaxation Planner</p>
 </header>
 
-<!-- Progress -->
-<div id="progress-container">
+<div class="progress-container">
   <div id="progress-bar"></div>
 </div>
-<div id="progress-text">0 / 11 completed</div>
+<p id="progress-text">Phase 1 of 11</p>
 
-<main>
+<main id="wizard">
 
   <!-- PHASE 1 -->
-  <section class="phase">
-    <h2 data-phase="1">Phase 1: Choose Destination Country</h2>
+  <section class="phase active">
+    <h2>Choose Your Destination</h2>
     <select id="country">
-      <option value="">Select a country</option>
-      <option value="Portugal">🇵🇹 Portugal</option>
-      <option value="Spain">🇪🇸 Spain</option>
-      <option value="France">🇫🇷 France</option>
-      <option value="Italy">🇮🇹 Italy</option>
-      <option value="Greece">🇬🇷 Greece</option>
-      <option value="Cyprus">🇨🇾 Cyprus</option>
-      <option value="Germany">🇩🇪 Germany</option>
-      <option value="Netherlands">🇳🇱 Netherlands</option>
-      <option value="Malta">🇲🇹 Malta</option>
-      <option value="Ireland">🇮🇪 Ireland</option>
+      <option value="">Select country</option>
+      <option>Portugal</option>
+      <option>Spain</option>
+      <option>France</option>
+      <option>Italy</option>
+      <option>Cyprus</option>
+      <option>Greece</option>
+      <option>UAE</option>
+      <option>Thailand</option>
+      <option>Malaysia</option>
+      <option>Mexico</option>
     </select>
-    <button onclick="savePhase(1)">Save</button>
   </section>
 
   <!-- PHASE 2 -->
   <section class="phase">
-    <h2 data-phase="2">Phase 2: Your Age</h2>
+    <h2>Your Age</h2>
     <input type="number" id="age" placeholder="Enter your age">
-    <button onclick="savePhase(2)">Save</button>
   </section>
 
   <!-- PHASE 3 -->
   <section class="phase">
-    <h2 data-phase="3">Phase 3: Monthly Income</h2>
-    <input type="number" id="income" placeholder="Monthly income (€)">
-    <button onclick="savePhase(3)">Save</button>
+    <h2>Monthly Income (€)</h2>
+    <input type="number" id="income" placeholder="Monthly income">
   </section>
 
   <!-- PHASE 4 -->
   <section class="phase">
-    <h2 data-phase="4">Phase 4: Healthcare Preference</h2>
+    <h2>Healthcare Preference</h2>
     <select id="healthcare">
-      <option value="">Select option</option>
-      <option value="Public">Public healthcare</option>
-      <option value="Private">Private healthcare</option>
-      <option value="Both">Combination</option>
+      <option value="">Select</option>
+      <option>Private</option>
+      <option>Public</option>
+      <option>Mixed</option>
     </select>
-    <button onclick="savePhase(4)">Save</button>
   </section>
 
   <!-- PHASE 5 -->
   <section class="phase">
-    <h2 data-phase="5">Phase 5: Housing Plan</h2>
+    <h2>Housing Plan</h2>
     <select id="housing">
-      <option value="">Select option</option>
-      <option value="Rent">Rent</option>
-      <option value="Buy">Buy</option>
-      <option value="Undecided">Undecided</option>
+      <option value="">Select</option>
+      <option>Rent</option>
+      <option>Buy</option>
+      <option>Undecided</option>
     </select>
-    <button onclick="savePhase(5)">Save</button>
   </section>
 
   <!-- PHASE 6 -->
   <section class="phase">
-    <h2 data-phase="6">Phase 6: Banking</h2>
+    <h2>Banking Preference</h2>
     <select id="banking">
-      <option value="">Select option</option>
-      <option value="Local">Local bank</option>
-      <option value="Online">Online bank (Wise, Revolut)</option>
-      <option value="Both">Both</option>
+      <option value="">Select</option>
+      <option>UK bank only</option>
+      <option>Local bank</option>
+      <option>Online banks (Wise / Revolut)</option>
+      <option>Combination</option>
     </select>
-    <button onclick="savePhase(6)">Save</button>
   </section>
 
   <!-- PHASE 7 -->
   <section class="phase">
-    <h2 data-phase="7">Phase 7: Transport</h2>
+    <h2>Transport</h2>
     <select id="transport">
-      <option value="">Select option</option>
-      <option value="Car">Own a car</option>
-      <option value="Public">Public transport</option>
-      <option value="Both">Both</option>
+      <option value="">Select</option>
+      <option>No car</option>
+      <option>Buy locally</option>
+      <option>Import UK vehicle</option>
     </select>
-    <button onclick="savePhase(7)">Save</button>
   </section>
 
   <!-- PHASE 8 -->
   <section class="phase">
-    <h2 data-phase="8">Phase 8: Visa / Residency</h2>
+    <h2>Residency Route</h2>
     <select id="visa">
-      <option value="">Select option</option>
-      <option value="Tourist">Tourist stay</option>
-      <option value="Residency">Residency permit</option>
-      <option value="Undecided">Undecided</option>
+      <option value="">Select</option>
+      <option>Passive income / retirement</option>
+      <option>Work / self-employed</option>
+      <option>Investment</option>
     </select>
-    <button onclick="savePhase(8)">Save</button>
   </section>
 
   <!-- PHASE 9 -->
   <section class="phase">
-    <h2 data-phase="9">Phase 9: Lifestyle Priority</h2>
+    <h2>Lifestyle Preference</h2>
     <select id="lifestyle">
-      <option value="">Select option</option>
-      <option value="Beach">Beach</option>
-      <option value="City">City</option>
-      <option value="Rural">Rural</option>
+      <option value="">Select</option>
+      <option>Quiet / rural</option>
+      <option>City</option>
+      <option>Coastal / island</option>
     </select>
-    <button onclick="savePhase(9)">Save</button>
   </section>
 
   <!-- PHASE 10 -->
   <section class="phase">
-    <h2 data-phase="10">Phase 10: Legal & Tax Awareness</h2>
+    <h2>Tax Awareness</h2>
     <select id="tax">
-      <option value="">Select option</option>
-      <option value="Aware">Already aware</option>
-      <option value="Learning">Learning</option>
-      <option value="NeedHelp">Need help</option>
+      <option value="">Select</option>
+      <option>Low concern</option>
+      <option>Medium concern</option>
+      <option>High concern</option>
     </select>
-    <button onclick="savePhase(10)">Save</button>
   </section>
 
   <!-- PHASE 11 -->
   <section class="phase">
-    <h2 data-phase="11">Phase 11: Summary</h2>
-    <button onclick="generateSummary()">Generate Summary</button>
+    <h2>Your Relocation Summary</h2>
     <div id="output"></div>
   </section>
 
 </main>
 
-<footer>
-  © 2026 Brits Abroad Planner
-</footer>
+<div class="nav-buttons">
+  <button id="backBtn">Back</button>
+  <button id="nextBtn">Next</button>
+</div>
 
 <script src="script.js"></script>
 </body>
