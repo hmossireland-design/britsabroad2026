@@ -1,151 +1,85 @@
-/* RESET */
-* {
-  box-sizing: border-box;
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f6f8;
   margin: 0;
   padding: 0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
 }
 
-/* BODY */
-body {
-  background: linear-gradient(180deg, #f4f7fb, #e9eef5);
-  color: #222;
-  line-height: 1.5;
-}
-
-/* HEADER */
 header {
-  text-align: center;
-  padding: 30px 20px;
-  background: linear-gradient(135deg, #003366, #0057a8);
+  background: #0b5ed7;
   color: white;
+  text-align: center;
+  padding: 20px;
 }
 
-header h1 {
-  font-size: 2rem;
-}
-
-header p {
-  opacity: 0.9;
-}
-
-/* PROGRESS */
-#progress-container {
+.progress-container {
   width: 90%;
-  max-width: 800px;
-  height: 12px;
-  background: #d9e2ef;
-  border-radius: 20px;
-  margin: 20px auto 6px auto;
-  overflow: hidden;
+  height: 10px;
+  background: #ddd;
+  margin: 20px auto;
+  border-radius: 5px;
 }
 
 #progress-bar {
   height: 100%;
   width: 0%;
-  background: linear-gradient(90deg, #00c853, #64dd17);
-  transition: width 0.4s ease;
+  background: #28a745;
+  border-radius: 5px;
+  transition: width 0.3s;
 }
 
 #progress-text {
   text-align: center;
-  font-size: 0.85rem;
-  color: #555;
+  margin-bottom: 10px;
 }
 
-/* MAIN */
-main {
-  width: 95%;
-  max-width: 900px;
-  margin: auto;
-  padding-bottom: 60px;
-}
-
-/* PHASE CARDS */
 .phase {
+  display: none;
   background: white;
-  border-radius: 14px;
-  padding: 22px;
-  margin-bottom: 20px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-  border-left: 6px solid #0057a8;
-}
-
-/* PHASE TITLES */
-.phase h2 {
-  font-size: 1.2rem;
-  margin-bottom: 14px;
-  color: #003366;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-/* ICONS PER PHASE */
-.phase h2::before {
-  font-size: 1.4rem;
-}
-
-.phase h2[data-phase="1"]::before { content: "🌍"; }
-.phase h2[data-phase="2"]::before { content: "🎂"; }
-.phase h2[data-phase="3"]::before { content: "💷"; }
-.phase h2[data-phase="4"]::before { content: "🏥"; }
-.phase h2[data-phase="5"]::before { content: "🏠"; }
-.phase h2[data-phase="6"]::before { content: "🏦"; }
-.phase h2[data-phase="7"]::before { content: "🚗"; }
-.phase h2[data-phase="8"]::before { content: "🛂"; }
-.phase h2[data-phase="9"]::before { content: "🌴"; }
-.phase h2[data-phase="10"]::before { content: "⚖️"; }
-.phase h2[data-phase="11"]::before { content: "📋"; }
-
-/* INPUTS */
-input,
-select {
-  width: 100%;
-  padding: 12px;
-  font-size: 1rem;
+  padding: 25px;
+  margin: 20px auto;
+  width: 90%;
+  max-width: 500px;
   border-radius: 10px;
-  border: 1px solid #ccc;
-  background: #f9fbff;
 }
 
-input:focus,
-select:focus {
-  outline: none;
-  border-color: #0057a8;
-  box-shadow: 0 0 0 2px rgba(0,87,168,0.15);
+.phase.active {
+  display: block;
 }
 
-/* BUTTON */
-button {
-  margin-top: 12px;
-  padding: 14px;
+select, input {
   width: 100%;
-  border-radius: 12px;
+  padding: 10px;
+  margin-top: 15px;
+  font-size: 16px;
+}
+
+.nav-buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  max-width: 500px;
+  margin: 20px auto;
+}
+
+button {
+  padding: 12px 20px;
+  font-size: 16px;
   border: none;
-  font-size: 1rem;
-  font-weight: 600;
-  background: linear-gradient(135deg, #00c853, #64dd17);
+  border-radius: 6px;
   cursor: pointer;
 }
 
-button:hover {
-  transform: translateY(-1px);
+#nextBtn {
+  background: #0b5ed7;
+  color: white;
 }
 
-/* SUMMARY */
+#backBtn {
+  background: #6c757d;
+  color: white;
+}
+
 #output {
-  margin-top: 18px;
-  padding: 18px;
-  border-radius: 12px;
-  background: #f1f8ff;
-  border-left: 6px solid #00c853;
-}
-
-/* FOOTER */
-footer {
-  text-align: center;
-  padding: 25px;
-  font-size: 0.8rem;
-  color: #666;
+  line-height: 1.6;
 }
