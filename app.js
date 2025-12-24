@@ -1,95 +1,55 @@
-// ===== GLOBAL STATE =====
-const totalPhases = 11;
-let completedPhases = new Set();
-
-// ===== ELEMENTS =====
+const phases = document.querySelectorAll(".phase");
+const nextBtn = document.getElementById("nextBtn");
+const backBtn = document.getElementById("backBtn");
 const progressBar = document.getElementById("progress-bar");
 const progressText = document.getElementById("progress-text");
 const output = document.getElementById("output");
 
-// ===== UPDATE PROGRESS =====
-function updateProgress() {
-  const completed = completedPhases.size;
-  const percent = (completed / totalPhases) * 100;
+let currentPhase = 0;
+const totalPhases = phases.length;
 
-  progressBar.style.width = percent + "%";
-  progressText.innerText = `${completed} / ${totalPhases} completed`;
+function showPhase(index) {
+  phases.forEach(p => p.classList.remove("active"));
+  phases[index].classList.add("active");
+
+  progressBar.style.width = ((index) / (totalPhases - 1)) * 100 + "%";
+  progressText.innerText = `Phase ${index + 1} of ${totalPhases}`;
+
+  backBtn.style.display = index === 0 ? "none" : "inline-block";
+  nextBtn.innerText = index === totalPhases - 1 ? "Finish" : "Next";
 }
 
-// ===== SAVE PHASE =====
-function savePhase(phaseNumber) {
-  let valid = false;
-
-  switch (phaseNumber) {
-    case 1:
-      valid = document.getElementById("country").value !== "";
-      break;
-    case 2:
-      valid = document.getElementById("age").value !== "";
-      break;
-    case 3:
-      valid = document.getElementById("income").value !== "";
-      break;
-    case 4:
-      valid = document.getElementById("healthcare").value !== "";
-      break;
-    case 5:
-      valid = document.getElementById("housing").value !== "";
-      break;
-    case 6:
-      valid = document.getElementById("banking").value !== "";
-      break;
-    case 7:
-      valid = document.getElementById("transport").value !== "";
-      break;
-    case 8:
-      valid = document.getElementById("visa").value !== "";
-      break;
-    case 9:
-      valid = document.getElementById("lifestyle").value !== "";
-      break;
-    case 10:
-      valid = document.getElementById("tax").value !== "";
-      break;
-  }
-
-  if (!valid) {
-    alert("Please complete this phase before saving.");
-    return;
-  }
-
-  completedPhases.add(phaseNumber);
-  updateProgress();
-}
-
-// ===== GENERATE SUMMARY =====
 function generateSummary() {
-  if (completedPhases.size < totalPhases - 1) {
-    alert("Please complete all phases before generating your summary.");
-    return;
-  }
-
-  const summary = `
-    <h3>Your Relocation Summary</h3>
+  output.innerHTML = `
+    <h3>Your Plan</h3>
     <ul>
-      <li><strong>Destination:</strong> ${document.getElementById("country").value}</li>
-      <li><strong>Age:</strong> ${document.getElementById("age").value}</li>
-      <li><strong>Monthly Income:</strong> €${document.getElementById("income").value}</li>
-      <li><strong>Healthcare:</strong> ${document.getElementById("healthcare").value}</li>
-      <li><strong>Housing:</strong> ${document.getElementById("housing").value}</li>
-      <li><strong>Banking:</strong> ${document.getElementById("banking").value}</li>
-      <li><strong>Transport:</strong> ${document.getElementById("transport").value}</li>
-      <li><strong>Residency:</strong> ${document.getElementById("visa").value}</li>
-      <li><strong>Lifestyle:</strong> ${document.getElementById("lifestyle").value}</li>
-      <li><strong>Tax Awareness:</strong> ${document.getElementById("tax").value}</li>
+      <li><strong>Country:</strong> ${country.value}</li>
+      <li><strong>Age:</strong> ${age.value}</li>
+      <li><strong>Income:</strong> €${income.value}</li>
+      <li><strong>Healthcare:</strong> ${healthcare.value}</li>
+      <li><strong>Housing:</strong> ${housing.value}</li>
+      <li><strong>Banking:</strong> ${banking.value}</li>
+      <li><strong>Transport:</strong> ${transport.value}</li>
+      <li><strong>Residency:</strong> ${visa.value}</li>
+      <li><strong>Lifestyle:</strong> ${lifestyle.value}</li>
+      <li><strong>Tax Focus:</strong> ${tax.value}</li>
     </ul>
-    <p><em>This is a planning guide, not legal or tax advice.</em></p>
   `;
-
-  output.innerHTML = summary;
-  completedPhases.add(11);
-  updateProgress();
 }
 
-// ===== INITIALISE =====
-updateProgress();
+nextBtn.addEventListener("click", () => {
+  if (currentPhase < totalPhases - 1) {
+    currentPhase++;
+    if (currentPhase === totalPhases - 1) generateSummary();
+    showPhase(currentPhase);
+  }
+});
+
+backBtn.addEventListener("click", () => {
+  if (currentPhase > 0) {
+    currentPhase--;
+    showPhase(currentPhase);
+  }
+});
+
+showPhase(currentPhase);
