@@ -8,18 +8,21 @@
 </head>
 
 <body>
+
 <header>
   <h1>Brits Abroad 2026</h1>
   <p>The Ultimate Relocation & Relaxation Planner</p>
 </header>
 
+<!-- PROGRESS -->
 <div id="progress-container">
   <div id="progress-bar"></div>
-  <span id="progress-text">0 / 11 completed</span>
 </div>
+<div id="progress-text">0 / 10 completed</div>
 
 <main id="app">
-  <!-- Phase 1: Choose Destination -->
+
+  <!-- PHASE 1 -->
   <section class="phase">
     <h2>Phase 1: Choose Destination Country</h2>
     <select id="countrySelect">
@@ -27,19 +30,19 @@
     </select>
   </section>
 
-  <!-- Phase 2: Age -->
+  <!-- PHASE 2 -->
   <section class="phase">
-    <h2>Phase 2: Age</h2>
-    <input type="number" id="age" placeholder="Your age">
+    <h2>Phase 2: Your Age</h2>
+    <input type="number" id="age" placeholder="Enter your age">
   </section>
 
-  <!-- Phase 3: Monthly Income -->
+  <!-- PHASE 3 -->
   <section class="phase">
     <h2>Phase 3: Monthly Income (£)</h2>
-    <input type="number" id="income" placeholder="Monthly income">
+    <input type="number" id="income" placeholder="Enter monthly income">
   </section>
 
-  <!-- Phase 4: Healthcare -->
+  <!-- PHASE 4 -->
   <section class="phase">
     <h2>Phase 4: Healthcare Preference</h2>
     <select id="healthcare">
@@ -50,7 +53,7 @@
     </select>
   </section>
 
-  <!-- Phase 5: Housing -->
+  <!-- PHASE 5 -->
   <section class="phase">
     <h2>Phase 5: Housing Plan</h2>
     <select id="housing">
@@ -61,19 +64,19 @@
     </select>
   </section>
 
-  <!-- Phase 6: Banking -->
+  <!-- PHASE 6 -->
   <section class="phase">
-    <h2>Phase 6: Banking</h2>
+    <h2>Phase 6: Banking Setup</h2>
     <select id="banking">
       <option value="">Select</option>
-      <option>UK only</option>
-      <option>Local account</option>
-      <option>UK + Offshore</option>
-      <option>Online banks (Wise/Revolut)</option>
+      <option>UK bank only</option>
+      <option>Local bank account</option>
+      <option>Online banks (Wise / Revolut)</option>
+      <option>Combination (UK + Offshore)</option>
     </select>
   </section>
 
-  <!-- Phase 7: Transport -->
+  <!-- PHASE 7 -->
   <section class="phase">
     <h2>Phase 7: Transport</h2>
     <select id="transport">
@@ -84,7 +87,7 @@
     </select>
   </section>
 
-  <!-- Phase 8: Residency Route -->
+  <!-- PHASE 8 -->
   <section class="phase">
     <h2>Phase 8: Residency Route</h2>
     <select id="visa">
@@ -95,7 +98,7 @@
     </select>
   </section>
 
-  <!-- Phase 9: Lifestyle -->
+  <!-- PHASE 9 -->
   <section class="phase">
     <h2>Phase 9: Lifestyle Preference</h2>
     <select id="lifestyle">
@@ -106,7 +109,7 @@
     </select>
   </section>
 
-  <!-- Phase 10: Risk -->
+  <!-- PHASE 10 -->
   <section class="phase">
     <h2>Phase 10: Risk Tolerance</h2>
     <select id="risk">
@@ -117,7 +120,7 @@
     </select>
   </section>
 
-  <!-- Phase 11: Summary -->
+  <!-- PHASE 11 -->
   <section class="phase">
     <h2>Phase 11: Your Relocation Summary</h2>
     <button onclick="generateSummary()">Generate My Summary</button>
