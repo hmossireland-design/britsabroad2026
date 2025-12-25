@@ -4,11 +4,8 @@
   <meta charset="UTF-8">
   <title>Brits Abroad 2026</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!-- MAIN STYLES -->
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <header class="site-header">
@@ -19,55 +16,35 @@
 <main id="app">
 
   <!-- PROGRESS BAR -->
-  <div class="progress-container">
-    <div id="progressBar" class="progress-bar"></div>
-    <div id="progressText">0 / 11 phases completed</div>
+  <div id="progress-container">
+    <div id="progress-bar"></div>
+    <span id="progress-text">0 / 11 completed</span>
   </div>
 
   <!-- PHASE 1 -->
-  <section class="phase">
+  <section class="phase" id="phase-country">
     <h2>Phase 1: Choose Your Destination</h2>
-    <select id="countrySelect" onchange="updateProgressBar()">
+    <select id="countrySelect">
       <option value="">Select a country</option>
-      <option value="Portugal">🇵🇹 Portugal</option>
-      <option value="Spain">🇪🇸 Spain</option>
-      <option value="Ireland">🇮🇪 Ireland</option>
-      <option value="Cyprus">🇨🇾 Cyprus</option>
-      <option value="Malta">🇲🇹 Malta</option>
-      <option value="France">🇫🇷 France</option>
-      <option value="UAE">🇦🇪 UAE</option>
-      <option value="Thailand">🇹🇭 Thailand</option>
-      <option value="Italy">🇮🇹 Italy</option>
-      <option value="Greece">🇬🇷 Greece</option>
-      <option value="Canada">🇨🇦 Canada</option>
-      <option value="New Zealand">🇳🇿 New Zealand</option>
-      <option value="Malaysia">🇲🇾 Malaysia</option>
-      <option value="Panama">🇵🇦 Panama</option>
-      <option value="Mexico">🇲🇽 Mexico</option>
-      <option value="Costa Rica">🇨🇷 Costa Rica</option>
-      <option value="Hungary">🇭🇺 Hungary</option>
-      <option value="Poland">🇵🇱 Poland</option>
-      <option value="Slovenia">🇸🇮 Slovenia</option>
-      <option value="Slovakia">🇸🇰 Slovakia</option>
     </select>
   </section>
 
   <!-- PHASE 2 -->
-  <section class="phase">
+  <section class="phase" id="phase-age">
     <h2>Phase 2: Your Age</h2>
-    <input type="number" id="age" placeholder="Enter your age" oninput="updateProgressBar()">
+    <input type="number" id="age" placeholder="Enter your age">
   </section>
 
   <!-- PHASE 3 -->
-  <section class="phase">
+  <section class="phase" id="phase-income">
     <h2>Phase 3: Monthly Income (£)</h2>
-    <input type="number" id="income" placeholder="Monthly income in GBP" oninput="updateProgressBar()">
+    <input type="number" id="income" placeholder="Monthly income in GBP">
   </section>
 
   <!-- PHASE 4 -->
-  <section class="phase">
+  <section class="phase" id="phase-healthcare">
     <h2>Phase 4: Healthcare Preference</h2>
-    <select id="healthcare" onchange="updateProgressBar()">
+    <select id="healthcare">
       <option value="">Select</option>
       <option value="Private">Private</option>
       <option value="Public">Public</option>
@@ -76,9 +53,9 @@
   </section>
 
   <!-- PHASE 5 -->
-  <section class="phase">
+  <section class="phase" id="phase-housing">
     <h2>Phase 5: Housing Plan</h2>
-    <select id="housing" onchange="updateProgressBar()">
+    <select id="housing">
       <option value="">Select</option>
       <option value="Rent">Rent</option>
       <option value="Buy">Buy</option>
@@ -87,9 +64,9 @@
   </section>
 
   <!-- PHASE 6 -->
-  <section class="phase">
+  <section class="phase" id="phase-banking">
     <h2>Phase 6: Banking Setup</h2>
-    <select id="banking" onchange="updateProgressBar()">
+    <select id="banking">
       <option value="">Select</option>
       <option value="UK only">UK bank only</option>
       <option value="Local account">Local bank account</option>
@@ -99,9 +76,9 @@
   </section>
 
   <!-- PHASE 7 -->
-  <section class="phase">
+  <section class="phase" id="phase-transport">
     <h2>Phase 7: Transport</h2>
-    <select id="transport" onchange="updateProgressBar()">
+    <select id="transport">
       <option value="">Select</option>
       <option value="No car">No car</option>
       <option value="Buy locally">Buy locally</option>
@@ -110,9 +87,9 @@
   </section>
 
   <!-- PHASE 8 -->
-  <section class="phase">
+  <section class="phase" id="phase-visa">
     <h2>Phase 8: Residency Route</h2>
-    <select id="visa" onchange="updateProgressBar()">
+    <select id="visa">
       <option value="">Select</option>
       <option value="Passive income / Retirement">Passive income / Retirement</option>
       <option value="Work / Self-employed">Work / Self-employed</option>
@@ -121,9 +98,9 @@
   </section>
 
   <!-- PHASE 9 -->
-  <section class="phase">
+  <section class="phase" id="phase-lifestyle">
     <h2>Phase 9: Lifestyle Preference</h2>
-    <select id="lifestyle" onchange="updateProgressBar()">
+    <select id="lifestyle">
       <option value="">Select</option>
       <option value="Quiet / Rural">Quiet / Rural</option>
       <option value="City">City</option>
@@ -132,9 +109,9 @@
   </section>
 
   <!-- PHASE 10 -->
-  <section class="phase">
+  <section class="phase" id="phase-risk">
     <h2>Phase 10: Risk Tolerance</h2>
-    <select id="risk" onchange="updateProgressBar()">
+    <select id="risk">
       <option value="">Select</option>
       <option value="Low">Low</option>
       <option value="Medium">Medium</option>
@@ -143,16 +120,10 @@
   </section>
 
   <!-- PHASE 11 -->
-  <section class="phase">
+  <section class="phase" id="phase-summary">
     <h2>Phase 11: Your Relocation Summary</h2>
-
-    <button class="primary-btn" onclick="generateSummary()">
-      Generate My Summary
-    </button>
-
-    <div id="output" class="summary-box">
-      <!-- Summary appears here -->
-    </div>
+    <button class="primary-btn" onclick="generateSummary()">Generate My Summary</button>
+    <div id="output" class="summary-box"></div>
   </section>
 
 </main>
@@ -161,8 +132,6 @@
   <p>© 2026 Brits Abroad</p>
 </footer>
 
-<!-- MAIN SCRIPT -->
 <script src="app.js"></script>
-
 </body>
 </html>
