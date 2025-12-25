@@ -1,28 +1,61 @@
-const phases = [
-  "countrySelect","age","income","healthcare","housing",
-  "banking","transport","visa","lifestyle","risk"
+// Countries list
+const countries = [
+  { name: "Portugal", flag: "🇵🇹" },
+  { name: "Spain", flag: "🇪🇸" },
+  { name: "Ireland", flag: "🇮🇪" },
+  { name: "Australia", flag: "🇦🇺" },
+  { name: "Cyprus", flag: "🇨🇾" },
+  { name: "Malta", flag: "🇲🇹" },
+  { name: "France", flag: "🇫🇷" },
+  { name: "UAE", flag: "🇦🇪" },
+  { name: "Thailand", flag: "🇹🇭" },
+  { name: "Italy", flag: "🇮🇹" },
+  { name: "Greece", flag: "🇬🇷" },
+  { name: "Canada", flag: "🇨🇦" },
+  { name: "New Zealand", flag: "🇳🇿" },
+  { name: "Malaysia", flag: "🇲🇾" },
+  { name: "Panama", flag: "🇵🇦" },
+  { name: "Mexico", flag: "🇲🇽" },
+  { name: "Costa Rica", flag: "🇨🇷" },
+  { name: "Hungary", flag: "🇭🇺" },
+  { name: "Poland", flag: "🇵🇱" },
+  { name: "Slovakia", flag: "🇸🇰" }
 ];
 
-function updateProgressBar() {
+// Populate country dropdown
+const countrySelect = document.getElementById("countrySelect");
+countries.forEach(c => {
+  const option = document.createElement("option");
+  option.value = c.name;
+  option.textContent = `${c.flag} ${c.name}`;
+  countrySelect.appendChild(option);
+});
+
+// Track progress
+const totalPhases = 11;
+
+function updateProgress() {
   let completed = 0;
-  phases.forEach(id => {
-    const el = document.getElementById(id);
-    const section = el.closest(".phase");
-    if (!el) return;
-    if ((el.tagName==="SELECT" || el.tagName==="INPUT") && el.value) {
+  for (let i = 1; i <= totalPhases; i++) {
+    const el = document.querySelector(`#phase-${i}`) || document.querySelector(`#phase-country`);
+    if (el && el.querySelector("input, select")?.value) {
+      el.classList.add("completed");
       completed++;
-      section.classList.add("completed");
-    } else {
-      section.classList.remove("completed");
     }
-  });
-  const percent = (completed / phases.length) * 100;
-  document.getElementById("progressBar").style.width = percent + "%";
-  document.getElementById("progressText").textContent = `${completed} / ${phases.length} phases completed`;
+  }
+  const percent = (completed / totalPhases) * 100;
+  document.getElementById("progress-bar").style.width = `${percent}%`;
+  document.getElementById("progress-text").textContent = `${completed} / ${totalPhases} completed`;
 }
 
+// Add event listeners to update progress
+document.querySelectorAll("input, select").forEach(el => {
+  el.addEventListener("change", updateProgress);
+});
+
+// Generate relocation summary
 function generateSummary() {
-  const country = document.getElementById("countrySelect").value;
+  const country = countrySelect.value;
   const age = document.getElementById("age").value;
   const income = document.getElementById("income").value;
   const healthcare = document.getElementById("healthcare").value;
@@ -33,22 +66,18 @@ function generateSummary() {
   const lifestyle = document.getElementById("lifestyle").value;
   const risk = document.getElementById("risk").value;
 
-  const summary = `
-    <h3>Relocation Summary</h3>
-    <p><strong>Destination:</strong> ${country}</p>
-    <p><strong>Age:</strong> ${age}</p>
-    <p><strong>Income:</strong> £${income}</p>
-    <p><strong>Healthcare:</strong> ${healthcare}</p>
-    <p><strong>Housing:</strong> ${housing}</p>
-    <p><strong>Banking:</strong> ${banking}</p>
-    <p><strong>Transport:</strong> ${transport}</p>
-    <p><strong>Residency Route:</strong> ${visa}</p>
-    <p><strong>Lifestyle Preference:</strong> ${lifestyle}</p>
-    <p><strong>Risk Tolerance:</strong> ${risk}</p>
-    <p>Next steps will include visa rules, tax exposure, and healthcare setup specific to ${country}.</p>
+  const output = `
+    <h3>Relocation Summary for ${country}</h3>
+    <p>Age: ${age}</p>
+    <p>Monthly Income: £${income}</p>
+    <p>Healthcare Preference: ${healthcare}</p>
+    <p>Housing Plan: ${housing}</p>
+    <p>Banking Setup: ${banking}</p>
+    <p>Transport: ${transport}</p>
+    <p>Residency Route: ${visa}</p>
+    <p>Lifestyle Preference: ${lifestyle}</p>
+    <p>Risk Tolerance: ${risk}</p>
   `;
-  document.getElementById("output").innerHTML = summary;
-}
 
-// Initialize progress bar on page load
-updateProgressBar();
+  document.getElementById("output").innerHTML = output;
+}
