@@ -1,92 +1,130 @@
-body {
-  font-family: Arial, sans-serif;
+/* RESET */
+* {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  background: #f8f9fa;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* PAGE */
+body {
+  background: #f4f6f8;
   color: #333;
 }
 
-header.site-header, footer.site-footer {
-  text-align: center;
-  padding: 15px;
-  background-color: #003366;
+/* HEADER */
+.site-header {
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
   color: white;
+  padding: 24px 16px;
+  text-align: center;
 }
 
-h1, h2 {
-  margin: 0 0 10px 0;
+.site-header h1 {
+  font-size: 1.8rem;
+  margin-bottom: 6px;
 }
 
-main {
-  max-width: 800px;
-  margin: 20px auto;
-  padding: 0 15px;
+.site-header p {
+  opacity: 0.9;
+  font-size: 0.95rem;
 }
 
-.phase {
-  background: linear-gradient(to bottom right, #f0f8ff, #e6f2ff);
-  border-radius: 12px;
-  padding: 20px;
-  margin-bottom: 20px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-  transition: transform 0.2s, background 0.3s;
+/* PROGRESS BAR */
+.progress-container {
+  margin-top: 16px;
 }
 
-.phase:hover {
-  transform: translateY(-3px);
+.progress-info {
+  font-size: 0.85rem;
+  margin-bottom: 6px;
 }
 
-.phase.completed {
-  background: linear-gradient(to right, #d4edda, #c3e6cb);
-  border-color: #28a745;
-}
-
-.phase h2::before {
-  content: "📌"; 
-  margin-right: 8px;
-}
-
-#progress-container {
-  background: #e0e0e0;
-  border-radius: 20px;
+.progress-track {
+  background: rgba(255,255,255,0.3);
+  height: 10px;
+  border-radius: 6px;
   overflow: hidden;
-  margin-bottom: 20px;
-  position: relative;
 }
 
 #progress-bar {
-  height: 20px;
+  height: 100%;
   width: 0%;
-  background-color: #28a745;
-  transition: width 0.3s;
+  background: #4caf50;
+  transition: width 0.3s ease;
 }
 
-#progress-text {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  font-weight: bold;
-  line-height: 20px;
+/* MAIN */
+#app {
+  max-width: 850px;
+  margin: 24px auto;
+  padding: 0 12px 40px;
 }
 
+/* PHASE CARDS */
+.phase {
+  background: white;
+  border-radius: 12px;
+  padding: 18px;
+  margin-bottom: 18px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.phase h2 {
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+  color: #1e3c72;
+}
+
+/* INPUTS */
+input,
+select {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #2a5298;
+}
+
+/* BUTTON */
 .primary-btn {
-  background-color: #28a745;
+  background: #4caf50;
   color: white;
-  padding: 10px 15px;
   border: none;
-  border-radius: 6px;
+  padding: 14px 18px;
+  border-radius: 10px;
+  font-size: 1rem;
   cursor: pointer;
+  width: 100%;
 }
 
 .primary-btn:hover {
-  background-color: #218838;
+  background: #43a047;
 }
 
+/* SUMMARY */
 .summary-box {
-  margin-top: 15px;
-  padding: 15px;
-  background-color: #fff;
-  border-radius: 10px;
-  border: 1px solid #ddd;
+  margin-top: 16px;
+  padding: 16px;
+  background: #f1f8f4;
+  border-left: 5px solid #4caf50;
+  border-radius: 8px;
+}
+
+.summary-box h3 {
+  margin-bottom: 10px;
+}
+
+/* FOOTER */
+.site-footer {
+  text-align: center;
+  padding: 18px;
+  font-size: 0.85rem;
+  color: #777;
 }
