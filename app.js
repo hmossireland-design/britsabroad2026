@@ -1,83 +1,108 @@
-// Countries list
-const countries = [
-  { name: "Portugal", flag: "🇵🇹" },
-  { name: "Spain", flag: "🇪🇸" },
-  { name: "Ireland", flag: "🇮🇪" },
-  { name: "Australia", flag: "🇦🇺" },
-  { name: "Cyprus", flag: "🇨🇾" },
-  { name: "Malta", flag: "🇲🇹" },
-  { name: "France", flag: "🇫🇷" },
-  { name: "UAE", flag: "🇦🇪" },
-  { name: "Thailand", flag: "🇹🇭" },
-  { name: "Italy", flag: "🇮🇹" },
-  { name: "Greece", flag: "🇬🇷" },
-  { name: "Canada", flag: "🇨🇦" },
-  { name: "New Zealand", flag: "🇳🇿" },
-  { name: "Malaysia", flag: "🇲🇾" },
-  { name: "Panama", flag: "🇵🇦" },
-  { name: "Mexico", flag: "🇲🇽" },
-  { name: "Costa Rica", flag: "🇨🇷" },
-  { name: "Hungary", flag: "🇭🇺" },
-  { name: "Poland", flag: "🇵🇱" },
-  { name: "Slovakia", flag: "🇸🇰" }
-];
+document.addEventListener("DOMContentLoaded", () => {
 
-// Populate country dropdown
-const countrySelect = document.getElementById("countrySelect");
-countries.forEach(c => {
-  const option = document.createElement("option");
-  option.value = c.name;
-  option.textContent = `${c.flag} ${c.name}`;
-  countrySelect.appendChild(option);
-});
+  /* ===============================
+     COUNTRY DATA
+  =============================== */
 
-// Track progress
-const totalPhases = 11;
+  const countries = [
+    { name: "Portugal", flag: "🇵🇹" },
+    { name: "Spain", flag: "🇪🇸" },
+    { name: "France", flag: "🇫🇷" },
+    { name: "Ireland", flag: "🇮🇪" },
+    { name: "Italy", flag: "🇮🇹" },
+    { name: "Greece", flag: "🇬🇷" },
+    { name: "Cyprus", flag: "🇨🇾" },
+    { name: "Malta", flag: "🇲🇹" },
+    { name: "UAE", flag: "🇦🇪" },
+    { name: "Thailand", flag: "🇹🇭" },
+    { name: "Malaysia", flag: "🇲🇾" },
+    { name: "Australia", flag: "🇦🇺" },
+    { name: "New Zealand", flag: "🇳🇿" },
+    { name: "Canada", flag: "🇨🇦" },
+    { name: "Mexico", flag: "🇲🇽" },
+    { name: "Costa Rica", flag: "🇨🇷" },
+    { name: "Panama", flag: "🇵🇦" },
+    { name: "Hungary", flag: "🇭🇺" },
+    { name: "Poland", flag: "🇵🇱" },
+    { name: "Slovakia", flag: "🇸🇰" }
+  ];
 
-function updateProgress() {
-  let completed = 0;
-  for (let i = 1; i <= totalPhases; i++) {
-    const el = document.querySelector(`#phase-${i}`) || document.querySelector(`#phase-country`);
-    if (el && el.querySelector("input, select")?.value) {
-      el.classList.add("completed");
-      completed++;
-    }
+  /* ===============================
+     POPULATE COUNTRY DROPDOWN
+  =============================== */
+
+  const countrySelect = document.getElementById("countrySelect");
+
+  if (!countrySelect) {
+    console.error("❌ countrySelect not found in DOM");
+    return;
   }
-  const percent = (completed / totalPhases) * 100;
-  document.getElementById("progress-bar").style.width = `${percent}%`;
-  document.getElementById("progress-text").textContent = `${completed} / ${totalPhases} completed`;
-}
 
-// Add event listeners to update progress
-document.querySelectorAll("input, select").forEach(el => {
-  el.addEventListener("change", updateProgress);
+  // Clear any cached options (important!)
+  countrySelect.innerHTML = `<option value="">Select a country</option>`;
+
+  countries.forEach(country => {
+    const option = document.createElement("option");
+    option.value = country.name;
+    option.textContent = `${country.flag} ${country.name}`;
+    countrySelect.appendChild(option);
+  });
+
+  console.log("✅ Countries injected:", countries.length);
+
+  /* ===============================
+     PROGRESS BAR LOGIC
+  =============================== */
+
+  const totalPhases = 11;
+
+  function updateProgress() {
+    let completed = 0;
+
+    const fields = [
+      "countrySelect","age","income","healthcare","housing",
+      "banking","transport","visa","lifestyle","risk"
+    ];
+
+    fields.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && el.value) completed++;
+    });
+
+    const percent = Math.round((completed / totalPhases) * 100);
+
+    document.getElementById("progress-bar").style.width = percent + "%";
+    document.getElementById("progress-text").textContent =
+      `${completed} / ${totalPhases} completed`;
+  }
+
+  document.querySelectorAll("input, select").forEach(el => {
+    el.addEventListener("change", updateProgress);
+  });
+
+  /* ===============================
+     SUMMARY GENERATION
+  =============================== */
+
+  window.generateSummary = function () {
+
+    const get = id => document.getElementById(id)?.value || "Not specified";
+
+    const summaryHTML = `
+      <h3>Relocation Summary</h3>
+      <p><strong>Destination:</strong> ${get("countrySelect")}</p>
+      <p><strong>Age:</strong> ${get("age")}</p>
+      <p><strong>Monthly Income:</strong> £${get("income")}</p>
+      <p><strong>Healthcare:</strong> ${get("healthcare")}</p>
+      <p><strong>Housing:</strong> ${get("housing")}</p>
+      <p><strong>Banking:</strong> ${get("banking")}</p>
+      <p><strong>Transport:</strong> ${get("transport")}</p>
+      <p><strong>Residency Route:</strong> ${get("visa")}</p>
+      <p><strong>Lifestyle:</strong> ${get("lifestyle")}</p>
+      <p><strong>Risk Tolerance:</strong> ${get("risk")}</p>
+    `;
+
+    document.getElementById("output").innerHTML = summaryHTML;
+  };
+
 });
-
-// Generate relocation summary
-function generateSummary() {
-  const country = countrySelect.value;
-  const age = document.getElementById("age").value;
-  const income = document.getElementById("income").value;
-  const healthcare = document.getElementById("healthcare").value;
-  const housing = document.getElementById("housing").value;
-  const banking = document.getElementById("banking").value;
-  const transport = document.getElementById("transport").value;
-  const visa = document.getElementById("visa").value;
-  const lifestyle = document.getElementById("lifestyle").value;
-  const risk = document.getElementById("risk").value;
-
-  const output = `
-    <h3>Relocation Summary for ${country}</h3>
-    <p>Age: ${age}</p>
-    <p>Monthly Income: £${income}</p>
-    <p>Healthcare Preference: ${healthcare}</p>
-    <p>Housing Plan: ${housing}</p>
-    <p>Banking Setup: ${banking}</p>
-    <p>Transport: ${transport}</p>
-    <p>Residency Route: ${visa}</p>
-    <p>Lifestyle Preference: ${lifestyle}</p>
-    <p>Risk Tolerance: ${risk}</p>
-  `;
-
-  document.getElementById("output").innerHTML = output;
-}
