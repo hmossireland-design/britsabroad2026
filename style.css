@@ -2,76 +2,78 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background: #fdfdfd;
+  background: #f9f9f9;
+  color: #333;
 }
 
-header, footer {
+.site-header, .site-footer {
   text-align: center;
+  background: #007bff;
+  color: #fff;
   padding: 15px;
-  background: #004080;
-  color: white;
 }
 
 main {
-  padding: 20px;
-  max-width: 800px;
-  margin: auto;
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 0 15px;
 }
 
 .phase {
   margin-bottom: 20px;
-  background: #f0f8ff;
-  padding: 15px;
-  border-radius: 8px;
+  background: linear-gradient(to bottom right, #f0f8ff, #e6f2ff);
+  padding: 20px;
+  border-radius: 12px;
   border: 1px solid #ddd;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  transition: transform 0.2s;
 }
 
-select, input {
-  width: 100%;
-  padding: 8px;
-  margin-top: 8px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
+.phase:hover {
+  transform: translateY(-3px);
 }
 
-button.primary-btn {
-  background-color: #4caf50;
-  color: white;
-  padding: 12px 20px;
+.phase.completed {
+  background: linear-gradient(to right, #d4edda, #c3e6cb);
+  border-color: #28a745;
+}
+
+.primary-btn {
+  background-color: #28a745;
+  color: #fff;
   border: none;
-  border-radius: 6px;
-  cursor: pointer;
+  padding: 12px 20px;
   font-size: 16px;
+  cursor: pointer;
+  border-radius: 8px;
 }
 
-button.primary-btn:hover {
-  background-color: #45a049;
+.primary-btn:hover {
+  background-color: #218838;
 }
 
 .summary-box {
   margin-top: 15px;
-  padding: 15px;
-  background-color: #ffffe0;
+  background: #fff;
+  border-radius: 10px;
   border: 1px solid #ddd;
-  border-radius: 8px;
+  padding: 15px;
 }
 
 .progress-container {
-  margin: 15px 0;
+  margin: 20px 0;
   background-color: #eee;
-  border-radius: 10px;
+  border-radius: 20px;
   position: relative;
-  height: 25px;
-  width: 100%;
+  height: 30px;
 }
 
 .progress-bar {
   height: 100%;
   width: 0%;
-  background-color: #4caf50;
-  border-radius: 10px;
-  transition: width 0.3s;
+  background-color: #28a745;
+  border-radius: 20px;
+  transition: width 0.4s ease-in-out;
 }
 
 #progressText {
@@ -79,7 +81,7 @@ button.primary-btn:hover {
   width: 100%;
   text-align: center;
   top: 0;
-  line-height: 25px;
+  line-height: 30px;
   font-weight: bold;
   color: #000;
 }
