@@ -1,77 +1,117 @@
 /***********************
-  COUNTRY DATA
+  COUNTRY VISA & TAX RULES
 ************************/
 
 const countryRules = {
   Portugal: {
     flag: "🇵🇹",
-    visa: "D7 Passive Income Visa or Digital Nomad Visa",
-    visaNotes: "Proof of passive income or remote work required. Minimum stay rules apply.",
+    visas: {
+      "Passive income / Retirement": {
+        minIncome: 820,
+        minAge: 0,
+        notes: "D7 Visa requires stable passive income above Portuguese minimum wage."
+      },
+      "Work / Self-employed": {
+        minIncome: 1200,
+        minAge: 18,
+        notes: "Digital Nomad Visa available for remote workers."
+      }
+    },
     tax: "Tax resident after 183 days",
-    taxNotes: "NHR regime ended for new applicants, but incentives may still exist for some professions."
+    taxNotes: "NHR closed to new applicants, but some incentives remain."
   },
+
   Spain: {
     flag: "🇪🇸",
-    visa: "Non-Lucrative Visa or Digital Nomad Visa",
-    visaNotes: "Non-lucrative requires no local work. Digital Nomad allows foreign employment.",
+    visas: {
+      "Passive income / Retirement": {
+        minIncome: 2400,
+        minAge: 0,
+        notes: "Non-lucrative visa requires significant savings and income."
+      },
+      "Work / Self-employed": {
+        minIncome: 2200,
+        minAge: 18,
+        notes: "Digital Nomad Visa introduced in 2023."
+      }
+    },
     tax: "Tax resident after 183 days",
-    taxNotes: "Beckham Law may apply for eligible workers. Wealth tax exists in some regions."
+    taxNotes: "Wealth tax may apply depending on region."
   },
+
   France: {
     flag: "🇫🇷",
-    visa: "Long-Stay Visitor Visa",
-    visaNotes: "No work allowed. Proof of income and accommodation required.",
-    tax: "Tax resident after 183 days or centre of life",
-    taxNotes: "Worldwide income taxable. Social charges can be significant."
+    visas: {
+      "Passive income / Retirement": {
+        minIncome: 1400,
+        minAge: 0,
+        notes: "Long-stay visitor visa. No employment allowed."
+      }
+    },
+    tax: "Worldwide income taxable",
+    taxNotes: "High social charges may apply."
   },
+
   Italy: {
     flag: "🇮🇹",
-    visa: "Elective Residence Visa",
-    visaNotes: "Passive income only. No employment allowed.",
+    visas: {
+      "Passive income / Retirement": {
+        minIncome: 2600,
+        minAge: 0,
+        notes: "Elective Residence Visa requires strong financial proof."
+      }
+    },
     tax: "Tax resident after 183 days",
-    taxNotes: "Flat tax regimes exist for high-net-worth individuals."
+    taxNotes: "Flat-tax schemes exist for some migrants."
   },
+
   Greece: {
     flag: "🇬🇷",
-    visa: "Financially Independent Person (FIP) Visa",
-    visaNotes: "Requires steady overseas income.",
+    visas: {
+      "Passive income / Retirement": {
+        minIncome: 2000,
+        minAge: 0,
+        notes: "Financially Independent Person visa available."
+      }
+    },
     tax: "Tax resident after 183 days",
-    taxNotes: "7% flat tax available for some retirees."
+    taxNotes: "7% flat tax available for qualifying retirees."
   },
+
   Cyprus: {
     flag: "🇨🇾",
-    visa: "Category F or Digital Nomad Visa",
-    visaNotes: "Low bureaucracy, popular with UK nationals.",
-    tax: "Tax resident after 183 days or 60-day rule",
-    taxNotes: "Non-domiciled residents enjoy dividend & interest tax exemptions."
+    visas: {
+      "Passive income / Retirement": {
+        minIncome: 2000,
+        minAge: 0,
+        notes: "Category F residency popular with UK nationals."
+      },
+      "Work / Self-employed": {
+        minIncome: 2500,
+        minAge: 18,
+        notes: "Digital Nomad Visa available."
+      }
+    },
+    tax: "183-day or 60-day rule",
+    taxNotes: "Non-dom regime offers major tax benefits."
   },
+
   UAE: {
     flag: "🇦🇪",
-    visa: "Remote Work Visa or Investor Visa",
-    visaNotes: "No income tax. Proof of income required.",
+    visas: {
+      "Work / Self-employed": {
+        minIncome: 3500,
+        minAge: 18,
+        notes: "Remote Work Visa available. No income tax."
+      },
+      "Investment": {
+        minIncome: 0,
+        minAge: 18,
+        notes: "Property or business investment required."
+      }
+    },
     tax: "No personal income tax",
-    taxNotes: "UK tax residency rules still apply if ties remain."
-  },
-  Thailand: {
-    flag: "🇹🇭",
-    visa: "Long-Term Resident (LTR) or Retirement Visa",
-    visaNotes: "Age and income thresholds apply.",
-    tax: "Territorial tax system",
-    taxNotes: "Foreign income taxed if remitted in same year."
-  },
-  Mexico: {
-    flag: "🇲🇽",
-    visa: "Temporary or Permanent Resident Visa",
-    visaNotes: "Income thresholds vary by consulate.",
-    tax: "Tax resident if main home is in Mexico",
-    taxNotes: "Worldwide income taxable if resident."
-  },
-  Malaysia: {
-    flag: "🇲🇾",
-    visa: "MM2H or DE Rantau Nomad Visa",
-    visaNotes: "Financial requirements apply.",
-    tax: "Territorial tax system",
-    taxNotes: "Foreign income largely exempt."
+    taxNotes: "UK tax residency rules still apply."
   }
 };
 
@@ -89,18 +129,18 @@ Object.keys(countryRules).forEach(country => {
 });
 
 /***********************
-  SUMMARY GENERATION
+  SUMMARY + VISA ELIGIBILITY
 ************************/
 
 function generateSummary() {
   const country = countrySelect.value;
-  const age = document.getElementById("age").value;
-  const income = document.getElementById("income").value;
+  const age = Number(document.getElementById("age").value);
+  const income = Number(document.getElementById("income").value);
+  const visaRoute = document.getElementById("visa").value;
   const healthcare = document.getElementById("healthcare").value;
   const housing = document.getElementById("housing").value;
   const banking = document.getElementById("banking").value;
   const transport = document.getElementById("transport").value;
-  const visaRoute = document.getElementById("visa").value;
   const lifestyle = document.getElementById("lifestyle").value;
   const risk = document.getElementById("risk").value;
 
@@ -110,6 +150,23 @@ function generateSummary() {
   }
 
   const rules = countryRules[country];
+  const visaRules = rules.visas[visaRoute];
+  let visaResult = "";
+  let warnings = [];
+
+  if (!visaRules) {
+    warnings.push("⚠️ Selected visa route is not commonly available for this country.");
+  } else {
+    if (income < visaRules.minIncome) {
+      warnings.push(`⚠️ Income may be too low. Typical minimum: £${visaRules.minIncome}/month.`);
+    }
+    if (age < visaRules.minAge) {
+      warnings.push(`⚠️ Minimum age requirement may not be met.`);
+    }
+    if (warnings.length === 0) {
+      visaResult = "✅ Your profile appears suitable for this visa route.";
+    }
+  }
 
   const output = document.getElementById("output");
 
@@ -118,23 +175,25 @@ function generateSummary() {
 
     <p><strong>Age:</strong> ${age || "Not specified"}</p>
     <p><strong>Monthly Income:</strong> £${income || "Not specified"}</p>
+    <p><strong>Visa Route:</strong> ${visaRoute}</p>
     <p><strong>Healthcare:</strong> ${healthcare}</p>
-    <p><strong>Housing Plan:</strong> ${housing}</p>
+    <p><strong>Housing:</strong> ${housing}</p>
     <p><strong>Banking:</strong> ${banking}</p>
     <p><strong>Transport:</strong> ${transport}</p>
-    <p><strong>Lifestyle Preference:</strong> ${lifestyle}</p>
-    <p><strong>Risk Tolerance:</strong> ${risk}</p>
+    <p><strong>Lifestyle:</strong> ${lifestyle}</p>
+    <p><strong>Risk Profile:</strong> ${risk}</p>
 
     <hr>
 
-    <h4>Visa & Residency</h4>
-    <p><strong>Likely Visa:</strong> ${rules.visa}</p>
-    <p>${rules.visaNotes}</p>
+    <h4>Visa Eligibility Check</h4>
+    ${visaResult ? `<p>${visaResult}</p>` : ""}
+    ${warnings.map(w => `<p>${w}</p>`).join("")}
+    <p><em>${visaRules ? visaRules.notes : ""}</em></p>
 
-    <h4>Tax Considerations</h4>
+    <h4>Tax Overview</h4>
     <p><strong>Tax Residency:</strong> ${rules.tax}</p>
     <p>${rules.taxNotes}</p>
 
-    <p style="margin-top:15px;"><em>This is guidance only. Always confirm with a local immigration or tax professional.</em></p>
+    <p style="margin-top:15px;"><em>Guidance only — always confirm with a licensed advisor.</em></p>
   `;
 }
