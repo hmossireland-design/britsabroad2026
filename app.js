@@ -197,3 +197,42 @@ function generateSummary() {
     <p style="margin-top:15px;"><em>Guidance only — always confirm with a licensed advisor.</em></p>
   `;
 }
+const totalPhases = 11;
+
+function updateProgressBar() {
+  let completed = 0;
+
+  const phaseIds = [
+    "countrySelect", "age", "income", "healthcare",
+    "housing", "banking", "transport", "visa",
+    "lifestyle", "risk"
+  ];
+
+  phaseIds.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+      if (el.tagName === "SELECT" && el.value) completed++;
+      if (el.tagName === "INPUT" && el.value) completed++;
+    }
+  });
+
+  const progressPercent = (completed / totalPhases) * 100;
+  const progressBar = document.getElementById("progressBar");
+  const progressText = document.getElementById("progressText");
+
+  progressBar.style.width = progressPercent + "%";
+  progressText.textContent = `${completed} / ${totalPhases} phases completed`;
+}
+
+// Attach event listeners to update progress in real-time
+["countrySelect","age","income","healthcare","housing",
+ "banking","transport","visa","lifestyle","risk"].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) {
+    el.addEventListener("change", updateProgressBar);
+    el.addEventListener("input", updateProgressBar);
+  }
+});
+
+// Initialize progress bar on load
+updateProgressBar();
