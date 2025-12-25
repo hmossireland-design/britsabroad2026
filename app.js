@@ -1,238 +1,82 @@
-/***********************
-  COUNTRY VISA & TAX RULES
-************************/
+// Countries list with flags
+const countries = [
+  {name:"Portugal", flag:"🇵🇹"}, {name:"Spain", flag:"🇪🇸"},
+  {name:"Ireland", flag:"🇮🇪"}, {name:"Australia", flag:"🇦🇺"},
+  {name:"Cyprus", flag:"🇨🇾"}, {name:"Malta", flag:"🇲🇹"},
+  {name:"France", flag:"🇫🇷"}, {name:"UAE", flag:"🇦🇪"},
+  {name:"Thailand", flag:"🇹🇭"}, {name:"Italy", flag:"🇮🇹"},
+  {name:"Greece", flag:"🇬🇷"}, {name:"Canada", flag:"🇨🇦"},
+  {name:"New Zealand", flag:"🇳🇿"}, {name:"Malaysia", flag:"🇲🇾"},
+  {name:"Panama", flag:"🇵🇦"}, {name:"Mexico", flag:"🇲🇽"},
+  {name:"Costa Rica", flag:"🇨🇷"}, {name:"Hungary", flag:"🇭🇺"},
+  {name:"Poland", flag:"🇵🇱"}, {name:"Slovenia", flag:"🇸🇮"},
+  {name:"Slovakia", flag:"🇸🇰"}, {name:"Bulgaria", flag:"🇧🇬"},
+  {name:"Indonesia", flag:"🇮🇩"}, {name:"Colombia", flag:"🇨🇴"},
+  {name:"Mauritius", flag:"🇲🇺"}, {name:"Belize", flag:"🇧🇿"},
+  {name:"Ecuador", flag:"🇪🇨"}, {name:"Uruguay", flag:"🇺🇾"},
+  {name:"Chile", flag:"🇨🇱"}, {name:"Latvia", flag:"🇱🇻"}
+];
 
-const countryRules = {
-  Portugal: {
-    flag: "🇵🇹",
-    visas: {
-      "Passive income / Retirement": {
-        minIncome: 820,
-        minAge: 0,
-        notes: "D7 Visa requires stable passive income above Portuguese minimum wage."
-      },
-      "Work / Self-employed": {
-        minIncome: 1200,
-        minAge: 18,
-        notes: "Digital Nomad Visa available for remote workers."
-      }
-    },
-    tax: "Tax resident after 183 days",
-    taxNotes: "NHR closed to new applicants, but some incentives remain."
-  },
-
-  Spain: {
-    flag: "🇪🇸",
-    visas: {
-      "Passive income / Retirement": {
-        minIncome: 2400,
-        minAge: 0,
-        notes: "Non-lucrative visa requires significant savings and income."
-      },
-      "Work / Self-employed": {
-        minIncome: 2200,
-        minAge: 18,
-        notes: "Digital Nomad Visa introduced in 2023."
-      }
-    },
-    tax: "Tax resident after 183 days",
-    taxNotes: "Wealth tax may apply depending on region."
-  },
-
-  France: {
-    flag: "🇫🇷",
-    visas: {
-      "Passive income / Retirement": {
-        minIncome: 1400,
-        minAge: 0,
-        notes: "Long-stay visitor visa. No employment allowed."
-      }
-    },
-    tax: "Worldwide income taxable",
-    taxNotes: "High social charges may apply."
-  },
-
-  Italy: {
-    flag: "🇮🇹",
-    visas: {
-      "Passive income / Retirement": {
-        minIncome: 2600,
-        minAge: 0,
-        notes: "Elective Residence Visa requires strong financial proof."
-      }
-    },
-    tax: "Tax resident after 183 days",
-    taxNotes: "Flat-tax schemes exist for some migrants."
-  },
-
-  Greece: {
-    flag: "🇬🇷",
-    visas: {
-      "Passive income / Retirement": {
-        minIncome: 2000,
-        minAge: 0,
-        notes: "Financially Independent Person visa available."
-      }
-    },
-    tax: "Tax resident after 183 days",
-    taxNotes: "7% flat tax available for qualifying retirees."
-  },
-
-  Cyprus: {
-    flag: "🇨🇾",
-    visas: {
-      "Passive income / Retirement": {
-        minIncome: 2000,
-        minAge: 0,
-        notes: "Category F residency popular with UK nationals."
-      },
-      "Work / Self-employed": {
-        minIncome: 2500,
-        minAge: 18,
-        notes: "Digital Nomad Visa available."
-      }
-    },
-    tax: "183-day or 60-day rule",
-    taxNotes: "Non-dom regime offers major tax benefits."
-  },
-
-  UAE: {
-    flag: "🇦🇪",
-    visas: {
-      "Work / Self-employed": {
-        minIncome: 3500,
-        minAge: 18,
-        notes: "Remote Work Visa available. No income tax."
-      },
-      "Investment": {
-        minIncome: 0,
-        minAge: 18,
-        notes: "Property or business investment required."
-      }
-    },
-    tax: "No personal income tax",
-    taxNotes: "UK tax residency rules still apply."
-  }
-};
-
-/***********************
-  POPULATE COUNTRY DROPDOWN
-************************/
-
+// Inject countries into dropdown
 const countrySelect = document.getElementById("countrySelect");
-
-Object.keys(countryRules).forEach(country => {
-  const option = document.createElement("option");
-  option.value = country;
-  option.textContent = `${countryRules[country].flag} ${country}`;
-  countrySelect.appendChild(option);
+countries.forEach(c => {
+  const opt = document.createElement("option");
+  opt.value = c.name;
+  opt.textContent = `${c.flag} ${c.name}`;
+  countrySelect.appendChild(opt);
 });
 
-/***********************
-  SUMMARY + VISA ELIGIBILITY
-************************/
-
-function generateSummary() {
-  const country = countrySelect.value;
-  const age = Number(document.getElementById("age").value);
-  const income = Number(document.getElementById("income").value);
-  const visaRoute = document.getElementById("visa").value;
-  const healthcare = document.getElementById("healthcare").value;
-  const housing = document.getElementById("housing").value;
-  const banking = document.getElementById("banking").value;
-  const transport = document.getElementById("transport").value;
-  const lifestyle = document.getElementById("lifestyle").value;
-  const risk = document.getElementById("risk").value;
-
-  if (!country) {
-    alert("Please select a destination country.");
-    return;
-  }
-
-  const rules = countryRules[country];
-  const visaRules = rules.visas[visaRoute];
-  let visaResult = "";
-  let warnings = [];
-
-  if (!visaRules) {
-    warnings.push("⚠️ Selected visa route is not commonly available for this country.");
-  } else {
-    if (income < visaRules.minIncome) {
-      warnings.push(`⚠️ Income may be too low. Typical minimum: £${visaRules.minIncome}/month.`);
-    }
-    if (age < visaRules.minAge) {
-      warnings.push(`⚠️ Minimum age requirement may not be met.`);
-    }
-    if (warnings.length === 0) {
-      visaResult = "✅ Your profile appears suitable for this visa route.";
-    }
-  }
-
-  const output = document.getElementById("output");
-
-  output.innerHTML = `
-    <h3>${rules.flag} Relocation Summary: ${country}</h3>
-
-    <p><strong>Age:</strong> ${age || "Not specified"}</p>
-    <p><strong>Monthly Income:</strong> £${income || "Not specified"}</p>
-    <p><strong>Visa Route:</strong> ${visaRoute}</p>
-    <p><strong>Healthcare:</strong> ${healthcare}</p>
-    <p><strong>Housing:</strong> ${housing}</p>
-    <p><strong>Banking:</strong> ${banking}</p>
-    <p><strong>Transport:</strong> ${transport}</p>
-    <p><strong>Lifestyle:</strong> ${lifestyle}</p>
-    <p><strong>Risk Profile:</strong> ${risk}</p>
-
-    <hr>
-
-    <h4>Visa Eligibility Check</h4>
-    ${visaResult ? `<p>${visaResult}</p>` : ""}
-    ${warnings.map(w => `<p>${w}</p>`).join("")}
-    <p><em>${visaRules ? visaRules.notes : ""}</em></p>
-
-    <h4>Tax Overview</h4>
-    <p><strong>Tax Residency:</strong> ${rules.tax}</p>
-    <p>${rules.taxNotes}</p>
-
-    <p style="margin-top:15px;"><em>Guidance only — always confirm with a licensed advisor.</em></p>
-  `;
-}
-const totalPhases = 11;
-
+// Progress Bar
+const totalPhases = 10;
 function updateProgressBar() {
   let completed = 0;
-
-  const phaseIds = [
-    "countrySelect", "age", "income", "healthcare",
-    "housing", "banking", "transport", "visa",
-    "lifestyle", "risk"
-  ];
-
+  const phaseIds = ["countrySelect","age","income","healthcare","housing","banking","transport","visa","lifestyle","risk"];
   phaseIds.forEach(id => {
     const el = document.getElementById(id);
-    if (el) {
-      if (el.tagName === "SELECT" && el.value) completed++;
-      if (el.tagName === "INPUT" && el.value) completed++;
-    }
+    if (!el) return;
+    if ((el.tagName==="SELECT" || el.tagName==="INPUT") && el.value) completed++;
   });
-
-  const progressPercent = (completed / totalPhases) * 100;
-  const progressBar = document.getElementById("progressBar");
-  const progressText = document.getElementById("progressText");
-
-  progressBar.style.width = progressPercent + "%";
-  progressText.textContent = `${completed} / ${totalPhases} phases completed`;
+  const percent = (completed / totalPhases) * 100;
+  document.getElementById("progressBar").style.width = percent + "%";
+  document.getElementById("progressText").textContent = `${completed} / ${totalPhases} phases completed`;
 }
-
-// Attach event listeners to update progress in real-time
-["countrySelect","age","income","healthcare","housing",
- "banking","transport","visa","lifestyle","risk"].forEach(id => {
+phaseIds = ["countrySelect","age","income","healthcare","housing","banking","transport","visa","lifestyle","risk"];
+phaseIds.forEach(id => {
   const el = document.getElementById(id);
   if (el) {
     el.addEventListener("change", updateProgressBar);
     el.addEventListener("input", updateProgressBar);
   }
 });
-
-// Initialize progress bar on load
 updateProgressBar();
+
+// Generate Summary
+function generateSummary() {
+  const country = document.getElementById("countrySelect").value;
+  const age = document.getElementById("age").value;
+  const income = document.getElementById("income").value;
+  const healthcare = document.getElementById("healthcare").value;
+  const housing = document.getElementById("housing").value;
+  const banking = document.getElementById("banking").value;
+  const transport = document.getElementById("transport").value;
+  const visa = document.getElementById("visa").value;
+  const lifestyle = document.getElementById("lifestyle").value;
+  const risk = document.getElementById("risk").value;
+
+  const outputDiv = document.getElementById("output");
+
+  outputDiv.innerHTML = `
+    <h3>Your Relocation Summary</h3>
+    <p><strong>Destination:</strong> ${country}</p>
+    <p><strong>Age:</strong> ${age}</p>
+    <p><strong>Income:</strong> £${income}</p>
+    <p><strong>Healthcare:</strong> ${healthcare}</p>
+    <p><strong>Housing:</strong> ${housing}</p>
+    <p><strong>Banking:</strong> ${banking}</p>
+    <p><strong>Transport:</strong> ${transport}</p>
+    <p><strong>Residency:</strong> ${visa}</p>
+    <p><strong>Lifestyle:</strong> ${lifestyle}</p>
+    <p><strong>Risk Tolerance:</strong> ${risk}</p>
+    <p>Next steps will include visa rules, tax exposure, and healthcare setup specific to ${country}.</p>
+  `;
+}
